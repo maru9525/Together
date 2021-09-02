@@ -9,6 +9,14 @@
 
 데이터 처리 관련 기술을 경험해 보는 서브 프로젝트
 
+## 과제 파일
+
+- parse.py
+- analaze.py
+- visualize.py
+- map.html: 3-5, 지도에 음식점 분포 찍기
+- sparse.py: 4-1, 4-2 Sparse matrix 만들기 (Compressed sparse row format)
+
 ## 3-5. 음식점의 위치 분포를 지도에 나타내기
 
 - folium 라이브러리를 사용합니다.
@@ -120,7 +128,7 @@ pitov_sparse = pivot_table2.astype(pd.SparseDtype('int', np.nan))
 print(pitov_sparse)
 ```
 
-fill_value=0 또는 fillna(0)의 경우에만 제대로 결측값 변경에 성공한다. 
+fill_value=0 또는 fillna(0)의 경우에만 제대로 결측값 변경에 성공한다.
 
 ### sparse dtype으로의 변환
 

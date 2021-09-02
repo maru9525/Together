@@ -14,7 +14,7 @@ def users_reviews_csr_matrix(dataframes):
     reviews = dataframes['reviews']
     merge = pd.merge(
         users, reviews, left_on='id', right_on='user'
-    )
+    )[:10000]
 
     # pivot table 생성
     pivot_table = merge.pivot_table(index='user', columns='store', values='score', aggfunc=np.mean, fill_value=0)
@@ -24,6 +24,16 @@ def users_reviews_csr_matrix(dataframes):
 
     # Compressed sparsed row Matrix로 변환하여 리턴
     csr_matrix = scipy.sparse.csr_matrix(pivot_sparse)
+
+    print('-- Compressed sparse row --')
+    # 행렬의 0이 아닌 원소의 행의 시작 위치
+    print('indptr: ' , csr_matrix.indptr)
+    # 행렬의 0이 아닌 원소의 열의 위치
+    print('indices: ' , csr_matrix.indices)
+    # 행렬의 0이 아닌 원소 값
+    print('data: ' , csr_matrix.data)
+    # 값이 잘 찍히는걸 볼 수 있다.
+    print(csr_matrix[0, 39])
     return csr_matrix
 
 def users_stores_csr_matrix(dataframes):
@@ -57,8 +67,8 @@ def users_stores_csr_matrix(dataframes):
 
 def main():
     df = load_dataframes()
-    # users_reviews_csr_matrix(df)
-    users_stores_csr_matrix(df)
+    users_reviews_csr_matrix(df)
+    # users_stores_csr_matrix(df)
 
 if __name__ == "__main__":
     main()
