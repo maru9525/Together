@@ -167,15 +167,6 @@ def show_stores_distribution_graph(dataframes):
     geo_json = df_to_geojson(df)
     folium.GeoJson(geo_json, name="geojson").add_to(m)
 
-    # folium.Choropleth(
-    #     geo_data=geo_json,
-    #     data = stores,
-    #     columns=['store_name'],
-    #     fill_color='PuRd',
-    #     fill_opacity=0.8,
-    #     key_on='feature.id'
-    # ).add_to(m)
-
     # 스크롤 기능
     plugins.MousePosition().add_to(m)
     # 전체화면 기능

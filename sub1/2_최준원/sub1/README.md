@@ -93,3 +93,8 @@ def show_stores_distribution_graph(dataframes):
 ```
 
 ![image-20210901173002577](README.assets/image-20210901173002577.png)
+
+## 4-1 유저와 음식점을 축으로 하고 평점을 값으로 갖는 행렬 저장
+
+- sparse
+- 
