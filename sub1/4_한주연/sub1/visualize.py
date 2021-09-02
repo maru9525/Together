@@ -5,9 +5,13 @@ from analyze import sort_stores_by_score
 from analyze import get_most_active_users
 import pandas as pd
 import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import scipy
+# import folium
+# from folium import plugins
+
 
 def set_config():
     # 폰트, 그래프 색상 설정
@@ -115,40 +119,60 @@ def show_user_age_gender_distribution_graph(dataframes):
     plt.show()
 
 
+def df_to_geojson(df):
+    geojson = {'type': 'FeatureCollection', 'features': []}
+
+    for _, row in df.iterrows():
+        feature = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": []},
+            "properties": {}
+        }
+        feature['geometry']['coordinates'] = [row['longitude'], row['latitude']]
+        feature['properties']['tel'] = row['tel']
+        feature['properties']['address'] = row['address']
+        feature['properties']['area'] = row['area']
+
+        geojson['features'].append(feature)
+    return geojson
+
+
 def show_stores_distribution_graph(dataframes):
     """
     Req. 1-3-5 각 음식점의 위치 분포를 지도에 나타냅니다.
     """
-    stores = dataframes["stores"]
-    locStores = stores.groupby("area").size().reset_index(name = "loc_count").sort_values(by='loc_count', ascending=False).head(1000)
+    df = dataframes["stores"]
+    # 리뷰가 10개 이상 달린
+    df = df[df['review_cnt'] > 10]
+    m = folium.Map(
+        location=[35.8, 127.6], tiles="OpenStreetMap", zoom_start=8
+    )
+    geo_json = df_to_geojson(df)
+    folium.GeoJson(geo_json, name="geojson").add_to(m)
 
-    chart = sns.barplot(x="area", y="loc_count", data=locStores[locStores["loc_count"] >= 2])
+    # 스크롤 기능
+    plugins.MousePosition().add_to(m)
+    # 전체화면 기능
+    plugins.Fullscreen(
+        position='topright',
+        title='확장하기',
+        title_cancel='나가기',
+        force_separate_button=True
+    ).add_to(m)
 
-    
-    plt.title("음식점의 위치 분포")
-    plt.show()
-
-def dataFrame_to_sparseMatirx(df):
+    m.save('map.html')
 
 
-    pass
+
 
 def main():
     set_config()
     data = load_dataframes()
-    show_store_categories_graph(data)
-    show_store_review_distribution_graph(data)
-    show_store_average_ratings_graph(data)
-
-    users_reviews = pd.merge(
-        data["users"], data["reviews"], left_on="id", right_on="user"
-    )
-
-    
-    sparseM = scipy.sparse.csr_matrix(users_reviews.values)
-
-    print(sparseM)
-
+    # show_store_categories_graph(data)
+    # show_store_review_distribution_graph(data)
+    # show_store_average_ratings_graph(data)
     
 if __name__ == "__main__":
     main()
