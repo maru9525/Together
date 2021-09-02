@@ -120,8 +120,50 @@ pitov_sparse = pivot_table2.astype(pd.SparseDtype('int', np.nan))
 print(pitov_sparse)
 ```
 
-![image-20210902120636191](../../2_최준원/sub1/sparse.assets/image-20210902120636191.png)
+fill_value=0 또는 fillna(0)의 경우에만 제대로 결측값 변경에 성공한다. 
 
-fill_value=0 또는 fillna(0)의 경우에만 제대로 결측값 변경에 성공한다.
+### sparse dtype으로의 변환
+
+![image-20210902134029951](README.assets/image-20210902134029951.png)
+
+sparse dtype으로 변경했을 때, 드라마틱한 메모리 용량의 변화가 있음을 볼 수 있다.
+
+sparse 타입으로 pivot_table을 변경하고, 이후 csr_matrix로 변환해 주었다.
 
 https://rfriend.tistory.com/551
+
+## 4-2 유저와 음식점 카테고리를 축으로 하고 평점 평균을 값으로 갖는 행렬
+
+```python
+def users_stores_csr_matrix(dataframes):
+    stores = dataframes["stores"][['id', 'category', 'review_cnt']]
+    # 카테고리가 없거나 리뷰가 없는 가게는 제거
+    stores = stores[(stores['category'] != "") & (stores['review_cnt'] > 0)]
+    stores['category'] = stores['category'].str.split('|')
+
+    # category를 explode로 해서 열을 폭발시켜 줘야 한다
+    stores = stores.explode('category')
+
+    # TypeError: unhashable type: 'list'
+    reviews = dataframes["reviews"][['store', 'user', 'score']]
+
+    merge = pd.merge(
+        stores, reviews, left_on='id', right_on='store'
+    )
+    # user id, category, avg_score를 컬럼으로 하는 새로운 df 생성
+    gp = merge.groupby(['user', 'category'])['score'].mean().reset_index(name='avg_score')
+
+    # pivot table 생성
+    pivot_table = gp.pivot_table(index='user', columns='category', values='avg_score')
+
+    # sparse dtype으로 변경
+    pivot_sparse = pivot_table.astype(pd.SparseDtype('float'))
+
+    # Compressed sparsed row Matrix로 변환하여 리턴
+    csr_matrix = scipy.sparse.csr_matrix(pivot_sparse)
+    return csr_matrix
+```
+
+
+
+https://stackoverflow.com/questions/58301019/split-row-in-pandas-into-multiple-rows-based-on-the-symbol
