@@ -31,6 +31,12 @@ class URLMaker:
         url += f'?api_key={self.key}&language=ko-KR'
         return url
 
+    def get_provider_url(self, program_id, provider):
+        url = f'{self.url}/{provider}/{program_id}/watch/providers'
+        url += f'?api_key={self.key}'
+        return url
+
+
     # def get_program_episode_group_url(self, program_id):
     #     url = f'{self.url}/tv/{program_id}/episode_groups'
     #     url += f'?api_key={self.key}&language=ko-KR'

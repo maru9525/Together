@@ -33,6 +33,12 @@ def create_program_genre_data():
     with open('programs.json', 'w', encoding='utf8') as f:
         json.dump(genre_data, f, indent=4)
 
+def check_KR_provider(data):
+    try:
+        data.get('KR')
+    except AttributeError:
+        return None
+    return data.get('KR')
 
 def create_program_data():
     with open('programs.json', 'r+', encoding='utf-8') as f:
@@ -41,7 +47,7 @@ def create_program_data():
 
     print('-- TV 프로그램 데이터 작업 시작 --')
 
-    for page in range(1, 501):
+    for page in range(1, 10):
         raw_data = requests.get(url.get_program_url(page=page))
         json_data = raw_data.json()
         programs = json_data.get('results')
@@ -53,22 +59,35 @@ def create_program_data():
             fields['original_name'] = program.get('original_name')
             fields['overview'] = program.get('overview')
             fields['popularity'] = program.get('popularity')
+            fields['genre_ids'] = program.get('genre_ids')
             fields['first_air_date'] = program.get('first_air_date')
             fields['vote_average'] = program.get('vote_average')
             fields['vote_count'] = program.get('vote_count')
             fields['origin_country'] = program.get('origin_country')
             fields['like_users'] = []
 
-            # Program detail
             program_id = program.get('id')
-            detail_raw_data = requests.get(url.get_program_detail_url(program_id))
-            details = detail_raw_data.json()
+            provider_raw_data = requests.get(url.get_provider_url(program_id, 'tv'))
+            provider_json_data = provider_raw_data.json()
+            provider_results = provider_json_data.get('results')
 
-            fields['seasons'] = details.get('seasons')
-            fields['genres'] = details.get('genres')
-            fields['number_of_episodes'] = details.get('number_of_episodes')
-            fields['number_of_seasons'] = details.get('number_of_seasons')
-            fields['seasons'] = details.get('seasons')
+            # 한국에서 볼 수 없는 컨텐츠라면 건너뛰기
+            KR_provider = check_KR_provider(provider_results)
+            if KR_provider is None:
+                continue
+            else:
+                fields['provider'] = KR_provider
+
+            # Program detail
+            # 너무 많은 데이터이므로 개별 API 접속으로 빼도록 하자
+            # detail_raw_data = requests.get(url.get_program_detail_url(program_id))
+            # details = detail_raw_data.json()
+
+            # fields['seasons'] = details.get('seasons')
+            # fields['genres'] = details.get('genres')
+            # fields['number_of_episodes'] = details.get('number_of_episodes')
+            # fields['number_of_seasons'] = details.get('number_of_seasons')
+            # fields['seasons'] = details.get('seasons')
 
             json_model = {
                 'model': 'programs.program',

@@ -33,6 +33,12 @@ def create_movie_genre_data():
     with open('movies.json', 'w') as f:
         json.dump(genre_data, f, indent=4)
 
+def check_KR_provider(data):
+    try:
+        data.get('KR')
+    except AttributeError:
+        return None
+    return data.get('KR')
 
 def create_movie_data():
     with open('movies.json', 'r+') as f:
@@ -40,7 +46,7 @@ def create_movie_data():
 
     print('-- 영화 데이터 작업 시작 --')
 
-    for page in range(1, 101):
+    for page in range(1, 10):
         raw_data = requests.get(url.get_movie_url(page=page))
         json_data = raw_data.json()
         movies = json_data.get('results')
@@ -60,9 +66,21 @@ def create_movie_data():
             fields['vote_count'] = movie.get('vote_count')
             fields['like_users'] = []
 
+            movie_id = movie.get('id')
+            provider_raw_data = requests.get(url.get_provider_url(movie_id, 'movie'))
+            provider_json_data = provider_raw_data.json()
+            provider_results = provider_json_data.get('results')
+
+            # 한국에서 볼 수 없는 컨텐츠라면 건너뛰기
+            KR_provider = check_KR_provider(provider_results)
+            if KR_provider is None:
+                continue
+            else:
+                fields['provider'] = KR_provider
+
             json_model = {
                 'model': 'movies.movie',
-                'pk': movie.get('id'),
+                'pk': movie_id,
                 'fields': fields,
             }
             movie_data.append(json_model)
