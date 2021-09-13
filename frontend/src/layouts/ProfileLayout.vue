@@ -7,7 +7,9 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ProfileLayout',
-  setup() {},
+  setup() {
+    return {}
+  },
 })
 </script>
 

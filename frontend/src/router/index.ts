@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import AuthLayout from '@/layouts/ContentsLayout.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 import ContentsLayout from '@/layouts/ContentsLayout.vue'
-import PartyLayout from '@/layouts/ContentsLayout.vue'
-import ProfileLayout from '@/layouts/ContentsLayout.vue'
+import PartyLayout from '@/layouts/PartyLayout.vue'
+import ProfileLayout from '@/layouts/ProfileLayout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {

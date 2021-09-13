@@ -7,7 +7,9 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'PartyLayout',
-  setup() {},
+  setup() {
+    return {}
+  },
 })
 </script>
 

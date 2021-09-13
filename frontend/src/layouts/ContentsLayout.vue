@@ -8,7 +8,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'ContentsLayout',
   setup() {
-    const a = 'a'
+    return {}
   },
 })
 </script>
