@@ -21,7 +21,7 @@ module.exports = {
       "error",
       {
         singleQuote: true,
-        endOfLine: "lf",
+        endOfLine: "auto",
         semi: false,
         tabWidth: 2,
         trailingComma: "es5",
