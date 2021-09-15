@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div class="profile-main__info--array">
+    <div class="profile-main__info__top--array">
       <div class="text-2xl font-bold">내 정보</div>
-      <div class="text-gray-400">수정</div>
+      <div class="text-gray-400">
+        <router-link :to="{ name: 'ProfileEdit' }">수정</router-link>
+      </div>
     </div>
     <div class="profile-main__info--array">
       <p class="text-gray-500">닉네임</p>
@@ -32,15 +34,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .profile-main-container {
-  display: flex;
-  justify-content: center;
+  @apply flex justify-center;
+}
+
+.profile-main__info__top--array {
+  @apply flex justify-between items-center;
+  margin: 24px 16px 0px 16px;
 }
 
 .profile-main__info--array {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 86%;
-  margin: 45px auto;
+  @apply flex justify-between items-center;
+  margin: 16px 16px;
 }
 </style>

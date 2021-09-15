@@ -25,12 +25,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .profile-main__navbar__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid lightgray;
+  @apply flex justify-center items-center;
   height: 50px;
+  border: 1px solid lightgray;
 }
+
 .profile-main__navbar__button--space {
   margin-left: 40px;
 }

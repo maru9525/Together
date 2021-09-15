@@ -4,6 +4,8 @@ import ContentsLayout from '@/layouts/ContentsLayout.vue'
 import PartyLayout from '@/layouts/PartyLayout.vue'
 import ProfileLayout from '@/layouts/ProfileLayout.vue'
 import ProfileMain from '@/views/ProfileMain.vue'
+import ProfileEdit from '@/views/ProfileEdit.vue'
+import ProfileChangePassword from '@/views/ProfileChangePassword.vue'
 import ProfileParty from '@/views/ProfileParty.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -38,6 +40,16 @@ const routes: Array<RouteRecordRaw> = [
         path: '',
         name: 'ProfileMain',
         component: ProfileMain,
+      },
+      {
+        path: 'edit',
+        name: 'ProfileEdit',
+        component: ProfileEdit,
+      },
+      {
+        path: 'changepassword',
+        name: 'ProfileChangePassword',
+        component: ProfileChangePassword,
       },
       {
         path: 'party',
