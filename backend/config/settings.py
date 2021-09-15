@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',   # DRF
     'drf_yasg',  # drf_yasg
+    'sign.apps.SignConfig'
 ]
 
 MIDDLEWARE = [
