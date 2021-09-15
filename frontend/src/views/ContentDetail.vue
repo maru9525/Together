@@ -1,135 +1,117 @@
 <template>
   <section v-if="loading">로딩 중</section>
   <template v-else>
-    <section class="banner-section">배너</section>
-    <section class="info-section">
-      <header class="section-header">
-        <span class="title">{{ content.title }}</span>
-        <div class="sim-rate">{{ content.simRate }}%</div>
-      </header>
-      <ul class="provider-list">
-        <li
-          class="provider-item"
-          v-for="provider in content.providers"
-          :key="provider"
-        >
-          {{ provider }}
-        </li>
-      </ul>
-      <div class="details">
-        <div>{{ content.firstAirYear }}</div>
-        <div>{{ content.rated }}</div>
-        <div>시즌 {{ content.seasons }}개</div>
-      </div>
-      <div class="overview">
-        {{ content.overview }}
-      </div>
-      <div class="rating-wrapper">
-        <button class="rating-btn" v-for="i in 5" :key="i">
-          <span class="material-icons star">star</span>
-        </button>
-      </div>
+    <section class="banner-section">
+      <ContentDetailInfoSection v-if="!isMobile" :content="content" />
     </section>
-    <section class="review-section">
-      <header class="section-header">{{ content.title }} 리뷰</header>
-      <ul class="review-list">
-        <li
-          class="review-item"
-          v-for="review in displayedReviews"
-          :key="review.id.videoId"
-        >
-          <a
-            :href="`https://youtube.com/watch?v=${review.id.videoId}`"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div class="container">
+      <ContentDetailInfoSection v-if="isMobile" :content="content" />
+      <section class="review-section">
+        <header class="section-header">{{ content.title }} 리뷰</header>
+        <ul class="review-list">
+          <li
+            class="review-item"
+            v-for="review in displayedReviews"
+            :key="review.id.videoId"
           >
-            <div class="review">
-              <div class="thumbnail-wrapper">
-                <img
-                  :src="review.snippet.thumbnails.high.url"
-                  :alt="`${review.snippet.title} 썸네일`"
-                />
+            <a
+              :href="`https://youtube.com/watch?v=${review.id.videoId}`"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="review">
+                <div class="thumbnail-wrapper">
+                  <img
+                    :src="review.snippet.thumbnails.high.url"
+                    :alt="`${review.snippet.title} 썸네일`"
+                  />
+                </div>
+                <span class="title" v-html="review.snippet.title" />
               </div>
-              <span class="title" v-html="review.snippet.title" />
-            </div>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <section class="party-section">
-      <header class="section-header">파티에 참여하세요!</header>
-      <ul class="party-list">
-        <li class="party-item" v-for="party in parties" :key="party.id">
-          <div class="party">
-            <div class="infos">
-              <div class="text">
-                <h3>{{ party.provider }} 프리미엄</h3>
-                <p>{{ party.title }}</p>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="party-section">
+        <header class="section-header">파티에 참여하세요!</header>
+        <ul class="party-list">
+          <li class="party-item" v-for="party in parties" :key="party.id">
+            <div class="party">
+              <div class="infos">
+                <div class="text">
+                  <h3>{{ party.provider }} 프리미엄</h3>
+                  <p>{{ party.title }}</p>
+                </div>
+                <div class="logo-wrapper">로고</div>
               </div>
-              <div class="logo-wrapper">로고</div>
-            </div>
-            <div class="members">
-              <span class="material-icons" v-for="i in 5" :key="i">star</span>
-            </div>
-            <div class="details">
-              <div>
-                <p class="date">
-                  {{ party.endDate }}까지 ({{ party.restDays }}일)
-                </p>
+              <div class="members">
+                <span class="material-icons" v-for="i in 5" :key="i">star</span>
               </div>
-              <div class="price-wrapper">
-                <p class="original-price">
-                  {{ toCurrency(party.originalPricePerDay * party.restDays) }}
-                </p>
-                <p class="price">
-                  {{ toCurrency(party.pricePerDay * party.restDays) }}
-                </p>
+              <div class="details">
+                <div>
+                  <p class="date">
+                    {{ party.endDate }}까지 ({{ party.restDays }}일)
+                  </p>
+                </div>
+                <div class="price-wrapper">
+                  <p class="original-price">
+                    {{ toCurrency(party.originalPricePerDay * party.restDays) }}
+                  </p>
+                  <p class="price">
+                    {{ toCurrency(party.pricePerDay * party.restDays) }}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
-      <div class="flex">
-        <router-link class="more-link" :to="{ name: 'ContentList' }">
-          <span class="label">더보기</span>
-          <span class="material-icons">chevron_right</span>
-        </router-link>
-      </div>
-    </section>
-    <section class="community-section">
-      <header class="section-header">
-        <h1>커뮤니티</h1>
-        <p>댓글 12</p>
-      </header>
-      <ul class="comment-list">
-        <li class="comment-item" v-for="comment in comments" :key="comment.id">
-          <div class="left">
-            <img class="profile-img" :src="comment.user.profileImg" />
-            <div class="rating">{{ comment.rating }}</div>
-          </div>
-          <div class="right">
-            <div class="upper">
-              <span>{{ comment.user.nickName }}</span>
-              <span>2시간 전</span>
+          </li>
+        </ul>
+        <div class="flex">
+          <router-link class="more-link" :to="{ name: 'ContentList' }">
+            <span class="label">더보기</span>
+            <span class="material-icons">chevron_right</span>
+          </router-link>
+        </div>
+      </section>
+      <section class="community-section">
+        <header class="section-header">
+          <h1>커뮤니티</h1>
+          <p>댓글 12</p>
+        </header>
+        <ul class="comment-list">
+          <li
+            class="comment-item"
+            v-for="comment in comments"
+            :key="comment.id"
+          >
+            <div class="left">
+              <img class="profile-img" :src="comment.user.profileImg" />
+              <div class="rating">{{ comment.rating }}</div>
             </div>
-            <div class="comment">종이로 집을 지으면 전부 타버릴거야!</div>
-            <button class="btn-like">
-              <span class="material-icons text-gray-400">favorite</span>
-              <span class="like-count">{{ comment.like }}</span>
-            </button>
-          </div>
-        </li>
-      </ul>
-    </section>
+            <div class="right">
+              <div class="upper">
+                <span>{{ comment.user.nickName }}</span>
+                <span>2시간 전</span>
+              </div>
+              <div class="comment">종이로 집을 지으면 전부 타버릴거야!</div>
+              <button class="btn-like">
+                <span class="material-icons text-gray-400">favorite</span>
+                <span class="like-count">{{ comment.like }}</span>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
   </template>
   <div class="py-40"></div>
 </template>
 
 <script lang="ts">
 import axios from 'axios'
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import ContentDetailInfoSection from '@/components/ContentDetailInfoSection.vue'
 
-interface ContentDetail {
+type Content = {
   id: number
   title: string
   posterPath: string
@@ -141,7 +123,7 @@ interface ContentDetail {
   overview: string
 }
 
-interface Youtube {
+type Youtube = {
   id: {
     kind: string
     videoId: string
@@ -159,7 +141,7 @@ interface Youtube {
   }
 }
 
-interface Party {
+type Party = {
   id: number
   provider: string
   title: string
@@ -173,7 +155,7 @@ interface Party {
   pricePerDay: number
 }
 
-interface Comment {
+type Comment = {
   id: number
   user: {
     nickName: string
@@ -188,29 +170,41 @@ const YOUTUBE_BASEURL = 'https://www.googleapis.com/youtube/v3/search'
 const YOUTUBE_KEY = 'AIzaSyA3BjU4BpGVhBFlvHsJHsTNRuLePCbaU1Q'
 
 export default defineComponent({
+  name: 'ContentDetail',
   props: {
     contentId: {
       type: [String, Number],
     },
   },
+  components: { ContentDetailInfoSection },
   setup(props) {
     const loading = ref<boolean>(true)
-    const content = ref<ContentDetail>()
+    const content = ref<Content>()
     const youtubeReviews = ref<Youtube[]>()
     const parties = ref<Party[]>()
     const comments = ref<Comment[]>()
+    const innerWidth = ref<number>(window.innerWidth)
+
+    const isMobile = computed(() => {
+      console.log(innerWidth.value)
+      return innerWidth.value < 768
+    })
 
     const displayedReviews = computed(() => {
       // 화면 사이즈에 따라 end index가 달라진다.
-      return youtubeReviews.value?.slice(0, 3)
+      return youtubeReviews.value?.slice(0, isMobile.value ? 3 : 12)
     })
 
     const toCurrency = (price: number): string => {
       return `${String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`
     }
 
+    addEventListener('resize', (e) => {
+      const w = e.target as Window
+      innerWidth.value = w.innerWidth
+    })
+
     onMounted(async () => {
-      console.log('asdf')
       try {
         const res = await axios.get(
           `http://localhost:3000/contents/${props.contentId}`
@@ -253,8 +247,14 @@ export default defineComponent({
       }
       loading.value = false
     })
+    onBeforeUnmount(() => {
+      removeEventListener('resize', () => {
+        console.log('Remove')
+      })
+    })
     return {
       loading,
+      isMobile,
       content,
       displayedReviews,
       parties,
@@ -267,48 +267,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .banner-section {
-  @apply h-44 bg-purple-100;
-}
-
-.info-section {
-  @apply p-4 grid gap-4;
-
-  .section-header {
-    @apply flex justify-between items-center;
-
-    .title {
-      @apply text-2xl font-bold;
-    }
-
-    .sim-rate {
-      @apply text-xs text-yellow-400 bg-gray-900 rounded-md py-0.5 px-2;
-    }
-  }
-
-  .provider-list {
-    @apply flex gap-2;
-  }
-
-  .details {
-    @apply flex gap-2 text-sm;
-  }
-
-  .overview {
-    word-break: keep-all;
-    @apply text-sm;
-  }
-
-  .rating-wrapper {
-    @apply p-2 border border-gray-200 rounded mr-auto flex gap-1;
-
-    .rating-btn {
-      @apply flex;
-
-      .star {
-        @apply text-gray-200;
-      }
-    }
-  }
+  @apply grid place-items-center md:grid-cols-2 h-44 md:h-80 bg-purple-600;
 }
 
 .review-section {
@@ -319,11 +278,16 @@ export default defineComponent({
   }
 
   .review-list {
-    @apply grid gap-2;
+    @apply grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6;
 
     .review-item {
       .review {
-        @apply grid grid-cols-2 gap-2;
+        @apply grid grid-cols-2 md:grid-cols-1 gap-2 p-2;
+
+        &:hover {
+          @apply bg-gray-200;
+        }
+
         .thumbnail-wrapper {
           padding-top: 55.5%;
           @apply relative overflow-hidden;
@@ -352,7 +316,7 @@ export default defineComponent({
   }
 
   .party-list {
-    @apply grid gap-2 mb-1;
+    @apply grid gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mb-1;
 
     .party {
       @apply grid gap-4 p-4 border rounded-md border-gray-100;

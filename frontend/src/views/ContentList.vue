@@ -1,6 +1,6 @@
 <template>
-  <main class="container">
-    <section class="banner-section">배너</section>
+  <section class="banner-section">배너</section>
+  <div class="container">
     <section class="filter-section">
       <ul class="filter-list">
         <li class="filter-item">넷</li>
@@ -26,14 +26,14 @@
         </li>
       </ul>
     </section>
-    <div class="py-40"></div>
-  </main>
+  </div>
+  <div class="py-40"></div>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
 import axios from 'axios'
 
-interface Content {
+type Content = {
   id: number
   title: string
   posterPath: string
@@ -55,7 +55,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .banner-section {
-  @apply h-44 bg-gray-200;
+  @apply h-44 md:h-80 bg-gray-200;
 }
 .filter-section {
   @apply py-6 px-4;
@@ -64,7 +64,7 @@ export default defineComponent({
     @apply flex gap-6;
 
     .filter-item {
-      @apply w-8 h-8 bg-pink-300;
+      @apply w-8 h-8 md:w-10 md:h-10 bg-pink-300;
     }
   }
 }
@@ -77,7 +77,7 @@ export default defineComponent({
   }
 
   .contents-list {
-    @apply grid grid-cols-3 gap-2 sm:grid-cols-4;
+    @apply grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2;
 
     .poster-wrapper {
       padding-top: 142.1686747%;
