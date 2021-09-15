@@ -33,10 +33,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.profile-main-container {
-  @apply flex justify-center;
-}
-
 .profile-main__info__top--array {
   @apply flex justify-between items-center;
   margin: 24px 16px 0px 16px;
@@ -45,5 +41,14 @@ export default defineComponent({
 .profile-main__info--array {
   @apply flex justify-between items-center;
   margin: 16px 16px;
+}
+
+@media (min-width: 768px) {
+  .profile-main__info__top--array {
+    margin: 28px 352px 0px;
+  }
+  .profile-main__info--array {
+    margin: 16px 352px 0px;
+  }
 }
 </style>
