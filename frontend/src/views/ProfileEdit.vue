@@ -67,7 +67,7 @@ export default defineComponent({
   }
 
   .profile-edit__checkbox--form {
-    @apply flex justify-center items-center mt-10 mx-auto mb-2 h-14 border rounded-xl text-white;
+    @apply flex justify-center items-center mt-8 mx-auto mb-2 h-14 border rounded-xl text-white;
     width: 382px;
     background-color: #312e81;
   }
