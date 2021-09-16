@@ -1,49 +1,53 @@
 <template>
-  <p class="profile-edit__info__top--array text-2xl font-bold">내 정보</p>
-  <div class="profile-edit__box__form">
-    <p class="profile-edit__box__form__text--array1 text-xs text-gray-400">
-      닉네임
-    </p>
-    <input
-      class="profile-edit__box__form__text--array2 text-sm"
-      value="누클리어 런치 디텍티드"
-    />
-  </div>
-  <div class="profile-edit__box__form">
-    <p class="profile-edit__box__form__text--array1 text-xs text-gray-400">
-      이름
-    </p>
-    <input
-      class="profile-edit__box__form__text--array2 text-sm"
-      value="김정은"
-    />
-  </div>
-  <div class="profile-edit__box__form">
-    <p class="profile-edit__box__form__text--array1 text-xs text-gray-400">
-      휴대폰 번호
-    </p>
-    <input
-      class="profile-edit__box__form__text--array2 text-sm"
-      value="010-1717-1602"
-    />
-  </div>
-  <p class="profile-edit__cert__text--array text-sm text-gray-700">
-    휴대폰 번호를 변경하려면 새로운 번호 인증을 해야 합니다.
-  </p>
-  <button class="profile-edit__cert__box__form text-sm">
-    <p>휴대폰 본인인증</p>
-  </button>
-  <div class="profile-edit__button__box--array">
-    <router-link
-      :to="{ name: 'ProfileMain' }"
-      class="profile-edit__checkbox--form"
-      >확인</router-link
-    >
-    <router-link
-      :to="{ name: 'ProfileChangePassword' }"
-      class="profile-edit__changepw--array"
-      >비밀번호 변경</router-link
-    >
+  <div class="container mx-auto max-w-screen-md">
+    <div class="profile-edit__main__section">
+      <p class="profile-edit__info__top--array text-2xl font-bold">내 정보</p>
+      <div class="profile-edit__box__form">
+        <p class="profile-edit__box__form__text--array1 text-xs text-gray-400">
+          닉네임
+        </p>
+        <input
+          class="profile-edit__box__form__text--array2 text-sm"
+          value="누클리어 런치 디텍티드"
+        />
+      </div>
+      <div class="profile-edit__box__form">
+        <p class="profile-edit__box__form__text--array1 text-xs text-gray-400">
+          이름
+        </p>
+        <input
+          class="profile-edit__box__form__text--array2 text-sm"
+          value="김정은"
+        />
+      </div>
+      <div class="profile-edit__box__form">
+        <p class="profile-edit__box__form__text--array1 text-xs text-gray-400">
+          휴대폰 번호
+        </p>
+        <input
+          class="profile-edit__box__form__text--array2 text-sm"
+          value="010-1717-1602"
+        />
+      </div>
+      <p class="profile-edit__cert__text--array text-sm text-gray-700">
+        휴대폰 번호를 변경하려면 새로운 번호 인증을 해야 합니다.
+      </p>
+      <button class="profile-edit__cert__box__form text-sm">
+        <p>휴대폰 본인인증</p>
+      </button>
+      <div class="profile-edit__button__box--array">
+        <router-link
+          :to="{ name: 'ProfileMain' }"
+          class="profile-edit__checkbox--form"
+          >확인</router-link
+        >
+        <router-link
+          :to="{ name: 'ProfileChangePassword' }"
+          class="profile-edit__changepw--array"
+          >비밀번호 변경</router-link
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -58,33 +62,36 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.profile-edit__main__section {
+  @apply py-6 px-4 grid gap-4;
+}
+
 .profile-edit__info__top--array {
-  margin: 24px 16px 16px 16px;
+  // @apply;
 }
 
 .profile-edit__box__form {
-  @apply flex flex-col justify-center items-start;
-  margin: 0px 16px 8px 16px;
+  @apply flex flex-col justify-center items-start px-4;
   height: 60px;
   border: 1px solid lightgray;
   border-radius: 6px;
 }
 
 .profile-edit__box__form__text--array1 {
-  margin: 8px 0px 0px 16px;
+  // margin: 8px 0px 0px 16px;
 }
 
 .profile-edit__box__form__text--array2 {
-  margin: 0px 0px 8px 16px;
+  // margin: 0px 0px 8px 16px;
 }
 
 .profile-edit__cert__text--array {
-  margin: 0px 16px 8px 16px;
+  // margin: 0px 16px 8px 16px;
 }
 
 .profile-edit__cert__box__form {
   @apply flex justify-center items-center;
-  margin-left: 16px;
+  // margin-left: 16px;
   width: 126px;
   height: 36px;
   border: 1px solid;

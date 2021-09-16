@@ -43,25 +43,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ProfileParty',
   setup() {
-    const isContentShown = ref<boolean>(false)
-    const open = () => (isContentShown.value = true)
-
-    // const contentShown = () => {
-    //   // if (isContentShown === 'false')
-    //   const sizeChange = document.getElementById('profile_party__box--size')
-    //   sizeChange.style.height = '376px'
-    // }
-
-    return {
-      isContentShown,
-      open,
-      // contentShown,
-    }
+    return {}
   },
 })
 </script>
