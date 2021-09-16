@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-screen-md a">
+  <div class="container max-w-screen-md">
     <p class="profile-changepassword__top--array">비밀번호 변경</p>
     <div class="profile-changepassword__box__form">
       <input
@@ -43,10 +43,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.a {
-  @apply h-96;
-}
-
 .profile-changepassword__top--array {
   @apply px-4 pt-6 pb-4 text-2xl font-bold;
 }

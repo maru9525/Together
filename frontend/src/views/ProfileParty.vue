@@ -1,43 +1,120 @@
 <template>
-  <div>
-    <p class="profile-party__text--array text-2xl font-bold">내 파티</p>
-    <div class="profile-party__box" id="profile_party__box--size">
-      <div class="profile-party__box__text--array">
-        <p class="font-semibold">넷플릭스 프리미엄</p>
-        <img
-          src="@/assets/images/Netflix.png"
-          class="profile-party__box__image--size"
-          alt="넷플릭스"
-        />
+  <div class="container max-w-screen-md">
+    <p class="profile-party__text--array">내 파티</p>
+    <div class="profile-party__box--array">
+      <div class="profile-party__box border-red-500">
+        <div class="profile-party__box__text--array">
+          <p class="font-semibold">넷플릭스 프리미엄</p>
+          <img
+            src="@/assets/images/Netflix.png"
+            class="profile-party__box__image--size"
+            alt="넷플릭스"
+          />
+        </div>
+        <div class="profile-party__box__text--array2">
+          <p>21.12.25까지 (109일)</p>
+          <p class="font-bold">10,900원</p>
+        </div>
+        <details>
+          <summary></summary>
+          <hr />
+          <div class="show">
+            <p class="profile-party__box__text--array3">계정 정보</p>
+            <div class="profile-party__box__text--array4">
+              <p>아이디</p>
+              <p>northKing@NK.com</p>
+            </div>
+            <div class="profile-party__box__text--array4">
+              <p>비밀번호</p>
+              <input type="password" value="12335" style="text-align: right" />
+            </div>
+            <p class="profile-party__box__text--array3">파티장 정보</p>
+            <div class="profile-party__box__text--array4">
+              <p>이름</p>
+              <p>김일성</p>
+            </div>
+            <div class="profile-party__box__text--array4">
+              <p>휴대폰 번호</p>
+              <p>011-247-1001</p>
+            </div>
+          </div>
+        </details>
       </div>
-      <div class="profile-party__box__text--array2">
-        <p>21.12.25까지 (109일)</p>
-        <p class="font-bold">10,900원</p>
+
+      <div class="profile-party__box border-blue-500">
+        <div class="profile-party__box__text--array">
+          <p class="font-semibold">웨이브 프리미엄</p>
+          <img
+            src="@/assets/images/Wavve.jpg"
+            class="profile-party__box__image--size"
+            alt="넷플릭스"
+          />
+        </div>
+        <div class="profile-party__box__text--array2">
+          <p>21.12.25까지 (109일)</p>
+          <p class="font-bold">10,900원</p>
+        </div>
+        <details>
+          <summary></summary>
+          <hr />
+          <p class="profile-party__box__text--array3">계정 정보</p>
+          <div class="profile-party__box__text--array4">
+            <p>아이디</p>
+            <p>northKing@NK.com</p>
+          </div>
+          <div class="profile-party__box__text--array4">
+            <p>비밀번호</p>
+            <input type="password" value="12335" style="text-align: right" />
+          </div>
+          <p class="profile-party__box__text--array3">파티장 정보</p>
+          <div class="profile-party__box__text--array4">
+            <p>이름</p>
+            <p>김일성</p>
+          </div>
+          <div class="profile-party__box__text--array4">
+            <p>휴대폰 번호</p>
+            <p>011-247-1001</p>
+          </div>
+        </details>
       </div>
-      <details @click="contentShown">
-        <summary></summary>
-        <hr />
-        <p class="profile-party__box__text--array3 font-semibold">계정 정보</p>
-        <div class="profile-party__box__text--array4">
-          <p>아이디</p>
-          <p>northKing@NK.com</p>
+
+      <div class="profile-party__box border-pink-400">
+        <div class="profile-party__box__text--array">
+          <p class="font-semibold">왓챠 프리미엄</p>
+          <img
+            src="@/assets/images/Watcha.png"
+            class="profile-party__box__image--size"
+            alt="넷플릭스"
+          />
         </div>
-        <div class="profile-party__box__text--array4">
-          <p>비밀번호</p>
-          <input type="password" value="12335" style="text-align: right" />
+        <div class="profile-party__box__text--array2">
+          <p>21.12.25까지 (109일)</p>
+          <p class="font-bold">10,900원</p>
         </div>
-        <p class="profile-party__box__text--array3 font-semibold">
-          파티장 정보
-        </p>
-        <div class="profile-party__box__text--array4">
-          <p>이름</p>
-          <p>김일성</p>
-        </div>
-        <div class="profile-party__box__text--array4">
-          <p>휴대폰 번호</p>
-          <p>011-247-1001</p>
-        </div>
-      </details>
+        <details>
+          <summary></summary>
+          <hr />
+          <p class="profile-party__box__text--array3">계정 정보</p>
+          <div class="profile-party__box__text--array4">
+            <p>아이디</p>
+            <p>northKing@NK.com</p>
+          </div>
+          <div class="profile-party__box__text--array4">
+            <p>비밀번호</p>
+            <input type="password" value="12335" style="text-align: right" />
+          </div>
+          <p class="profile-party__box__text--array3">파티장 정보</p>
+          <div class="profile-party__box__text--array4">
+            <p>이름</p>
+            <p>김일성</p>
+          </div>
+          <div class="profile-party__box__text--array4">
+            <p>휴대폰 번호</p>
+            <p>011-247-1001</p>
+          </div>
+        </details>
+      </div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -54,42 +131,43 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@media (min-width: 768px) {
+  .profile-party__box--array {
+    @apply grid grid-flow-row grid-cols-2;
+  }
+
+  .profile-party__box {
+  }
+}
 .profile-party__text--array {
-  margin: 24px 0px 16px 16px;
+  @apply mt-6 mb-4 ml-4  text-2xl font-bold;
 }
 
 .profile-party__box {
-  margin: 0px 16px 8px 16px;
-  padding: 16px 16px;
-  border: 1px red solid;
-  border-radius: 6px;
+  @apply mx-4 mb-2 px-4 py-4 border rounded-md;
+
+  .profile-party__box__text--array {
+    @apply flex justify-between mb-8;
+
+    .profile-party__box__image--size {
+      @apply w-12 h-12;
+    }
+  }
+
+  .profile-party__box__text--array2 {
+    @apply flex justify-between mb-4;
+  }
+
+  .profile-party__box__text--array3 {
+    @apply font-semibold mt-4;
+  }
+
+  .profile-party__box__text--array4 {
+    @apply flex justify-between my-2 mx-0;
+  }
 }
 
 details summary {
   cursor: pointer;
-}
-
-.profile-party__box__image--size {
-  width: 50px;
-  height: 50px;
-}
-
-.profile-party__box__text--array {
-  @apply flex justify-between;
-  margin-bottom: 32px;
-}
-
-.profile-party__box__text--array2 {
-  @apply flex justify-between;
-  margin-bottom: 16px;
-}
-
-.profile-party__box__text--array3 {
-  margin-top: 16px;
-}
-
-.profile-party__box__text--array4 {
-  @apply flex justify-between;
-  margin: 8px 0px;
 }
 </style>
