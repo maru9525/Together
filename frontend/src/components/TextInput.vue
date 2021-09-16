@@ -3,21 +3,19 @@
     <div class="input-container">
       <input
         autocomplete="off"
-        id="inputText"
         :type="field.type"
         :value="modelValue"
-        :class="{ active: isFocused }"
+        :class="{ active: labelActive }"
         @blur="handleBlur"
         @focus="handleFocus"
         @input="handleInput"
         @keydown.enter="$emit('submit')"
       />
       <label
-        id="inputLabel"
         class="input-container__placeholder"
-        :class="{ active: isFocused }"
+        :class="{ active: labelActive }"
       >
-        <p v-if="isFocused">{{ field.label }}</p>
+        <p v-if="labelActive">{{ field.label }}</p>
         <p v-else>{{ field.placeholder }}</p>
       </label>
     </div>
@@ -25,15 +23,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   name: 'TextInput',
   props: {
     field: {
-      type: Object,
-    },
-    formData: {
       type: Object,
     },
     modelValue: {
@@ -46,40 +41,34 @@ export default defineComponent({
       type: String,
     },
   },
+  emits: ['update:modelValue'],
   setup(props, { emit }) {
     const modelValue = computed(() => props.modelValue)
-    const isFocused = ref<boolean>(Boolean(props.modelValue))
+    const labelActive = ref<boolean>(Boolean(props.modelValue))
 
     // const validate = () => {
     //   return
     // }
 
     const handleBlur = () => {
-      isFocused.value = props.modelValue ? true : false
-      console.log(Boolean(props.modelValue))
+      labelActive.value = props.modelValue ? true : false
     }
 
     const handleFocus = () => {
-      console.log(Boolean(props.modelValue))
-      isFocused.value = true
+      labelActive.value = true
     }
 
     // any의 사용에 대한 확신이 없음. 수정 필요
     const handleInput = (event: any) => {
-      // emit('update:modelValue', event.target.value)
-      return
+      emit('update:modelValue', event.target.value)
     }
 
     watch(modelValue, (value) => {
-      console.log(value, '워치중')
-      // isFocused.value = Boolean(value)
-    })
-
-    onMounted(() => {
-      console.log(props.modelValue, '모델')
+      labelActive.value = Boolean(value)
     })
 
     return {
+      labelActive,
       handleBlur,
       handleFocus,
       handleInput,
@@ -93,7 +82,7 @@ export default defineComponent({
   @apply relative w-full;
 
   input {
-    @apply relative text-sm outline-none px-4 py-3 rounded-md bg-transparent border border-gray-300 w-full py-2;
+    @apply relative text-sm outline-none px-4 py-3 z-10 rounded-md bg-transparent border border-gray-300 w-full py-2;
 
     &.active {
       @apply border-indigo-900;
@@ -104,7 +93,8 @@ export default defineComponent({
     transform: translate(0);
 
     &.active {
-      transform: translate(0, -170%);
+      @apply bg-white rounded-md text-xs text-indigo-900 p-1 z-10;
+      transform: translate(0, -100%);
     }
   }
 }

@@ -13,22 +13,23 @@
             :key="key"
             :name="key"
             :field="field"
-            :formData="formData"
             @submit="login"
           />
         </div>
-        <div>
-          <input
-            class="mr-1 bg-indigo-800"
-            type="checkbox"
-            id="checkSaveEmail"
-            v-model="isSaveEmail"
-          />
-          <label
-            class="relative bottom-0.5 text-xs text-gray-600"
-            for="checkSaveEmail"
-            >이메일 저장하기</label
-          >
+        <div class="login-container__sub-option">
+          <div>
+            <input
+              class="mr-1 bg-indigo-800"
+              type="checkbox"
+              id="checkSaveEmail"
+              v-model="isSaveEmail"
+            />
+            <label
+              class="relative bottom-0.5 text-xs text-gray-600"
+              for="checkSaveEmail"
+              >이메일 저장하기</label
+            >
+          </div>
           <router-link
             class="relative top-1 text-xs text-gray-600 float-right"
             :to="{ name: 'ResetPassword' }"
@@ -38,6 +39,7 @@
         <button
           class="login-container__login-btn"
           :class="{ disabled: !isValidFormData }"
+          :disabled="!isValidFormData"
           @click="login"
         >
           <!-- TODO: 로딩 상태 분기해서 로딩스피너와 교체할 것 -->
@@ -112,10 +114,12 @@ export default defineComponent({
     const login = async () => {
       // validate check
       // if isSaveEmail, save to localStorage
+      console.log('login button clicked')
       return
     }
 
     return {
+      store,
       router,
       isSaveEmail,
       isValidFormData,
@@ -144,8 +148,10 @@ export default defineComponent({
         @apply w-full rounded-lg py-3 text-sm text-white font-bold bg-indigo-900;
 
         &.disabled {
-          @apply bg-indigo-300 text-gray-100;
+          @apply opacity-50;
         }
+      }
+      &__sub-option {
       }
       &__social-btn {
         @apply w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
