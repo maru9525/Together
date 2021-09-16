@@ -37,12 +37,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .profile-main__info__section {
   @apply py-6 px-4 grid gap-4;
-}
-.profile-main__info__top--array {
-  @apply flex justify-between items-center;
-}
 
-.profile-main__info--array {
-  @apply flex justify-between items-center;
+  .profile-main__info__top--array {
+    @apply flex justify-between items-center;
+  }
+
+  .profile-main__info--array {
+    @apply flex justify-between items-center;
+  }
 }
 </style>
