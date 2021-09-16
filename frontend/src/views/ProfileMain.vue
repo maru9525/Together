@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-screen-md">
+  <div class="container max-w-screen-md">
     <div class="profile-main__info__section">
       <div class="profile-main__info__top--array">
         <div class="text-2xl font-bold">내 정보</div>
