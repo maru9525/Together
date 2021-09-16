@@ -110,6 +110,7 @@
 import axios from 'axios'
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import ContentDetailInfoSection from '@/components/ContentDetailInfoSection.vue'
+import { useStore } from 'vuex'
 
 interface Content {
   id: number
@@ -178,6 +179,7 @@ export default defineComponent({
   },
   components: { ContentDetailInfoSection },
   setup(props) {
+    const store = useStore()
     const loading = ref<boolean>(true)
     const content = ref<Content>()
     const youtubeReviews = ref<Youtube[]>()
@@ -206,11 +208,11 @@ export default defineComponent({
 
     onMounted(async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:3000/contents/${props.contentId}`
-        )
-        console.log(res)
-        content.value = res.data
+        // const res = await axios.get(
+        //   `http://localhost:3000/contents/${props.contentId}`
+        // )
+        const res = await store.dispatch('content/getContent', props.contentId)
+        content.value = res
       } catch (error) {
         console.log(error)
         // 에러가 발생하는 경우 목록 페이지로 이동

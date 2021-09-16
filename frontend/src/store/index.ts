@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
+import { content } from '@/store/modules/content'
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+export interface RootState {
+  data: string
+}
+
+export default createStore<RootState>({
+  modules: { content },
 })
