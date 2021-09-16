@@ -5,7 +5,7 @@
 ```typescript
 import { defineComponent, PropType } from 'vue'
 
-type Content = {
+interface Content {
   id: number
   title: string
   posterPath: string

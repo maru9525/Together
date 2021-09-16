@@ -111,7 +111,7 @@ import axios from 'axios'
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import ContentDetailInfoSection from '@/components/ContentDetailInfoSection.vue'
 
-type Content = {
+interface Content {
   id: number
   title: string
   posterPath: string
@@ -123,7 +123,7 @@ type Content = {
   overview: string
 }
 
-type Youtube = {
+interface Youtube {
   id: {
     kind: string
     videoId: string
@@ -141,7 +141,7 @@ type Youtube = {
   }
 }
 
-type Party = {
+interface Party {
   id: number
   provider: string
   title: string
@@ -155,7 +155,7 @@ type Party = {
   pricePerDay: number
 }
 
-type Comment = {
+interface Comment {
   id: number
   user: {
     nickName: string
