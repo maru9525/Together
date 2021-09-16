@@ -1,18 +1,36 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import AuthLayout from '@/layouts/AuthLayout.vue'
-import ContentsLayout from '@/layouts/ContentsLayout.vue'
+import ContentLayout from '@/layouts/ContentLayout.vue'
 import PartyLayout from '@/layouts/PartyLayout.vue'
 import ProfileLayout from '@/layouts/ProfileLayout.vue'
+<<<<<<< HEAD
 import ProfileMain from '@/views/ProfileMain.vue'
 import ProfileEdit from '@/views/ProfileEdit.vue'
 import ProfileChangePassword from '@/views/ProfileChangePassword.vue'
 import ProfileParty from '@/views/ProfileParty.vue'
+=======
+import ContentList from '@/views/ContentList.vue'
+import ContentDetail from '@/views/ContentDetail.vue'
+>>>>>>> 1c5b5ba596ce87ad86bf703d7f931fe37e584daf
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'ContentsLayout',
-    component: ContentsLayout,
+    name: 'ContentLayout',
+    component: ContentLayout,
+    children: [
+      {
+        path: '/',
+        name: 'ContentList',
+        component: ContentList,
+      },
+      {
+        path: '/:contentId',
+        name: 'ContentDetail',
+        component: ContentDetail,
+        props: true,
+      },
+    ],
     // children: [
     //   {
     //     path: '/',
