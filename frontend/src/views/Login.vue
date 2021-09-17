@@ -69,7 +69,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import Textinput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
@@ -89,15 +89,20 @@ export default defineComponent({
       localStorage.getItem('email') ? true : false
     )
 
+    // 문제인 부분. errors에 접근하지 못하고 있다.
     const isValidFormData = computed(() => {
       const keys = Object.keys(formData)
-      return keys.every((key) => {
-        const errors = Object.keys(formData[key].errors)
-        return formData[key].value !== '' && !errors.length
-      })
+      // 아래의 함수가 문제다.
+      // return keys.every((key) => {
+      //   const errors = Object.keys(formData.value[key].errors)
+      //   return formData.value[key].value !== '' && !errors.length
+      // })
+
+      // 임시로 true값 리턴
+      return true
     })
 
-    const formData = reactive<FormDataList>({
+    const formData = ref<FormDataList>({
       email: {
         label: '이메일',
         type: 'email',
@@ -119,9 +124,9 @@ export default defineComponent({
       const { key, type, status, message } = data
       // message와 같이 undefined로 올 수도 있는 경우, 체크를 잘 해주어야 함
       if (!status && message) {
-        formData[key].errors[type] = message
+        formData.value[key].errors[type] = message
       } else {
-        delete formData[key].errors[type]
+        delete formData.value[key].errors[type]
       }
     }
 
