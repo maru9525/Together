@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="container">
     <div class="body">
       <div class="logo">
         <!-- temporary element -->
@@ -13,7 +13,9 @@
             :key="key"
             :name="key"
             :field="field"
+            :formData="formData"
             @submit="login"
+            @update:validate="handleUpdateValidate($event)"
           />
         </div>
         <div class="login-container__sub-option">
@@ -69,8 +71,10 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from 'vue'
 import Textinput from '@/components/TextInput.vue'
+import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { FormDataList, ValidateData } from '@/libs/interface'
 
 export default defineComponent({
   name: 'Login',
@@ -86,35 +90,53 @@ export default defineComponent({
     )
 
     const isValidFormData = computed(() => {
-      return Object.keys(formData).every((key) => {
-        return key !== ''
+      const keys = Object.keys(formData)
+      return keys.every((key) => {
+        const errors = Object.keys(formData[key].errors)
+        return formData[key].value !== '' && !errors.length
       })
     })
 
-    const formData = reactive({
+    const formData: FormDataList = reactive({
       email: {
         label: '이메일',
         type: 'email',
         value: localStorage.getItem('email') || '',
         placeholder: '이메일을 입력하세요.',
-        validators: null,
-        error: '',
-        maxlength: 100,
+        validator: emailValidator,
+        errors: {},
       },
       password: {
         label: '비밀번호',
         type: 'password',
         value: '',
         placeholder: '비밀번호를 입력하세요.',
-        validators: [],
-        error: '',
+        errors: {},
       },
     })
+
+    const handleUpdateValidate = (data: ValidateData) => {
+      const { key, type, status, message } = data
+      // message와 같이 undefined로 올 수도 있는 경우, 체크를 잘 해주어야 함
+      if (!status && message) {
+        formData[key].errors[type] = message
+      } else {
+        delete formData[key].errors[type]
+      }
+    }
 
     const login = async () => {
       // validate check
       // if isSaveEmail, save to localStorage
-      console.log('login button clicked')
+      const keys = Object.keys(formData)
+      // console.log(
+      //   keys.every((key) => {
+      //     formData[key].value !== ''
+      //   })
+      // )
+      // keys.forEach((key) => {
+      //   console.log(formData[key])
+      // })
       return
     }
 
@@ -124,6 +146,7 @@ export default defineComponent({
       isSaveEmail,
       isValidFormData,
       formData,
+      handleUpdateValidate,
       login,
     }
   },
@@ -131,40 +154,39 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.wrap {
-  .body {
-    @apply flex flex-col justify-center items-center w-full h-screen;
+.body {
+  @apply flex flex-col justify-center items-center w-full h-screen -mt-4 mb-4;
 
-    .logo {
-      @apply mb-4;
+  .logo {
+    @apply mb-4;
+  }
+  .login-container {
+    @apply grid gap-2 px-8 w-full;
+
+    &__input-list {
+      @apply grid gap-3 w-full;
     }
-    .login-container {
-      @apply grid gap-2 px-8 w-full;
+    &__login-btn {
+      @apply w-full rounded-lg py-3 text-sm text-white font-bold bg-indigo-900;
 
-      &__input-list {
-        @apply grid gap-3 w-full;
+      &.disabled {
+        @apply opacity-50;
       }
-      &__login-btn {
-        @apply w-full rounded-lg py-3 text-sm text-white font-bold bg-indigo-900;
+    }
+    &__sub-option {
+      @apply flex flex-row justify-between;
+    }
+    &__social-btn {
+      @apply w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
 
-        &.disabled {
-          @apply opacity-50;
-        }
+      &.kakao {
+        @apply bg-yellow-400;
       }
-      &__sub-option {
+      &.google {
+        @apply bg-gray-100;
       }
-      &__social-btn {
-        @apply w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
-
-        &.kakao {
-          @apply bg-yellow-400;
-        }
-        &.google {
-          @apply bg-gray-100;
-        }
-        &.naver {
-          @apply bg-green-500;
-        }
+      &.naver {
+        @apply bg-green-500;
       }
     }
   }
