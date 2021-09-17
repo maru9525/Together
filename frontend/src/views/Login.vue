@@ -89,10 +89,8 @@ export default defineComponent({
       localStorage.getItem('email') ? true : false
     )
 
-    // 문제인 부분. errors에 접근하지 못하고 있다.
     const isValidFormData = computed(() => {
       const keys = Object.keys(formData.value)
-      // 아래의 함수가 문제다.
       return keys.every((key) => {
         const errors = Object.keys(formData.value[key].errors)
         return formData.value[key].value !== '' && !errors.length
@@ -120,7 +118,6 @@ export default defineComponent({
     const handleUpdateValidate = (data: ValidateData) => {
       const { key, type, status, message } = data
       // message와 같이 undefined로 올 수도 있는 경우, 체크를 잘 해주어야 함
-
       if (!status && message) {
         formData.value[key].errors[type] = message
       } else {
@@ -132,14 +129,6 @@ export default defineComponent({
       // validate check
       // if isSaveEmail, save to localStorage
       const keys = Object.keys(formData.value)
-      // console.log(
-      //   keys.every((key) => {
-      //     formData[key].value !== ''
-      //   })
-      // )
-      // keys.forEach((key) => {
-      //   console.log(formData[key])
-      // })
       return
     }
 
