@@ -68,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
         component: ProfileChangePassword,
       },
       {
-        path: 'party',
+        path: 'myparty',
         name: 'ProfileParty',
         component: ProfileParty,
         children: [

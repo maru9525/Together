@@ -1,22 +1,23 @@
 <template>
-  <div>
-    <div class="profile-main__navbar__button">
-      <div>
-        <router-link :to="{ name: 'ProfileMain' }">프로필</router-link>
-      </div>
-      <div class="profile-main__navbar__button--space">
-        <router-link :to="{ name: 'ProfileParty' }">파티 관리</router-link>
-      </div>
-    </div>
-    <router-view></router-view>
-  </div>
+  <!-- <nav class="profile-main__navbar__button">
+    <router-link to="/profile">프로필</router-link>
+    <router-link
+      to="/profile/myparty"
+      class="profile-main__navbar__button--space"
+      >파티 관리</router-link
+    >
+  </nav> -->
+  <ProfileHeader />
+  <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import ProfileHeader from '@/components/Common/ProfileHeader.vue'
 
 export default defineComponent({
   name: 'ProfileLayout',
+  components: { ProfileHeader },
   setup() {
     return {}
   },
@@ -25,12 +26,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .profile-main__navbar__button {
-  @apply flex justify-center items-center;
-  height: 56px;
-  border: 1px solid lightgray;
+  @apply flex justify-center items-center h-14 border border-gray-300;
+
+  a {
+    @apply font-semibold text-gray-300;
+  }
+
+  .router-link-exact-active {
+    @apply text-indigo-900;
+  }
 }
 
 .profile-main__navbar__button--space {
-  margin-left: 24px;
+  @apply ml-6;
 }
 </style>
