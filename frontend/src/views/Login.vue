@@ -97,7 +97,7 @@ export default defineComponent({
       })
     })
 
-    const formData: FormDataList = reactive({
+    const formData = reactive<FormDataList>({
       email: {
         label: '이메일',
         type: 'email',

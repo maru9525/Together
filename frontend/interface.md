@@ -82,6 +82,28 @@ ref와 reactive의 차이에 대해 알아보았는데, `reactive`는 `reactive 
 ## type assertion 사용의 주의사항
 [참조](https://hyunseob.github.io/2017/12/12/typescript-type-inteference-and-type-assertion/)
 
+위의 코드 중 ref의 경우 type assertion을 사용하였고 reactive에서는 reactive<FormDataList>도 물론 작동하지만, 타입 지정자인 `:`로 타입을 선언해도 정상적으로 작동하였습니다.
+
 타입 단언(assertion)은 타입을 변경합니다. 다만 런타임이 아니라 컴파일타임에서만 타입을 변경하기 때문에 `타입 캐스팅`과는 다릅니다.
 
 따라서 컴파일 과정에 생기는 에러를 as, `<>`를 사용한 타입 단언으로 해결할 수 있으나, 너무 많이 사용하는 것은 타입스크립트의 장점을 해친다고 생각했기 때문에 타입 지정 방식인 `:`로 타입을 선언했습니다.
+
+같은 이유로 ref에서는 왜 as 방식으로 해야 하는지 잘 모르겠기 때문에 :로 타입을 지정해 보려 했으나, 그렇게 하니 오류가 났습니다.
+
+![image-20210917152351635](interface.assets/image-20210917152351635.png)
+
+오류를 보니, ref를 사용할 경우 return값 자체가 타입 선언문이기 때문인 것으로 보입니다.
+
+### 그런데
+
+`const formData = reactive<FormDataList>` 코드의 reactive 속성
+
+![image-20210917151842530](interface.assets/image-20210917151842530.png)
+
+`const formData: FormDataList = reactive` 코드의 reactive 속성
+
+![image-20210917152005243](interface.assets/image-20210917152005243.png)
+
+제가 선언한 interface의 자세한 형태가 assertion으로 선언했을 때에 제대로 보이는 것을 확인했습니다.
+
+코드의 통일성을 위한다는 측면에서 ref, reactive는 모두 assertion으로 타입을 바꿔 주겠습니다.
