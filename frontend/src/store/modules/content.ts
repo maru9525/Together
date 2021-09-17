@@ -30,7 +30,7 @@ export const content: Module<ProfileState, RootState> = {
   mutations: {},
   actions: {
     getContent: async (
-      state,
+      context,
       contentId: number | string
     ): Promise<Content | undefined> => {
       try {
