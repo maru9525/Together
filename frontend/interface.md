@@ -72,3 +72,16 @@ const handleUpdateValidate = (data: ValidateData) => {
       }
     }
 ```
+
+## reactive, ref
+
+[ref vs reactive](https://markus.oberlehner.net/blog/vue-3-composition-api-ref-vs-reactive/)
+
+ref와 reactive의 차이에 대해 알아보았는데, `reactive`는 `reactive object`를 선언할 때만 사용하는 것이라는 것을 알았습니다. 그 외의 경우에는 ref를 쓰도록 하겠습니다.
+
+## type assertion 사용의 주의사항
+[참조](https://hyunseob.github.io/2017/12/12/typescript-type-inteference-and-type-assertion/)
+
+타입 단언(assertion)은 타입을 변경합니다. 다만 런타임이 아니라 컴파일타임에서만 타입을 변경하기 때문에 `타입 캐스팅`과는 다릅니다.
+
+따라서 컴파일 과정에 생기는 에러를 as, `<>`를 사용한 타입 단언으로 해결할 수 있으나, 너무 많이 사용하는 것은 타입스크립트의 장점을 해친다고 생각했기 때문에 타입 지정 방식인 `:`로 타입을 선언했습니다.
