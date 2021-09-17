@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 # Hide API KEY
 # verbose: .env 파일 누락 등의 경고 메시지 출력 옵션
 load_dotenv(verbose=True)
-TMDB_KEY = os.getenv('TMDB_KEY')
+TMDB_KEY = os.getenv('TMDB_KEY')        # "export TMDB_KEY=(발급 받은 api key)" 로 key를 환경 변수로 추가 해주어야 한다.
 
 url = URLMaker(TMDB_KEY)
 
@@ -30,7 +30,7 @@ def create_movie_genre_data():
         }
         genre_data.append(tmp)
 
-    with open('movies.json', 'w') as f:
+    with open('movies_genre.json', 'w') as f:
         json.dump(genre_data, f, indent=4)
 
 def check_KR_provider(data):
@@ -41,9 +41,9 @@ def check_KR_provider(data):
     return data.get('KR')
 
 def create_movie_data():
-    with open('movies.json', 'r+') as f:
-        movie_data = json.load(f)
-
+    #with open('movies.json', 'r+') as f:
+    #    movie_data = json.load(f)
+    movie_data = []
     print('-- 영화 데이터 작업 시작 --')
 
     for page in range(1, 10):
@@ -89,6 +89,15 @@ def create_movie_data():
         json.dump(movie_data, f, indent=4)
 
     print('-- 영화 데이터 작업 완료 --')
+
+def create_movie_review_data():
+    review_url = url.get_movie_review_url()
+    raw_data = requests.get(review_url)
+    json_data = raw_data.json()
+    reviews = json_data.get('reviews')
+    
+    pass
+
 
 if __name__ == '__main__':
     create_movie_genre_data()

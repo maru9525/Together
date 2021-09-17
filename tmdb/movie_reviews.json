@@ -1,0 +1,1182 @@
+[
+    {
+        "userId": "61048d3d688cd0007f215a28",
+        "movieId": 436969,
+        "rating": 8.0
+    },
+    {
+        "userId": "610d456f5bce9e002cfa1ef5",
+        "movieId": 436969,
+        "rating": 7.0
+    },
+    {
+        "userId": "611b96a49f0e1900440acce5",
+        "movieId": 436969,
+        "rating": 9.0
+    },
+    {
+        "userId": "612b83b4a1d33200473fc3c6",
+        "movieId": 436969,
+        "rating": 8.0
+    },
+    {
+        "userId": "6134975e64f71600629ffb82",
+        "movieId": 436969,
+        "rating": 9.0
+    },
+    {
+        "userId": "6137ade5a217c000890ea0b8",
+        "movieId": 436969,
+        "rating": 8.0
+    },
+    {
+        "userId": "60e4945827ff990074dea224",
+        "movieId": 588228,
+        "rating": 7.0
+    },
+    {
+        "userId": "60eb4d0cf9a3fb00291d7e50",
+        "movieId": 588228,
+        "rating": 8.0
+    },
+    {
+        "userId": "604ca4402cefc2006bf30d4d",
+        "movieId": 595743,
+        "rating": 4.0
+    },
+    {
+        "userId": "60d7d5248805510074c99755",
+        "movieId": 595743,
+        "rating": 5.0
+    },
+    {
+        "userId": "60e74284b76cbb0073e80020",
+        "movieId": 497698,
+        "rating": 8.0
+    },
+    {
+        "userId": "60f90db0df857c0045b1f522",
+        "movieId": 497698,
+        "rating": 10.0
+    },
+    {
+        "userId": "610526f4ee43e80027c25bc3",
+        "movieId": 497698,
+        "rating": 2.0
+    },
+    {
+        "userId": "612025512e0697005da5a605",
+        "movieId": 497698,
+        "rating": 8.0
+    },
+    {
+        "userId": "60f36d1133a53300753f75dc",
+        "movieId": 379686,
+        "rating": 8.0
+    },
+    {
+        "userId": "60f6c8a3f1759c00765c6d12",
+        "movieId": 379686,
+        "rating": 8.0
+    },
+    {
+        "userId": "60ca235142d8a50056d9ec6f",
+        "movieId": 508943,
+        "rating": 7.0
+    },
+    {
+        "userId": "60cfd7bb43d9b10057a55fd3",
+        "movieId": 508943,
+        "rating": 7.0
+    },
+    {
+        "userId": "60c5f23c944a57006eb2a086",
+        "movieId": 385128,
+        "rating": 8.0
+    },
+    {
+        "userId": "60d73bb6109cd0004709b24e",
+        "movieId": 385128,
+        "rating": 10.0
+    },
+    {
+        "userId": "60d8bfcbaa7898005d562dff",
+        "movieId": 385128,
+        "rating": 3.0
+    },
+    {
+        "userId": "61041cce17c44300468a962a",
+        "movieId": 385128,
+        "rating": 2.0
+    },
+    {
+        "userId": "610a5a305c5634007fe3b5b5",
+        "movieId": 385128,
+        "rating": 4.0
+    },
+    {
+        "userId": "612b8401a4af8f008a2abe3e",
+        "movieId": 385128,
+        "rating": 4.0
+    },
+    {
+        "userId": "6143ad399450fe00431410ab",
+        "movieId": 385128,
+        "rating": 5.0
+    },
+    {
+        "userId": "611abeff33ec26002ee3cb82",
+        "movieId": 597433,
+        "rating": 5.0
+    },
+    {
+        "userId": "6073dd204d0e8d0043061b63",
+        "movieId": 460465,
+        "rating": 10.0
+    },
+    {
+        "userId": "60847e545c3247007764906c",
+        "movieId": 460465,
+        "rating": 6.0
+    },
+    {
+        "userId": "6084a79a8d22fc003f1c11de",
+        "movieId": 460465,
+        "rating": 7.0
+    },
+    {
+        "userId": "608c456f66469a00428df802",
+        "movieId": 460465,
+        "rating": 5.0
+    },
+    {
+        "userId": "6099654b72a2c9003e33c4f2",
+        "movieId": 460465,
+        "rating": 10.0
+    },
+    {
+        "userId": "60e750acb76cbb00461c9fbd",
+        "movieId": 460465,
+        "rating": 6.0
+    },
+    {
+        "userId": "60e7538183ee670027c8beb1",
+        "movieId": 635302,
+        "rating": 8.0
+    },
+    {
+        "userId": "60f6b4fbe72fe8005e3b348b",
+        "movieId": 635302,
+        "rating": 10.0
+    },
+    {
+        "userId": "6094662e9f0e19007a5c4ce1",
+        "movieId": 637649,
+        "rating": 7.0
+    },
+    {
+        "userId": "60b277206dea3a00588fd4d9",
+        "movieId": 637649,
+        "rating": 6.0
+    },
+    {
+        "userId": "60b593c0371097002ac52fb4",
+        "movieId": 637649,
+        "rating": 6.0
+    },
+    {
+        "userId": "60db1e2a0e5aba007ec68162",
+        "movieId": 637649,
+        "rating": 6.0
+    },
+    {
+        "userId": "60e74f509979d200460075ec",
+        "movieId": 637649,
+        "rating": 8.0
+    },
+    {
+        "userId": "60e9e8cdefcea9007ff09d55",
+        "movieId": 637649,
+        "rating": 8.0
+    },
+    {
+        "userId": "60faac5bd7fbda0062a8bc3f",
+        "movieId": 637649,
+        "rating": 9.0
+    },
+    {
+        "userId": "61166ad899d5c30046efdcfa",
+        "movieId": 637649,
+        "rating": 6.0
+    },
+    {
+        "userId": "60ae64210f2ae10057563b35",
+        "movieId": 337404,
+        "rating": 8.0
+    },
+    {
+        "userId": "60c1afeaf9a3fb005bc39198",
+        "movieId": 337404,
+        "rating": 9.0
+    },
+    {
+        "userId": "60e74fc043250f0047133e58",
+        "movieId": 337404,
+        "rating": 3.0
+    },
+    {
+        "userId": "60f80852f1759c005f35cf02",
+        "movieId": 337404,
+        "rating": 10.0
+    },
+    {
+        "userId": "611e7f62d7059400738e82d1",
+        "movieId": 337404,
+        "rating": 9.0
+    },
+    {
+        "userId": "605bbb20988afd003d996bb3",
+        "movieId": 399566,
+        "rating": 8.0
+    },
+    {
+        "userId": "6064cf562476f20057ced28c",
+        "movieId": 399566,
+        "rating": 7.0
+    },
+    {
+        "userId": "6065ad5db84f94006f4b9363",
+        "movieId": 399566,
+        "rating": 8.0
+    },
+    {
+        "userId": "6067a779924ce600292c3daf",
+        "movieId": 399566,
+        "rating": 6.0
+    },
+    {
+        "userId": "60784c751b1f3c002941ef20",
+        "movieId": 399566,
+        "rating": 5.0
+    },
+    {
+        "userId": "60a614169a64c1002963ab0c",
+        "movieId": 399566,
+        "rating": 10.0
+    },
+    {
+        "userId": "60c8f35648333a002a3cabf1",
+        "movieId": 399566,
+        "rating": 7.0
+    },
+    {
+        "userId": "60e75115bcf8c9002f98eb38",
+        "movieId": 399566,
+        "rating": 8.0
+    },
+    {
+        "userId": "60f582e1af58cb002f3abb74",
+        "movieId": 399566,
+        "rating": 8.0
+    },
+    {
+        "userId": "604f89596517d6006a209fa0",
+        "movieId": 791373,
+        "rating": 7.0
+    },
+    {
+        "userId": "6053c31042f19f003c9945cd",
+        "movieId": 791373,
+        "rating": 7.0
+    },
+    {
+        "userId": "6055862bfd4f800074b8e18f",
+        "movieId": 791373,
+        "rating": 9.0
+    },
+    {
+        "userId": "6055d0169ae613006adfb910",
+        "movieId": 791373,
+        "rating": 10.0
+    },
+    {
+        "userId": "605b6b00d5ffcb005631ed1b",
+        "movieId": 791373,
+        "rating": 10.0
+    },
+    {
+        "userId": "60742314d4b9d900792149d9",
+        "movieId": 791373,
+        "rating": 4.0
+    },
+    {
+        "userId": "607b8f6cab68490058bec703",
+        "movieId": 791373,
+        "rating": 6.0
+    },
+    {
+        "userId": "60e75314a3b5e60045904274",
+        "movieId": 791373,
+        "rating": 10.0
+    },
+    {
+        "userId": "5bd28c050e0a2616cf00459a",
+        "movieId": 335983,
+        "rating": 6.0
+    },
+    {
+        "userId": "5bd8df3dc3a3683cef000ea5",
+        "movieId": 335983,
+        "rating": 7.0
+    },
+    {
+        "userId": "5c6fb4d90e0a26239cd44402",
+        "movieId": 335983,
+        "rating": 7.0
+    },
+    {
+        "userId": "5ca546330e0a261b89b4d306",
+        "movieId": 335983,
+        "rating": 9.0
+    },
+    {
+        "userId": "60a58352543398003eb17511",
+        "movieId": 503736,
+        "rating": 8.0
+    },
+    {
+        "userId": "60a986ef7f4f21002a909c9f",
+        "movieId": 503736,
+        "rating": 6.0
+    },
+    {
+        "userId": "60ce5eab9c24fc002a2650aa",
+        "movieId": 503736,
+        "rating": 8.0
+    },
+    {
+        "userId": "60e75017168ea300247bbf75",
+        "movieId": 503736,
+        "rating": 6.0
+    },
+    {
+        "userId": "61166e02151c5c00460d66ce",
+        "movieId": 503736,
+        "rating": 4.0
+    },
+    {
+        "userId": "60bce70dbb26020057a5dd78",
+        "movieId": 423108,
+        "rating": 6.0
+    },
+    {
+        "userId": "60bff44cd7fbda006f960d95",
+        "movieId": 423108,
+        "rating": 7.0
+    },
+    {
+        "userId": "60e74eaa6ee3d7007546adfa",
+        "movieId": 423108,
+        "rating": 6.0
+    },
+    {
+        "userId": "5f5ac7335bce9e0036c3281e",
+        "movieId": 613504,
+        "rating": 3.0
+    },
+    {
+        "userId": "60b7c7f7c8a5ac0059e8ed30",
+        "movieId": 520763,
+        "rating": 7.0
+    },
+    {
+        "userId": "60e1bcacfbe36f007407c442",
+        "movieId": 520763,
+        "rating": 7.0
+    },
+    {
+        "userId": "6106ef797719d700456d0b02",
+        "movieId": 520763,
+        "rating": 7.0
+    },
+    {
+        "userId": "60ce4afa5ed962006f1b1336",
+        "movieId": 615658,
+        "rating": 7.0
+    },
+    {
+        "userId": "60f06168f3e0df00467b935a",
+        "movieId": 615658,
+        "rating": 4.0
+    },
+    {
+        "userId": "5d16ef595b4fed001e4684c9",
+        "movieId": 429617,
+        "rating": 6.0
+    },
+    {
+        "userId": "5d1b48a70cd32a1960f777c1",
+        "movieId": 429617,
+        "rating": 10.0
+    },
+    {
+        "userId": "5d23564b15c6364753f412f7",
+        "movieId": 429617,
+        "rating": 8.0
+    },
+    {
+        "userId": "5d277e4dbe4b3612f69e17c9",
+        "movieId": 429617,
+        "rating": 5.0
+    },
+    {
+        "userId": "5d2ec9b227d9cc00127d01f6",
+        "movieId": 429617,
+        "rating": 7.0
+    },
+    {
+        "userId": "5d347e55caab6d1640ad1fdd",
+        "movieId": 429617,
+        "rating": 6.0
+    },
+    {
+        "userId": "5d6701cd2790bf06ea3242c5",
+        "movieId": 429617,
+        "rating": 6.0
+    },
+    {
+        "userId": "5dde66bb88bbe60014190298",
+        "movieId": 429617,
+        "rating": 8.0
+    },
+    {
+        "userId": "5f1fe86bb4a543003532c9a9",
+        "movieId": 429617,
+        "rating": 8.0
+    },
+    {
+        "userId": "600f445add83fa003d978d61",
+        "movieId": 429617,
+        "rating": 7.0
+    },
+    {
+        "userId": "602b72a7ab5e34003ea01680",
+        "movieId": 429617,
+        "rating": 10.0
+    },
+    {
+        "userId": "602dd656d4b9d90040d39e02",
+        "movieId": 429617,
+        "rating": 10.0
+    },
+    {
+        "userId": "60b5e7d8abf8e2006fae9fb9",
+        "movieId": 429617,
+        "rating": 10.0
+    },
+    {
+        "userId": "60898f30e19de90057936173",
+        "movieId": 567189,
+        "rating": 6.0
+    },
+    {
+        "userId": "60d13260c9dbf900739913d6",
+        "movieId": 567189,
+        "rating": 6.0
+    },
+    {
+        "userId": "60e75183168ea300247bc206",
+        "movieId": 567189,
+        "rating": 3.0
+    },
+    {
+        "userId": "605ebcc346f354005353fdfc",
+        "movieId": 615457,
+        "rating": 6.0
+    },
+    {
+        "userId": "60931bf4a06efe007a43b903",
+        "movieId": 615457,
+        "rating": 7.0
+    },
+    {
+        "userId": "60eae12f42d8a500461533e4",
+        "movieId": 615457,
+        "rating": 6.0
+    },
+    {
+        "userId": "61166795350398005ce97d23",
+        "movieId": 615457,
+        "rating": 5.0
+    },
+    {
+        "userId": "612a378da4af8f00624cc444",
+        "movieId": 615457,
+        "rating": 7.0
+    },
+    {
+        "userId": "603d20a3e267de005151480c",
+        "movieId": 527774,
+        "rating": 7.0
+    },
+    {
+        "userId": "604589ebca0e17007648b76b",
+        "movieId": 527774,
+        "rating": 7.0
+    },
+    {
+        "userId": "604797d0ea37e00045400a6b",
+        "movieId": 527774,
+        "rating": 8.0
+    },
+    {
+        "userId": "60c6507448333a0057570e7f",
+        "movieId": 527774,
+        "rating": 8.0
+    },
+    {
+        "userId": "610e7d32dcf8750060754f8d",
+        "movieId": 527774,
+        "rating": 8.0
+    },
+    {
+        "userId": "612b7bc2a1d332001ed44a0d",
+        "movieId": 527774,
+        "rating": 8.0
+    },
+    {
+        "userId": "5e3df0ce98f1f100140de70c",
+        "movieId": 495764,
+        "rating": 6.0
+    },
+    {
+        "userId": "5e6685d2357c0000193a2151",
+        "movieId": 495764,
+        "rating": 1.0
+    },
+    {
+        "userId": "5e7d5b33109dec213c02b68d",
+        "movieId": 495764,
+        "rating": 7.0
+    },
+    {
+        "userId": "5e7e783190dde00013a22b50",
+        "movieId": 495764,
+        "rating": 9.0
+    },
+    {
+        "userId": "5ea0427ddd2589001fd177af",
+        "movieId": 495764,
+        "rating": 7.0
+    },
+    {
+        "userId": "5ec38b7f3d3557001de1e80e",
+        "movieId": 495764,
+        "rating": 8.0
+    },
+    {
+        "userId": "5ec431cf18b7510020cb6010",
+        "movieId": 495764,
+        "rating": 5.0
+    },
+    {
+        "userId": "5f2bddea3009aa0035719338",
+        "movieId": 495764,
+        "rating": 3.0
+    },
+    {
+        "userId": "5f4ea0d1b2681f0030dee660",
+        "movieId": 495764,
+        "rating": 6.0
+    },
+    {
+        "userId": "5fda3918511d09003f5fe607",
+        "movieId": 495764,
+        "rating": 6.0
+    },
+    {
+        "userId": "60f8097539a1a60082ff2b76",
+        "movieId": 495764,
+        "rating": 5.0
+    },
+    {
+        "userId": "5ae02e1e0e0a26156900f6da",
+        "movieId": 299536,
+        "rating": 10.0
+    },
+    {
+        "userId": "5ae0a3d20e0a26156301455e",
+        "movieId": 299536,
+        "rating": 8.0
+    },
+    {
+        "userId": "5ae4205b0e0a266c71003206",
+        "movieId": 299536,
+        "rating": 4.0
+    },
+    {
+        "userId": "5ae77ce60e0a262b9700a2df",
+        "movieId": 299536,
+        "rating": 9.5
+    },
+    {
+        "userId": "5ae866939251410cdc016c31",
+        "movieId": 299536,
+        "rating": 8.0
+    },
+    {
+        "userId": "5b043a7a0e0a2623ec029554",
+        "movieId": 299536,
+        "rating": 10.0
+    },
+    {
+        "userId": "5b3a6dfcc3a36845b800feee",
+        "movieId": 299536,
+        "rating": 6.0
+    },
+    {
+        "userId": "5b72ec050e0a267ef11b5f8c",
+        "movieId": 299536,
+        "rating": 10.0
+    },
+    {
+        "userId": "5b97fa459251413c68000753",
+        "movieId": 299536,
+        "rating": 1.0
+    },
+    {
+        "userId": "5c8425420e0a26430a636548",
+        "movieId": 299536,
+        "rating": 7.0
+    },
+    {
+        "userId": "5e05aa094c1d9a0019dd7bca",
+        "movieId": 299536,
+        "rating": 10.0
+    },
+    {
+        "userId": "5fdcb7c82efe4e0040d7237c",
+        "movieId": 464052,
+        "rating": 7.0
+    },
+    {
+        "userId": "5fdfb6d20e4419003feab513",
+        "movieId": 464052,
+        "rating": 8.0
+    },
+    {
+        "userId": "5fe7fe505b1240003c695c82",
+        "movieId": 464052,
+        "rating": 6.0
+    },
+    {
+        "userId": "5fea347ca14bef003f2f5f6f",
+        "movieId": 464052,
+        "rating": 5.0
+    },
+    {
+        "userId": "5ff481377ef3810040d8a22e",
+        "movieId": 464052,
+        "rating": 3.0
+    },
+    {
+        "userId": "60078c12fb3f61004a4133a8",
+        "movieId": 464052,
+        "rating": 1.0
+    },
+    {
+        "userId": "6073e79a2f7915005756f9a0",
+        "movieId": 464052,
+        "rating": 1.0
+    },
+    {
+        "userId": "5d975abdae26be001abe129b",
+        "movieId": 475557,
+        "rating": 9.0
+    },
+    {
+        "userId": "5db52049d40d4c0014fd08bc",
+        "movieId": 475557,
+        "rating": 9.0
+    },
+    {
+        "userId": "5dd9cdd528723c0014588c1f",
+        "movieId": 475557,
+        "rating": 7.0
+    },
+    {
+        "userId": "5de278e63faba000150b67f4",
+        "movieId": 475557,
+        "rating": 9.0
+    },
+    {
+        "userId": "5df59eaad1a89300197854b5",
+        "movieId": 475557,
+        "rating": 8.0
+    },
+    {
+        "userId": "5e0e888768188800145829f8",
+        "movieId": 475557,
+        "rating": 9.0
+    },
+    {
+        "userId": "5e2f26e44ca676001249c3c2",
+        "movieId": 475557,
+        "rating": 8.0
+    },
+    {
+        "userId": "5e4d8cba283ed900195ccff2",
+        "movieId": 475557,
+        "rating": 3.0
+    },
+    {
+        "userId": "60739f5f7776f0005810629a",
+        "movieId": 475557,
+        "rating": 10.0
+    },
+    {
+        "userId": "5fd2b373f92532003daae946",
+        "movieId": 529203,
+        "rating": 6.0
+    },
+    {
+        "userId": "6126819cd7059400682aa38d",
+        "movieId": 631843,
+        "rating": 4.0
+    },
+    {
+        "userId": "5fec1fb61d1bf4003f13a633",
+        "movieId": 458576,
+        "rating": 2.0
+    },
+    {
+        "userId": "608f0e892b531d006e35c5a9",
+        "movieId": 458576,
+        "rating": 9.0
+    },
+    {
+        "userId": "60ce6bc8967cc7005841f0d4",
+        "movieId": 458576,
+        "rating": 6.0
+    },
+    {
+        "userId": "5d1e96c6a135337b2f0728c2",
+        "movieId": 537915,
+        "rating": 1.0
+    },
+    {
+        "userId": "60e75273b7d3520075bb60ea",
+        "movieId": 632357,
+        "rating": 1.0
+    },
+    {
+        "userId": "60479763c4ad590044e8dc85",
+        "movieId": 587807,
+        "rating": 4.0
+    },
+    {
+        "userId": "6066643a63d713002921bf43",
+        "movieId": 587807,
+        "rating": 4.0
+    },
+    {
+        "userId": "5cc07fa00e0a2615fdf464d3",
+        "movieId": 299534,
+        "rating": 9.0
+    },
+    {
+        "userId": "5cc307bfc3a36809ab86e2fd",
+        "movieId": 299534,
+        "rating": 10.0
+    },
+    {
+        "userId": "5cc5b3b1c3a36849368181c9",
+        "movieId": 299534,
+        "rating": 10.0
+    },
+    {
+        "userId": "5cd7cf4ec3a3681d16c096ba",
+        "movieId": 299534,
+        "rating": 9.0
+    },
+    {
+        "userId": "5ce3e58dc3a3683bd81e14bb",
+        "movieId": 299534,
+        "rating": 10.0
+    },
+    {
+        "userId": "5d1fb1e694d8a849843eb1e2",
+        "movieId": 299534,
+        "rating": 6.0
+    },
+    {
+        "userId": "5de2a4e33faba000130a8805",
+        "movieId": 299534,
+        "rating": 4.0
+    },
+    {
+        "userId": "5fd7e15d1f3e60003db13090",
+        "movieId": 508442,
+        "rating": 9.0
+    },
+    {
+        "userId": "5fe66ff3e18b97003f8bdf11",
+        "movieId": 508442,
+        "rating": 10.0
+    },
+    {
+        "userId": "5febbf975ff34e0040fe00bb",
+        "movieId": 508442,
+        "rating": 9.0
+    },
+    {
+        "userId": "5ffcbe116611b4003d60b289",
+        "movieId": 508442,
+        "rating": 7.0
+    },
+    {
+        "userId": "5ffde8ad8b959e003b417977",
+        "movieId": 508442,
+        "rating": 7.0
+    },
+    {
+        "userId": "6012c190458199003e237465",
+        "movieId": 508442,
+        "rating": 9.0
+    },
+    {
+        "userId": "603c2d6b5541fa0057dba0cf",
+        "movieId": 604822,
+        "rating": 3.0
+    },
+    {
+        "userId": "5d14a7c562fcd30015a902f3",
+        "movieId": 522681,
+        "rating": 5.0
+    },
+    {
+        "userId": "5cde21bb9251413a77cd843d",
+        "movieId": 458156,
+        "rating": 4.0
+    },
+    {
+        "userId": "5cde6ca40e0a261dd5cb27df",
+        "movieId": 458156,
+        "rating": 8.0
+    },
+    {
+        "userId": "5d10b43d0e0a2602a1cfefc6",
+        "movieId": 458156,
+        "rating": 8.0
+    },
+    {
+        "userId": "5d35722f2f8d095259e1591b",
+        "movieId": 458156,
+        "rating": 7.5
+    },
+    {
+        "userId": "5d6c2a22efcea900109a85e6",
+        "movieId": 458156,
+        "rating": 8.0
+    },
+    {
+        "userId": "5d782767069f0e113431acf2",
+        "movieId": 458156,
+        "rating": 8.0
+    },
+    {
+        "userId": "5d871477336e010029163b2d",
+        "movieId": 458156,
+        "rating": 9.0
+    },
+    {
+        "userId": "60c9fc9e1130bd0029cde096",
+        "movieId": 550205,
+        "rating": 10.0
+    },
+    {
+        "userId": "5d41a75995acf0000fb13aa0",
+        "movieId": 384018,
+        "rating": 6.0
+    },
+    {
+        "userId": "5d4850112d1e405082c08263",
+        "movieId": 384018,
+        "rating": 5.0
+    },
+    {
+        "userId": "5dba40af0792e1001847faee",
+        "movieId": 384018,
+        "rating": 5.0
+    },
+    {
+        "userId": "5e095805fea0d70013bc3836",
+        "movieId": 384018,
+        "rating": 5.0
+    },
+    {
+        "userId": "5ec8e92ceb79c20020a1bcaf",
+        "movieId": 384018,
+        "rating": 10.0
+    },
+    {
+        "userId": "5e1f061b5c071b001663faeb",
+        "movieId": 38700,
+        "rating": 4.0
+    },
+    {
+        "userId": "5e2099dc0102c900163d1076",
+        "movieId": 38700,
+        "rating": 5.0
+    },
+    {
+        "userId": "5e8bbac63e09f30012a33ee9",
+        "movieId": 38700,
+        "rating": 9.0
+    },
+    {
+        "userId": "5f238db9caaca20036683f52",
+        "movieId": 38700,
+        "rating": 5.0
+    },
+    {
+        "userId": "60a0901fd400f300774a93f0",
+        "movieId": 578701,
+        "rating": 6.0
+    },
+    {
+        "userId": "60a6b07716893500583826de",
+        "movieId": 578701,
+        "rating": 6.0
+    },
+    {
+        "userId": "60e4b7496bdec300460b192f",
+        "movieId": 578701,
+        "rating": 6.0
+    },
+    {
+        "userId": "596343df9251410b860f177c",
+        "movieId": 315635,
+        "rating": 7.0
+    },
+    {
+        "userId": "5a2f2fad925141032c16f0e7",
+        "movieId": 315635,
+        "rating": 4.0
+    },
+    {
+        "userId": "5a427fdf0e0a2620e9056c3d",
+        "movieId": 315635,
+        "rating": 4.0
+    },
+    {
+        "userId": "5a770dcfc3a36859ec04ad39",
+        "movieId": 315635,
+        "rating": 7.0
+    },
+    {
+        "userId": "5b1d62b59251416614000cb5",
+        "movieId": 315635,
+        "rating": 10.0
+    },
+    {
+        "userId": "5b51217b92514112ae005fe6",
+        "movieId": 315635,
+        "rating": 10.0
+    },
+    {
+        "userId": "5bcd91b20e0a26015b01dfd9",
+        "movieId": 315635,
+        "rating": 9.0
+    },
+    {
+        "userId": "5c8425a80e0a264301635857",
+        "movieId": 315635,
+        "rating": 5.0
+    },
+    {
+        "userId": "5ca97838c3a3683f5260a0c8",
+        "movieId": 315635,
+        "rating": 8.0
+    },
+    {
+        "userId": "600a0e62cf9ba3003f834452",
+        "movieId": 315635,
+        "rating": 8.0
+    },
+    {
+        "userId": "5e7d5b7d6c849200146add17",
+        "movieId": 338762,
+        "rating": 2.0
+    },
+    {
+        "userId": "5e85f055da10f00014ee8e23",
+        "movieId": 338762,
+        "rating": 3.0
+    },
+    {
+        "userId": "5f1d2beb735205003e4d0881",
+        "movieId": 338762,
+        "rating": 5.0
+    },
+    {
+        "userId": "5f7a0d759a64350037a9ef53",
+        "movieId": 338762,
+        "rating": 7.0
+    },
+    {
+        "userId": "612a36e012197e00436e5b8b",
+        "movieId": 568620,
+        "rating": 3.0
+    },
+    {
+        "userId": "5f6e95b87aecc60037cfeabb",
+        "movieId": 539885,
+        "rating": 9.0
+    },
+    {
+        "userId": "5fd41e000e64af003ececa52",
+        "movieId": 539885,
+        "rating": 8.0
+    },
+    {
+        "userId": "5fd41e6329c626003fb87739",
+        "movieId": 539885,
+        "rating": 8.0
+    },
+    {
+        "userId": "603d91952b531d006e0615ef",
+        "movieId": 539885,
+        "rating": 4.0
+    },
+    {
+        "userId": "6092ebb154508d00417b6040",
+        "movieId": 804435,
+        "rating": 4.0
+    },
+    {
+        "userId": "60ee34e0a44d09004665563c",
+        "movieId": 607259,
+        "rating": 6.0
+    },
+    {
+        "userId": "60f062c45aba320046a94d53",
+        "movieId": 607259,
+        "rating": 6.0
+    },
+    {
+        "userId": "60eb2f60a6c104007394c7ec",
+        "movieId": 591273,
+        "rating": 8.0
+    },
+    {
+        "userId": "5192715d19c2950a16225394",
+        "movieId": 1930,
+        "rating": 5.5
+    },
+    {
+        "userId": "5a71f1cd9251417f1600a830",
+        "movieId": 1930,
+        "rating": 6.0
+    },
+    {
+        "userId": "5d12a5550e0a267dceca3083",
+        "movieId": 1930,
+        "rating": 7.0
+    },
+    {
+        "userId": "5f9befe390ea4b00397d9b3b",
+        "movieId": 531219,
+        "rating": 1.0
+    },
+    {
+        "userId": "5f9d1dbcbc8abc003830e4fa",
+        "movieId": 531219,
+        "rating": 4.0
+    },
+    {
+        "userId": "5fdb0158706e560040d3ceaf",
+        "movieId": 531219,
+        "rating": 8.0
+    },
+    {
+        "userId": "60972aea9661fc003a9abb13",
+        "movieId": 522241,
+        "rating": 8.0
+    },
+    {
+        "userId": "60c418a418864b0029711870",
+        "movieId": 522241,
+        "rating": 8.0
+    },
+    {
+        "userId": "601e772a85b105003e872689",
+        "movieId": 581389,
+        "rating": 9.0
+    },
+    {
+        "userId": "609d69155b1240002a41c759",
+        "movieId": 602734,
+        "rating": 3.0
+    },
+    {
+        "userId": "60f082cf5aba320046a99bb1",
+        "movieId": 602734,
+        "rating": 4.0
+    },
+    {
+        "userId": "5ea061eff1b571001a8f36a4",
+        "movieId": 545609,
+        "rating": 7.0
+    },
+    {
+        "userId": "5ea08d8401757f001ed1b460",
+        "movieId": 545609,
+        "rating": 7.0
+    },
+    {
+        "userId": "5eaa1c74945d36001f855c02",
+        "movieId": 545609,
+        "rating": 6.0
+    },
+    {
+        "userId": "5ecf1c66528b2e001e64fdeb",
+        "movieId": 545609,
+        "rating": 1.0
+    },
+    {
+        "userId": "5f7893e0e039f10038e68ff2",
+        "movieId": 545609,
+        "rating": 7.0
+    },
+    {
+        "userId": "61171f4c0f0da500475af868",
+        "movieId": 760883,
+        "rating": 7.0
+    },
+    {
+        "userId": "5c6b7a529251412fc40c2bb0",
+        "movieId": 324857,
+        "rating": 7.0
+    },
+    {
+        "userId": "5cd04fcdc3a3684fbcdea3dd",
+        "movieId": 324857,
+        "rating": 9.0
+    },
+    {
+        "userId": "5fa63d658c7b0f003f785d60",
+        "movieId": 400160,
+        "rating": 6.0
+    },
+    {
+        "userId": "58446a5cc3a368481300bc33",
+        "movieId": 300669,
+        "rating": 7.0
+    },
+    {
+        "userId": "5c8429f592514127691f8310",
+        "movieId": 557,
+        "rating": 9.0
+    }
+]
