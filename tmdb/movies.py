@@ -8,7 +8,9 @@ from dotenv import load_dotenv
 # Hide API KEY
 # verbose: .env 파일 누락 등의 경고 메시지 출력 옵션
 load_dotenv(verbose=True)
-TMDB_KEY = os.getenv('TMDB_KEY')        # "export TMDB_KEY=(발급 받은 api key)" 로 key를 환경 변수로 추가 해주어야 한다.
+# TMDB_KEY = os.getenv('TMDB_KEY')        # "export TMDB_KEY=(발급 받은 api key)" 로 key를 환경 변수로 추가 해주어야 한다.
+
+TMDB_KEY = 'ce028cad82d684aa4fb7bed674115688'
 
 url = URLMaker(TMDB_KEY)
 
@@ -43,10 +45,11 @@ def check_KR_provider(data):
 def create_movie_data():
     #with open('movies.json', 'r+') as f:
     #    movie_data = json.load(f)
+    count = 0 # 영화 개수를 출력하기 위한 변수
     movie_data = []
     print('-- 영화 데이터 작업 시작 --')
 
-    for page in range(1, 10):
+    for page in range(1, 300):
         raw_data = requests.get(url.get_movie_url(page=page))
         json_data = raw_data.json()
         movies = json_data.get('results')
@@ -74,7 +77,7 @@ def create_movie_data():
             # 한국에서 볼 수 없는 컨텐츠라면 건너뛰기
             KR_provider = check_KR_provider(provider_results)
             if KR_provider is None:
-                continue
+                continue 
             else:
                 fields['provider'] = KR_provider
 
@@ -84,20 +87,14 @@ def create_movie_data():
                 'fields': fields,
             }
             movie_data.append(json_model)
+            count += 1
+            if(count % 100 == 0):
+                print(f'Currently, {count} have been saved.')
 
     with open('movies.json', 'w') as f:
         json.dump(movie_data, f, indent=4)
-
+    print(f'Total number of movies is {count}')
     print('-- 영화 데이터 작업 완료 --')
-
-def create_movie_review_data():
-    review_url = url.get_movie_review_url()
-    raw_data = requests.get(review_url)
-    json_data = raw_data.json()
-    reviews = json_data.get('reviews')
-    
-    pass
-
 
 if __name__ == '__main__':
     create_movie_genre_data()

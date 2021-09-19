@@ -21,8 +21,10 @@ meta = meta.rename(columns={'fields.genre_ids':'genres'})
 # meta = meta[meta['original_language'] == 'en'] # 영어로만 되어있는 리뷰 가져옴
 
 # 유저 rating 파일 불러옴
-ratings = pd.read_csv('ratings_small.csv')
-ratings = ratings[['userId', 'movieId', 'rating']]
+with open('movie_reviews.json','r') as f:
+    data = json.loads(f.read())
+ratings = pd.json_normalize(data)
+
 # ratings.head()
 
 # ratings.describe() # ratings 테이블의 기본 정보들을 알려준다. 개수, 평균, 최소, 등등
@@ -70,6 +72,7 @@ def recommend(input_movie, matrix, n, similar_genre=True):
         cor = pearsonR(matrix[input_movie], matrix[title])
         
         # genre comparison
+        temp_genres = []
         if similar_genre and len(input_genres) > 0:
             temp_genres = meta[meta['original_title'] == title]['genres'].iloc(0)[0]
 
@@ -79,14 +82,14 @@ def recommend(input_movie, matrix, n, similar_genre=True):
         if np.isnan(cor):
             continue
         else:
-            result.append((title, '{:.2f}'.format(cor), temp_genres))
+            result.append((title, '{:.100f}'.format(cor), temp_genres))
             
     result.sort(key=lambda r: r[1], reverse=True)
 
     return result[:n]
 
 # Prediction
-recommend_result = recommend('The Dark Knight', matrix, 10, similar_genre=True)
+recommend_result = recommend('The Suicide Squad', matrix, 10, similar_genre=True)
 
 result = pd.DataFrame(recommend_result, columns = ['Title', 'Correlation', 'Genre'])
 
