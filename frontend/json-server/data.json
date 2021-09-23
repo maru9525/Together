@@ -138,5 +138,19 @@
       "like": 10,
       "rating": 4
     }
+  ],
+  "myparty": [
+    {
+      "id": 1,
+      "provider": "넷플릭스"
+    },
+    {
+      "id": 2,
+      "provider": "왓챠"
+    },
+    {
+      "id": 3,
+      "provider": "웨이브"
+    }
   ]
 }

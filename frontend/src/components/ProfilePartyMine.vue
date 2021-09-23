@@ -1,7 +1,7 @@
 <template>
   <div class="profile-party__box border-red-500">
     <div class="profile-party__box__text--array">
-      <p class="font-semibold">넷플릭스 프리미엄</p>
+      <p class="font-semibold">{{ party.provider }}</p>
       <img
         src="@/assets/images/Netflix.png"
         class="profile-party__box__image--size"
@@ -37,9 +37,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
+
+interface Party {
+  id: number
+  provider: string
+  title: string
+  logoUrl: string
+  member: {
+    totalCount: number
+    joinCount: number
+  }
+  endDate: string
+  restDays: number
+  pricePerDay: number
+}
 
 export default defineComponent({
+  name: 'ProfilePartyMine',
+  props: {
+    party: {
+      type: Object as PropType<Party>,
+    },
+  },
   setup() {
     return {}
   },
@@ -51,12 +71,9 @@ export default defineComponent({
   .profile-party__box--array {
     @apply grid grid-flow-row grid-cols-2;
   }
-
-  .profile-party__box {
-  }
 }
 .profile-party__text--array {
-  @apply mt-6 mb-4 ml-4  text-2xl font-bold;
+  @apply mt-6 mb-4 ml-4 text-2xl font-bold;
 }
 
 .profile-party__box {
