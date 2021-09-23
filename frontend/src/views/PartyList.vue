@@ -1,7 +1,8 @@
 <template>
   <section class="banner-section"></section>
   <div class="container">
-    <section class="party-section">
+    <section class="loading-section" v-if="loading">로딩중이다!</section>
+    <section class="party-section" v-else>
       <header class="section-header">파티에 참여하세요!</header>
       <ul class="party-list">
         <PartyListItem
@@ -17,36 +18,20 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
 import PartyListItem from '@/components/PartyListItem.vue'
-import axios from 'axios'
-
-interface Party {
-  id: number
-  provider: string
-  title: string
-  logoUrl: string
-  member: {
-    totalCount: number
-    joinCount: number
-  }
-  endDate: string
-  restDays: number
-  pricePerDay: number
-}
+import { useStore } from 'vuex'
+import { Party } from '@/libs/interface'
 
 export default defineComponent({
   name: 'PartyList',
   components: { PartyListItem },
   setup() {
+    const store = useStore()
     const loading = ref(true)
     const parties = ref<Party[]>([])
 
     onMounted(async () => {
-      try {
-        const res = await axios.get('http://localhost:3000/parties')
-        parties.value = res.data
-      } catch (error) {
-        console.log(error)
-      }
+      parties.value = await store.dispatch('party/getAllParties')
+      loading.value = false
     })
     return { loading, parties }
   },

@@ -1,6 +1,6 @@
 <template>
   <li class="party-list-item">
-    <router-link to="#">
+    <router-link :to="{ name: 'PartyDetail', params: { partyId: party.id } }">
       <div class="party">
         <div class="infos">
           <div class="text">
