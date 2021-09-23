@@ -1,5 +1,4 @@
 <template>
-  <!-- <ProfileHeader /> -->
   <div class="container max-w-screen-md">
     <p class="profile-party__text--array">내 파티</p>
     <div class="profile-party__box--array">
@@ -122,11 +121,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import ProfileHeader from '@/components/Common/ProfileHeader.vue'
 
 export default defineComponent({
   name: 'ProfileParty',
-  // components: { ProfileHeader },
   setup() {
     return {}
   },

@@ -4,7 +4,7 @@
       <div class="profile-main__info__top--array">
         <div class="text-2xl font-bold">내 정보</div>
         <div class="text-gray-400">
-          <router-link :to="{ name: 'ProfileEdit'}">수정</router-link>
+          <router-link :to="{ name: 'ProfileEdit' }">수정</router-link>
         </div>
       </div>
       <div class="profile-main__info--array">
@@ -24,11 +24,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
+// import { useStore } from 'vuex'
+// import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'ProfileMain',
   setup() {
+    // const store = useStore()
+    // const router = useRouter()
+
+    // const
+
     return {}
   },
 })
