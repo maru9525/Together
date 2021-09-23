@@ -60,6 +60,6 @@ def create_movie_review_data():
         json.dump(review_data, f, indent=4)
     print(f'The total number of reviews is {count}')
     pass
-
+    
 if __name__ == '__main__':
     create_movie_review_data()

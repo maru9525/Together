@@ -49,11 +49,15 @@ def create_movie_data():
     movie_data = []
     print('-- 영화 데이터 작업 시작 --')
 
-    for page in range(1, 300):
+    for page in range(1, 1000):
         raw_data = requests.get(url.get_movie_url(page=page))
         json_data = raw_data.json()
         movies = json_data.get('results')
 
+        if(count > 5700):
+            print(f'Currently, {count} have been saved.')
+            break
+        
         for movie in movies:
             fields = {}
             fields['poster_path'] = movie.get('poster_path')
@@ -90,6 +94,7 @@ def create_movie_data():
             count += 1
             if(count % 100 == 0):
                 print(f'Currently, {count} have been saved.')
+            
 
     with open('movies.json', 'w') as f:
         json.dump(movie_data, f, indent=4)

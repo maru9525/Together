@@ -53,7 +53,7 @@ matrix = data.pivot_table(index='userId', columns='original_title', values='rati
 # ----------- 상관 관계 정하기 ----------
 # 피어슨 상관관계 ( Pearson Correlation )
 
-GENRE_WEIGHT = 0.1 # 같을 장르일 시, 더하는 가중치 값
+GENRE_WEIGHT = 0.001 # 같을 장르일 시, 더하는 가중치 값
 
 def pearsonR(s1, s2):
     s1_c = s1 - s1.mean()
