@@ -59,7 +59,12 @@
           {{ party.desc }}
         </div>
       </div>
-      <router-link class="join-link" to="/"> 파티 참가하기 </router-link>
+      <router-link
+        class="join-link"
+        :to="{ name: 'PartyJoin', params: { partyId } }"
+      >
+        파티 참가하기
+      </router-link>
     </section>
   </div>
 </template>
@@ -70,6 +75,7 @@ import { Party } from '@/libs/interface'
 import { useStore } from 'vuex'
 
 export default defineComponent({
+  name: 'PartyDetail',
   props: {
     partyId: {
       type: [String, Number],
