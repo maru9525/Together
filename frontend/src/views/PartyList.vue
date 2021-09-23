@@ -15,12 +15,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import PartyListItem from '@/components/PartyListItem.vue'
+import axios from 'axios'
+
+interface Party {
+  id: number
+  provider: string
+  title: string
+  logoUrl: string
+  member: {
+    totalCount: number
+    joinCount: number
+  }
+  endDate: string
+  restDays: number
+  pricePerDay: number
+}
 
 export default defineComponent({
   name: 'PartyList',
   components: { PartyListItem },
+  setup() {
+    const loading = ref(true)
+    const parties = ref<Party[]>([])
+
+    onMounted(async () => {
+      try {
+        const res = await axios.get('http://localhost:3000/parties')
+        parties.value = res.data
+      } catch (error) {
+        console.log(error)
+      }
+    })
+    return { loading, parties }
+  },
 })
 </script>
 
@@ -33,7 +62,11 @@ export default defineComponent({
   @apply py-6 px-4;
 
   .section-header {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold mb-4;
+  }
+
+  .party-list {
+    @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
   }
 }
 </style>

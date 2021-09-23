@@ -72,7 +72,7 @@
       "id": 1,
       "provider": "넷플릭스",
       "title": "[로얄넷플릭스] 💩5000000건이상공유💩",
-      "logoUrl": "",
+      "logoUrl": "@/assets/images/Netflix.png",
       "member": {
         "totalCount": 5,
         "joinCount": 4
@@ -86,7 +86,35 @@
       "id": 2,
       "provider": "넷플릭스",
       "title": "[로얄넷플릭스] 💩5000000건이상공유💩",
-      "logoUrl": "",
+      "logoUrl": "@/assets/images/Netflix.png",
+      "member": {
+        "totalCount": 4,
+        "joinCount": 2
+      },
+      "endDate": "2021-12-25",
+      "restDays": 109,
+      "originalPricePerDay": 300,
+      "pricePerDay": 85
+    },
+    {
+      "id": 3,
+      "provider": "넷플릭스",
+      "title": "[로얄넷플릭스] 💩5000000건이상공유💩",
+      "logoUrl": "@/assets/images/Netflix.png",
+      "member": {
+        "totalCount": 4,
+        "joinCount": 2
+      },
+      "endDate": "2021-12-25",
+      "restDays": 109,
+      "originalPricePerDay": 300,
+      "pricePerDay": 85
+    },
+    {
+      "id": 4,
+      "provider": "넷플릭스",
+      "title": "[로얄넷플릭스] 💩5000000건이상공유💩",
+      "logoUrl": "@/assets/images/Netflix.png",
       "member": {
         "totalCount": 4,
         "joinCount": 2

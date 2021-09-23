@@ -17,7 +17,9 @@ export const party: Module<PartyModule, RootState> = {
   },
   mutations: {},
   actions: {
-    getAllParties() {},
+    getAllParties() {
+      return
+    },
   },
   getters: {},
 }
