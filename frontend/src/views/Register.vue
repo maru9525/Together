@@ -47,7 +47,11 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import Textinput from '@/components/TextInput.vue'
-import { emailValidator, passwordSecurityValidator } from '@/libs/validator'
+import {
+  emailValidator,
+  passwordSecurityValidator,
+  passwordConfirmValidator,
+} from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
 
 export default defineComponent({
@@ -76,6 +80,7 @@ export default defineComponent({
         type: 'password',
         value: '',
         placeholder: '비밀번호 확인',
+        validator: passwordConfirmValidator,
         errors: {},
       },
     })
@@ -130,8 +135,6 @@ export default defineComponent({
     }
 
     const submit = () => {
-      console.log(!isValidFormData.value)
-      console.log(!isValidInfoData.value)
       console.log('회원가입!!!')
     }
     return {
