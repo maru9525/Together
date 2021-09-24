@@ -74,6 +74,7 @@ import Textinput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
 import { FormDataList, ValidateData } from '@/libs/interface'
+import * as authApi from '@/store/modules/auth'
 
 export default defineComponent({
   name: 'Login',
@@ -125,10 +126,19 @@ export default defineComponent({
     }
 
     const submit = async () => {
-      // validate check
-      // if isSaveEmail, save to localStorage
-      const keys = Object.keys(formData.value)
-      return
+      if (isSaveEmail.value) {
+        localStorage.setItem('email', formData.value['email'].value)
+      }
+      const userEmail = formData.value['email'].value
+      const password = formData.value['password'].value
+      const res = await store.dispatch('')
+
+      if (res.status === 200) {
+        // set JWToken
+        console.log('Login Success')
+      } else {
+        console.log('Login failed')
+      }
     }
 
     return {
