@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, ref } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 
 interface Party {
   id: number
