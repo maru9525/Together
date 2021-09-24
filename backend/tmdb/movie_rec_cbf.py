@@ -11,7 +11,7 @@ start = time.time()  # 시작 시간 저장
 # -------- Load Dataset -----------
 
 # movie json을 dataframe으로 만들기
-with open('./movies_kr.json', 'r') as f:
+with open('data/movies_kr.json', 'r') as f:
     data = json.loads(f.read())
 df_nested_list = pd.json_normalize(data)
 

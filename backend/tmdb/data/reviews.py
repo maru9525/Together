@@ -18,7 +18,7 @@ def create_movie_review_data():
     count = 0
 
     # 영화 ID 리스트를 불러오기 위해, 이전에 만든 movies.json을 가져온다.
-    with open('movies.json','r') as f:
+    with open('movies.json', 'r') as f:
         data = json.loads(f.read())
     df_nested_list = pd.json_normalize(data)
     

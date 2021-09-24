@@ -7,7 +7,7 @@ start = time.time()  # 시작 시간 저장
 # -------- Load Dataset -----------
 
 # movie json을 dataframe으로 만들기
-with open('movies.json','r') as f:
+with open('data/movies.json', 'r') as f:
     data = json.loads(f.read())
 df_nested_list = pd.json_normalize(data)
 
@@ -23,7 +23,7 @@ meta = meta.rename(columns={'fields.genre_ids':'genres'})
 # meta = meta[meta['original_language'] == 'en'] # 영어로만 되어있는 리뷰 가져옴
 
 # 유저 rating 파일 불러옴
-with open('movie_reviews.json','r') as f:
+with open('data/movie_reviews.json', 'r') as f:
     data = json.loads(f.read())
 ratings = pd.json_normalize(data)
 
