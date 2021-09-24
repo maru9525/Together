@@ -151,7 +151,7 @@ export default defineComponent({
   @apply flex flex-col justify-center items-center w-full h-screen -mt-4 -mb-4;
 
   .input-container {
-    @apply grid gap-2 px-8 w-full;
+    @apply grid gap-2 px-8 w-full sm:w-96;
 
     &__input-label {
       @apply text-lg font-bold;
