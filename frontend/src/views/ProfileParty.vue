@@ -64,7 +64,7 @@ export default defineComponent({
 }
 
 .profile-party__box {
-  @apply mx-4 mb-2 ml-2 mr-0 px-4 py-4 border rounded-md;
+  @apply mx-4 mb-2 mr-1 ml-1 px-4 py-4 border rounded-md;
 
   .profile-party__box__text--array {
     @apply flex justify-between mb-8;

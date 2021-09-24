@@ -1,11 +1,11 @@
 <template>
-  <div class="profile-party__box border-red-500">
+  <div class="profile-party__box" :class="provider">
     <div class="profile-party__box__text--array">
       <p class="font-semibold">{{ party.provider }}</p>
       <img
-        src="@/assets/images/Netflix.png"
+        :src="require(`@/assets/images/${provider}.png`)"
         class="profile-party__box__image--size"
-        alt="넷플릭스"
+        alt="이미지"
       />
     </div>
     <div class="profile-party__box__text--array2">
@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, reactive, ref } from 'vue'
 
 interface Party {
   id: number
@@ -58,10 +58,30 @@ export default defineComponent({
   props: {
     party: {
       type: Object as PropType<Party>,
+      required: true,
     },
   },
-  setup() {
-    return {}
+  setup(prop) {
+    const provider = ref<string>('netflix')
+
+    switch (prop.party.provider) {
+      case '넷플릭스': {
+        provider.value = 'netflix'
+        break
+      }
+      case '왓챠': {
+        provider.value = 'watcha'
+        break
+      }
+      case '웨이브': {
+        provider.value = 'wavve'
+        break
+      }
+    }
+
+    return {
+      provider,
+    }
   },
 })
 </script>
@@ -78,6 +98,15 @@ export default defineComponent({
 
 .profile-party__box {
   @apply mx-4 mb-2 px-4 py-4 border rounded-md;
+  &.netflix {
+    @apply border-red-500;
+  }
+  &.watcha {
+    @apply border-pink-500;
+  }
+  &.wavve {
+    @apply border-blue-500;
+  }
 
   .profile-party__box__text--array {
     @apply flex justify-between mb-8;
@@ -98,9 +127,5 @@ export default defineComponent({
   .profile-party__box__text--array4 {
     @apply flex justify-between my-2 mx-0;
   }
-}
-
-details summary {
-  cursor: pointer;
 }
 </style>
