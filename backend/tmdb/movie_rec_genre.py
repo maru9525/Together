@@ -3,8 +3,10 @@ import pandas as pd
 import numpy as np
 import json
 
+
 with open('./data/movies_kr.json', 'r') as f:
     data = json.loads(f.read())
+
 md = pd.json_normalize(data)
 md = md.rename(columns={'pk': 'movieId'})
 md = md.rename(columns={'fields.original_title': 'original_title'})
@@ -15,30 +17,25 @@ md = md.rename(columns={'fields.genre_ids': 'genres'})
 md = md.rename(columns={'fields.release_date': 'release_date'})
 md = md.rename(columns={'fields.popularity': 'popularity'})
 
-# 다음 차례는 chart에 등록되기 위한 최소한의 vote 수인 m에 적절한 값을 결정하는 것이다. 우리는 95% 백분위 수를 우리의 컷오프로 사용합니다.
-# 즉, 영화가 차트에 포함되려면 목록에 있는 영화의 95% 이상보다 더 많은 표가 있어야합니다.
+# errors='coerce' : 문자열이 속해있어서 오류가 날 경우 강제로 NaT으로 출력
+md['year'] = pd.to_datetime(md['release_date'], errors='coerce').apply(lambda x: str(x).split('-')[0] if not(pd.isnull(x)) else np.nan)
 
-# v : 영화의 vote 수
-# m : chart에 등록되기 위한 최소한의 vote 수
-# R : 영화 평점의 평균
-# C : 전체 report에 대한 평균 vote 수
+# stack : 들어온 것 부터 쌓음
+s = md.apply(lambda x: pd.Series(x['genres']), axis=1).stack().reset_index(level=1, drop=True)
+s.name = 'genre'
+gen_md = md.drop('genres', axis=1).join(s)
+
+md = gen_md[gen_md['genre'] == 12]  # 여기에
 
 vote_counts = md[md['vote_count'].notnull()]['vote_count'].astype('int')
 vote_averages = md[md['vote_average'].notnull()]['vote_average'].astype('int')
 C = vote_averages.mean() # 전체 report에 대한 평균 vote 수
-C  # 평균적으로 6.1표씩 받음
-
-# chart에 등록되기 위한 최소한의 vote 수
 m = vote_counts.quantile(0.95) # 상위 5프로 영화
 
-# errors='coerce' : 문자열이 속해있어서 오류가 날 경우 강제로 NaT으로 출력
-md['year'] = pd.to_datetime(md['release_date'], errors='coerce').apply(lambda x: str(x).split('-')[0] if not(pd.isnull(x)) else np.nan)
-
-qualified = md[(md['vote_count'] >= m) & (md['vote_count'].notnull()) & (md['vote_average'].notnull())][['original_title', 'year', 'vote_count', 'vote_average', 'popularity', 'genres']]
+qualified = md[(md['vote_count'] >= m) & (md['vote_count'].notnull()) & (md['vote_average'].notnull())][['original_title', 'year', 'vote_count', 'vote_average', 'popularity', 'genre']]
 qualified['vote_count'] = qualified['vote_count'].astype('int')
 qualified['vote_average'] = qualified['vote_average'].astype('int')
 qualified.shape   # 288개의 영화가 포함될 자격이 있다.
-
 
 def weighted_rating(x) :
     v = x['vote_count']
@@ -49,5 +46,4 @@ qualified['wr'] = qualified.apply(weighted_rating, axis = 1)
 
 # wr기준으로 상위 250개의 영화만 골라냄
 qualified = qualified.sort_values('wr', ascending = False).head(250)
-
 print(qualified.head(15))
