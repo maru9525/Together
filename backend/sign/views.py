@@ -1,7 +1,16 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+# from .serializers import SignupSerializer
+from django.shortcuts import redirect, render
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+import requests
 
+def login(request):
+  return render(request, 'login.html')
 
-# Create your views here.
-def index(request):
-    return HttpResponse("안녕하세요 pybo에 오신것을 환영합니다.")
+def detail(request, pk):
+  User = get_user_model()
+  user = get_object_or_404(User, pk=pk)
+  context = {
+    'user': user
+  }
+  return render(request, 'detail.html', context)
