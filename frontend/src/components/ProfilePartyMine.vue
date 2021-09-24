@@ -87,17 +87,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@media (min-width: 768px) {
-  .profile-party__box--array {
-    @apply grid grid-flow-row grid-cols-2;
-  }
-}
-.profile-party__text--array {
-  @apply mt-6 mb-4 ml-4 text-2xl font-bold;
-}
+// @media (min-width: 768px) {
+//   .profile-party__box {
+//     @apply mx-4 mr-1 ml-1 mb-2 px-4 py-4 border rounded-md;
+//   }
+// }
 
 .profile-party__box {
-  @apply mx-4 mb-2 px-4 py-4 border rounded-md;
   &.netflix {
     @apply border-red-500;
   }

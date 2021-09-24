@@ -58,36 +58,26 @@ export default defineComponent({
   .profile-party__box--array {
     @apply grid grid-flow-row grid-cols-2;
   }
+  .profile-party__box {
+    @apply mr-1 ml-1 mt-1 mb-1 px-4 py-4 border rounded-md;
+  }
 }
+
 .profile-party__text--array {
-  @apply mt-6 mb-4 ml-4  text-2xl font-bold;
+  @apply mt-6 mb-4 ml-4 text-2xl font-bold;
 }
 
-.profile-party__box {
-  @apply mx-4 mb-2 mr-1 ml-1 px-4 py-4 border rounded-md;
+@media (max-width: 767px) {
+  .profile-party__box {
+    @apply mx-4 mb-2 px-4 py-4 border rounded-md;
 
-  .profile-party__box__text--array {
-    @apply flex justify-between mb-8;
+    .profile-party__box__text--array {
+      @apply flex justify-between mb-8;
 
-    .profile-party__box__image--size {
-      @apply w-12 h-12;
+      .profile-party__box__image--size {
+        @apply w-12 h-12;
+      }
     }
   }
-
-  .profile-party__box__text--array2 {
-    @apply flex justify-between mb-4;
-  }
-
-  .profile-party__box__text--array3 {
-    @apply font-semibold mt-4;
-  }
-
-  .profile-party__box__text--array4 {
-    @apply flex justify-between my-2 mx-0;
-  }
-}
-
-details summary {
-  cursor: pointer;
 }
 </style>
