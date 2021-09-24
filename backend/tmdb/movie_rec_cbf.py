@@ -41,9 +41,11 @@ similar_index = np.argsort(-plot_similarity) # 유사도 높은 순서대로 ind
 input_movie = "Black Widow"  # data에 있는 영화의 제목 입력
 
 movie_index = movies[movies["original_title"] == input_movie].index.values # input_movie에 해당하는 index 값 가져오기
-similar_movies = similar_index[movie_index, :100]    # 유사도 상위 10개 index 가져오기
+similar_movies = similar_index[movie_index, :100]    # 유사도 상위 100개 index 가져오기
 # 인덱스로 사용하기 위해서는 1차원으로 변형
 similar_movies_index = similar_movies.reshape(-1)   # similar_movies 1차원 변형
+# 해당하는 인덱스에 대한 영화 정보들을 가져온다.
 movies = movies.iloc[similar_movies_index]
-movies = movies[movies["vote_count"] >= 1000]
-print(movies.head(10))
+# 1000개 미만 평가를 받은 영화는 제외한다.
+movies = movies[movies["vote_count"] >= 1000] 
+print(movies.head(10))  # 유사도 상위 10개 영화 가져오기
