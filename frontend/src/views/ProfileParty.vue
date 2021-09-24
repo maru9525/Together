@@ -64,7 +64,7 @@ export default defineComponent({
 }
 
 .profile-party__text--array {
-  @apply mt-6 mb-4 ml-4 text-2xl font-bold;
+  @apply mt-6 mb-4 ml-2 text-2xl font-bold;
 }
 
 @media (max-width: 767px) {
