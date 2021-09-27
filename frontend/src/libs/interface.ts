@@ -28,6 +28,18 @@ export interface ValidateData {
   message?: string
 }
 
+export interface Content {
+  id: number
+  title: string
+  posterPath: string
+  simRate: number
+  providers: string[]
+  firstAirYear: number
+  rated: string
+  seasons: number
+  overview: string
+}
+
 export interface Party {
   id: number
   provider: string
