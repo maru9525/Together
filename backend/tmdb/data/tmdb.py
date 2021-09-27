@@ -44,7 +44,11 @@ class URLMaker:
         url = f'{self.url}/movie/{movie_id}/reviews'
         url += f'?api_key={self.key}&language=ko-KR&page={str(page)}'
         return url
-        
+
+    def get_program_review_url(self, program_id, page='1'):
+        url = f'{self.url}/program/{program_id}/reviews'
+        url += f'?api_key={self.key}&language=ko-KR&page={str(page)}'
+        return url
 
     # def get_program_episode_group_url(self, program_id):
     #     url = f'{self.url}/tv/{program_id}/episode_groups'
