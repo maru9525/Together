@@ -1,48 +1,53 @@
 <template>
   <div class="profile-party__box" :class="provider">
-    <div class="profile-party__box__text--array">
-      <p class="font-semibold">{{ party.provider }}</p>
-      <img
-        :src="require(`@/assets/images/${provider}.png`)"
-        class="profile-party__box__image--size"
-        alt="이미지"
-      />
-    </div>
-    <div class="profile-party__box__text--array2">
-      <p>21.12.25까지 (109일)</p>
-      <p class="font-bold">10,900원</p>
-    </div>
-    <div class="show">
-      <button class="question" id="que-1">
-        <span id="que-1-toggle">d</span>
-      </button>
-      <div class="answer" id="ans-1">
-        <hr />
-        <p class="profile-party__box__text--array3">계정 정보</p>
-        <div class="profile-party__box__text--array4">
+    <header>
+      <div class="profile-party__box__text--array">
+        <p class="font-semibold">{{ party.provider }}</p>
+        <img
+          :src="require(`@/assets/images/${provider}.png`)"
+          class="profile-party__box__image--size"
+          alt="이미지"
+        />
+      </div>
+      <div class="profile-party__box__text--array2">
+        <p>21.12.25까지 (109일)</p>
+        <p class="font-bold">10,900원</p>
+      </div>
+    </header>
+    <div class="detail-info" v-if="isExpanded">
+      <hr />
+      <div class="account-info">
+        <h4>계정 정보</h4>
+        <div class="info-wrapper">
           <p>아이디</p>
           <p>northKing@NK.com</p>
         </div>
-        <div class="profile-party__box__text--array4">
+        <div class="info-wrapper">
           <p>비밀번호</p>
           <input type="password" value="12335" style="text-align: right" />
         </div>
-        <p class="profile-party__box__text--array3">파티장 정보</p>
-        <div class="profile-party__box__text--array4">
+      </div>
+      <div class="host-info">
+        <h4>파티장 정보</h4>
+        <div class="info-wrapper">
           <p>이름</p>
           <p>김일성</p>
         </div>
-        <div class="profile-party__box__text--array4">
+        <div class="info-wrapper">
           <p>휴대폰 번호</p>
           <p>011-247-1001</p>
         </div>
       </div>
     </div>
+    <button class="toggle-button" @click="handleToggleClick">
+      <span class="material-icons" v-if="isExpanded">expand_less</span>
+      <span class="material-icons" v-else>expand_more</span>
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
 
 interface Party {
   id: number
@@ -68,6 +73,7 @@ export default defineComponent({
   },
   setup(prop) {
     const provider = ref<string>('netflix')
+    const isExpanded = ref<boolean>(false)
 
     switch (prop.party.provider) {
       case '넷플릭스': {
@@ -84,23 +90,28 @@ export default defineComponent({
       }
     }
 
-    const items = document.querySelectorAll('.que')
+    const setIsExpanded = () => {
+      console.log(window.innerWidth)
+      isExpanded.value = window.innerWidth >= 768 ? true : false
+    }
 
-    // function openClose(item: HTMLElement | null) {
-    //   if (item !== null) {
-    //     const answerId = item.id.replace('que', 'ans')
+    onMounted(() => {
+      setIsExpanded()
+      window.addEventListener('resize', setIsExpanded)
+    })
 
-    //     if (document.getElementById(answerId)?.style.display === 'block') {
-    //       const
-    //       document.getElementById(answerId).style.display = 'none'
-    //       document.getElementById(item.id + '-toggle')?.textContent = '+'
-    //     }
-    //   }
-    // }
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', setIsExpanded)
+    })
+
+    const handleToggleClick = () => {
+      isExpanded.value = !isExpanded.value
+    }
 
     return {
-      items,
       provider,
+      isExpanded,
+      handleToggleClick,
     }
   },
 })
@@ -119,7 +130,7 @@ export default defineComponent({
   }
 
   .profile-party__box__text--array {
-    @apply flex justify-between mb-8;
+    @apply flex justify-between;
 
     .profile-party__box__image--size {
       @apply w-12 h-12;
@@ -127,7 +138,7 @@ export default defineComponent({
   }
 
   .profile-party__box__text--array2 {
-    @apply flex justify-between mb-4;
+    @apply flex justify-between;
   }
 
   .profile-party__box__text--array3 {
@@ -136,6 +147,31 @@ export default defineComponent({
 
   .profile-party__box__text--array4 {
     @apply flex justify-between my-2 mx-0;
+  }
+
+  header {
+    @apply grid gap-8 mb-6;
+  }
+
+  .detail-info {
+    @apply grid gap-6;
+
+    .info-wrapper {
+      @apply flex items-center justify-between;
+    }
+
+    .account-info,
+    .host-info {
+      @apply grid gap-2;
+
+      h4 {
+        @apply font-bold text-gray-600;
+      }
+    }
+  }
+
+  .toggle-button {
+    @apply w-full md:hidden hover:bg-gray-100;
   }
 }
 </style>
