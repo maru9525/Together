@@ -5,12 +5,12 @@ import json
 import time
 
 
-def recommend(movie_genre):
-    with open('./data/movies_kr.json', 'r') as f:
+def recommend(program_genre):
+    with open('./data/programs.json', 'r') as f:
         data = json.loads(f.read())
 
     md = pd.json_normalize(data)
-    md = md.rename(columns={'pk': 'movieId'})
+    md = md.rename(columns={'pk': 'programId'})
     md = md.rename(columns={'fields.original_title': 'original_title'})
     md = md.rename(columns={'fields.overview': 'overview'})
     md = md.rename(columns={'fields.vote_count': 'vote_count'})
@@ -27,7 +27,7 @@ def recommend(movie_genre):
     s.name = 'genre'
     gen_md = md.drop('genres', axis=1).join(s)
 
-    md = gen_md[gen_md['genre'] == movie_genre]  # 여기에 장르를 기입한다
+    md = gen_md[gen_md['genre'] == program_genre]  # 여기에 장르를 기입한다
 
     vote_counts = md[md['vote_count'].notnull()]['vote_count'].astype('int')
     vote_averages = md[md['vote_average'].notnull()]['vote_average'].astype('int')
@@ -52,7 +52,7 @@ def recommend(movie_genre):
 
 
 if __name__ == '__main__':
-    movie_genre = 16     # 영화 장르 지정
+    program_genre = 35     # 영화 장르 지정
     start = time.time()  # 시작 시간 저장
-    recommend(movie_genre)
+    recommend(program_genre)
     print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간

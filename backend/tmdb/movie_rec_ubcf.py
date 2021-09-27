@@ -13,7 +13,7 @@ def recommend(movie_name):
     df_nested_list = pd.json_normalize(data)
 
     # 사용하는 column만 추출
-    meta = df_nested_list[["pk","fields.original_title", "fields.original_language", "fields.genre_ids"]]
+    meta = df_nested_list[["pk", "fields.original_title", "fields.original_language", "fields.genre_ids"]]
 
     # id 컬럼 이름을 movieId로 변경
     meta = meta.rename(columns={'pk':'movieId'})
