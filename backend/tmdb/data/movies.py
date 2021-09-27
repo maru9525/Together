@@ -35,6 +35,7 @@ def create_movie_genre_data():
     with open('movies_genre.json', 'w') as f:
         json.dump(genre_data, f, indent=4)
 
+
 def check_KR_provider(data):
     try:
         data.get('KR')
@@ -104,6 +105,7 @@ def create_movie_data():
         json.dump(movie_data, f, indent=4)
     print(f'Total number of movies is {count}')
     print('-- 영화 데이터 작업 완료 --')
+
 
 if __name__ == '__main__':
     start = time.time()  # 시작 시간 저장
