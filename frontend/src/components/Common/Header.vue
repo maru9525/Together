@@ -6,11 +6,13 @@
       </div>
     </router-link>
     <nav>
-      <router-link to="/">OTT 추천</router-link>
-      <router-link to="/party">OTT 파티</router-link>
+      <router-link :to="{ name: 'ContentList' }">OTT 추천</router-link>
+      <router-link :to="{ name: 'PartyList' }">OTT 파티</router-link>
     </nav>
     <div>
-      <div class="btn login" v-if="true">로그인</div>
+      <router-link class="btn login" v-if="true" :to="{ name: 'Login' }">
+        로그인
+      </router-link>
       <div class="btn user" v-else>User NickName</div>
     </div>
   </header>
