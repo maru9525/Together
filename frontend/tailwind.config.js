@@ -182,7 +182,9 @@ module.exports = {
       150: '1.5',
       200: '2',
     },
-    container: {},
+    container: {
+      center: true,
+    },
     content: {
       none: 'none',
     },
@@ -1032,5 +1034,13 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
+  plugins: [
+    ({ addComponents }) => {
+      addComponents({
+        '.container': {
+          '@apply pb-20': {},
+        },
+      })
+    },
+  ],
 }
