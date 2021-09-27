@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    # CORS
+    'corsheaders',
+
     'drf_yasg',  # drf_yasg(swagger)
     # user authentioation basic module
     'django.contrib.sites',
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
+
 
     # app
     'sign.apps.SignConfig',
@@ -116,7 +119,6 @@ REST_FRAMEWORK = {
 # SNS 로그인
 SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm',
-    
 }
 
 
@@ -128,7 +130,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+]
+
 
 ROOT_URLCONF = 'config.urls'
 
