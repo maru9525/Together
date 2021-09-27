@@ -91,11 +91,13 @@ export default defineComponent({
     //     const answerId = item.id.replace('que', 'ans')
 
     //     if (document.getElementById(answerId)?.style.display === 'block') {
+    //       const
     //       document.getElementById(answerId).style.display = 'none'
     //       document.getElementById(item.id + '-toggle')?.textContent = '+'
     //     }
     //   }
     // }
+
     return {
       items,
       provider,
