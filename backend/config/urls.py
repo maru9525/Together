@@ -25,8 +25,9 @@ from rest_framework.permissions import AllowAny
 
 schema_url_patterns = [
     path('account/', include('sign.urls')),
-    path('accounts/', include('allauth.urls')),
-    ]
+    path('party/', include('party.urls')),
+    # path('accounts/', include('allauth.urls')),
+]
 
 schema_view_v1 = get_schema_view(
     openapi.Info(
@@ -42,7 +43,7 @@ schema_view_v1 = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('party/', include('party.urls')),
+    path('party/', include('party.urls')), # Party
     path('accounts/', include('allauth.urls')), # SNS 
     path('account/', include('sign.urls')), # User
     path('', sign.views.login),

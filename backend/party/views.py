@@ -109,14 +109,14 @@ class PartyDetailView(APIView):
     party.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
   
-# class PartyJoin
-#   def post(self, request, party_idx):
-#     party = self.get_object(party_idx)
-#     serializer = PartySerializer(party, data=request.data)
-#     if serializer.is_vaild():
-#       serializer.save()
-#       return Response(serializer.data)
-#     return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
+class PartyJoin:
+  def post(self, request, party_idx):
+    party = self.get_object(party_idx)
+    serializer = PartySerializer(party, data=request.data)
+    if serializer.is_vaild():
+      serializer.save()
+      return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
 
 
 
