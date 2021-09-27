@@ -155,7 +155,6 @@ export default defineComponent({
           phoneNumber,
           nickName,
         })
-        console.log(response)
       }
     }
     return {
@@ -173,7 +172,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .body {
-  @apply flex flex-col justify-center items-center w-full h-screen -mt-4 -mb-4;
+  @apply flex flex-col justify-center items-center w-full h-screen -mt-16 -mb-20;
 
   .input-container {
     @apply grid gap-2 px-8 w-full sm:w-96;

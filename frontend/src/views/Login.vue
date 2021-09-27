@@ -152,7 +152,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .body {
-  @apply flex flex-col justify-center items-center w-full h-screen -mt-4 mb-4;
+  @apply flex flex-col justify-center items-center w-full h-screen sm:-mt-16 sm:-mb-20 -mt-6 -mb-12;
 
   .logo {
     @apply mb-4;

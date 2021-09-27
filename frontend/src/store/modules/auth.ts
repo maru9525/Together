@@ -1,6 +1,7 @@
 import * as authApi from '@/api/auth'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
+import axios, { AxiosError } from 'axios'
 
 interface authModule {
   token: string
@@ -25,8 +26,10 @@ export const auth: Module<authModule, RootState> = {
           context.commit('setToken', response.data.access_token)
           return response
         }
-      } catch (err) {
-        alert('아이디 혹은 비밀번호를 확인해주세요.')
+      } catch (err: any) {
+        const errorKeys = Object.keys(err.response.data)
+        // 에러가 여러 개일 경우, 맨 앞의 에러 하나만 띄우도록 한다.
+        alert(err.response.data[errorKeys[0]])
       }
     },
     async register(context, params) {
@@ -40,11 +43,10 @@ export const auth: Module<authModule, RootState> = {
           params.nickName
         )
         return res
-      } catch (err) {
-        // TODO: 에러 리턴을 조금 더 UX 좋게 바꿔야 함.
-        // 현재 에러 리턴하면 보기 좋지 않게 옴. 모듈화를 풀고 then, catch를 사용하는 방법 고려
-        alert('이메일 혹은 이름이 중복되었습니다.')
-        return err
+      } catch (err: any) {
+        const errorKeys = Object.keys(err.response.data)
+        // 에러가 여러 개일 경우, 맨 앞의 에러 하나만 띄우도록 한다.
+        alert(err.response.data[errorKeys[0]])
       }
     },
   },
