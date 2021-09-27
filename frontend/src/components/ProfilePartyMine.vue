@@ -12,25 +12,30 @@
       <p>21.12.25까지 (109일)</p>
       <p class="font-bold">10,900원</p>
     </div>
-    <hr />
     <div class="show">
-      <p class="profile-party__box__text--array3">계정 정보</p>
-      <div class="profile-party__box__text--array4">
-        <p>아이디</p>
-        <p>northKing@NK.com</p>
-      </div>
-      <div class="profile-party__box__text--array4">
-        <p>비밀번호</p>
-        <input type="password" value="12335" style="text-align: right" />
-      </div>
-      <p class="profile-party__box__text--array3">파티장 정보</p>
-      <div class="profile-party__box__text--array4">
-        <p>이름</p>
-        <p>김일성</p>
-      </div>
-      <div class="profile-party__box__text--array4">
-        <p>휴대폰 번호</p>
-        <p>011-247-1001</p>
+      <button class="question" id="que-1">
+        <span id="que-1-toggle">d</span>
+      </button>
+      <div class="answer" id="ans-1">
+        <hr />
+        <p class="profile-party__box__text--array3">계정 정보</p>
+        <div class="profile-party__box__text--array4">
+          <p>아이디</p>
+          <p>northKing@NK.com</p>
+        </div>
+        <div class="profile-party__box__text--array4">
+          <p>비밀번호</p>
+          <input type="password" value="12335" style="text-align: right" />
+        </div>
+        <p class="profile-party__box__text--array3">파티장 정보</p>
+        <div class="profile-party__box__text--array4">
+          <p>이름</p>
+          <p>김일성</p>
+        </div>
+        <div class="profile-party__box__text--array4">
+          <p>휴대폰 번호</p>
+          <p>011-247-1001</p>
+        </div>
       </div>
     </div>
   </div>
@@ -79,7 +84,20 @@ export default defineComponent({
       }
     }
 
+    const items = document.querySelectorAll('.que')
+
+    // function openClose(item: HTMLElement | null) {
+    //   if (item !== null) {
+    //     const answerId = item.id.replace('que', 'ans')
+
+    //     if (document.getElementById(answerId)?.style.display === 'block') {
+    //       document.getElementById(answerId).style.display = 'none'
+    //       document.getElementById(item.id + '-toggle')?.textContent = '+'
+    //     }
+    //   }
+    // }
     return {
+      items,
       provider,
     }
   },
