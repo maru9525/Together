@@ -63,7 +63,7 @@ class PartyView(generics.GenericAPIView):
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class PartyDetail(APIView):
+class PartyDetailView(APIView):
   def get_object(self, party_idx):
     return get_object_or_404(Party,pk=party_idx)
 
@@ -108,5 +108,17 @@ class PartyDetail(APIView):
     party = self.get_object(party_idx)
     party.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+  
+# class PartyJoin
+#   def post(self, request, party_idx):
+#     party = self.get_object(party_idx)
+#     serializer = PartySerializer(party, data=request.data)
+#     if serializer.is_vaild():
+#       serializer.save()
+#       return Response(serializer.data)
+#     return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
+
+
+
 
       
