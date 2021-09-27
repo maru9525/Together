@@ -1,28 +1,27 @@
 import http from '@/api/http'
 import { AxiosResponse } from 'axios'
 
-export function login(
-  userEmail: string,
-  password: string
-): Promise<AxiosResponse> {
-  return http.post('/login', {
-    userEmail,
-    password,
+export function login(email: string, password: string): Promise<AxiosResponse> {
+  return http.post('account/login/', {
+    email: email,
+    password: password,
   })
 }
 
 export function register(
-  userEmail: string,
-  password: string,
-  nickName: string,
   name: string,
-  phoneNumber: string
+  email: string,
+  password1: string,
+  password2: string,
+  phoneNumber: string,
+  nickName: string
 ): Promise<AxiosResponse> {
-  return http.post('/register', {
-    userEmail,
-    password,
-    nickName,
-    name,
-    phoneNumber,
+  return http.post('account/register/', {
+    username: name,
+    email: email,
+    password1: password1,
+    password2: password2,
+    phone_number: phoneNumber,
+    nickname: nickName,
   })
 }
