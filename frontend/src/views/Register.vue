@@ -178,7 +178,7 @@ export default defineComponent({
     @apply grid gap-2 px-8 w-full sm:w-96;
 
     &__input-label {
-      @apply text-sm font-bold;
+      @apply text-sm font-bold mb-1;
 
       &.primary {
         @apply text-indigo-900;

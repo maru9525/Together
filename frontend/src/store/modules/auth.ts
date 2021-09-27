@@ -1,7 +1,6 @@
 import * as authApi from '@/api/auth'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
-import axios, { AxiosError } from 'axios'
 
 interface authModule {
   token: string
