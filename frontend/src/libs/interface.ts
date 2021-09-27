@@ -51,7 +51,7 @@ export type Validator = (key: string, value: string | number) => ValidateData
 export interface PartyFormField {
   label: string
   type: 'text' | 'number' | 'date'
-  value: string
+  value: string | number
   placeholder?: string
   errors: {
     [key: string]: string

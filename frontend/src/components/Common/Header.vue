@@ -1,6 +1,10 @@
 <template>
   <header>
-    <router-link class="logo" to="/">OTT</router-link>
+    <router-link class="logo" :to="{ name: 'ContentList' }">
+      <div class="logo-wrapper">
+        <img src="@/assets/images/logo.png" alt="로고" />
+      </div>
+    </router-link>
     <nav>
       <router-link to="/">OTT 추천</router-link>
       <router-link to="/party">OTT 파티</router-link>
@@ -26,7 +30,12 @@ export default defineComponent({
 header {
   @apply flex justify-between items-center w-full h-16 border-b px-4;
 
-  .logo {
+  .logo-wrapper {
+    @apply overflow-hidden w-20 h-10;
+
+    img {
+      @apply object-contain object-center;
+    }
   }
 
   nav {

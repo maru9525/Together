@@ -50,7 +50,7 @@ export default defineComponent({
       required: true,
     },
     modelValue: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
     name: {
@@ -64,7 +64,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'update:validate'],
   setup(props, { emit }) {
-    const labelActive = ref<boolean>(Boolean(props.modelValue))
+    const labelActive = ref<boolean>(Boolean(props.modelValue !== ''))
     const isError = computed(() =>
       Object.keys(props.field.errors).length === 0 ? false : true
     )
@@ -87,7 +87,7 @@ export default defineComponent({
       if (event.target.value !== '') {
         validate(event.target.value)
       }
-      labelActive.value = props.modelValue ? true : false
+      labelActive.value = props.modelValue !== '' ? true : false
     }
 
     const handleFocus = () => {
@@ -123,21 +123,24 @@ export default defineComponent({
     input {
       @apply w-full p-4 z-10 outline-none rounded-md bg-transparent border border-gray-300;
 
-      &.active {
+      &:focus {
         @apply border-indigo-900;
       }
+
+      /* &.active {
+        @apply border-indigo-900;
+      } */
       &.isError {
         @apply border-red-500;
       }
     }
 
     .placeholder {
-      @apply absolute top-1/2 left-4 text-sm text-gray-300 transition-all cursor-text;
+      @apply absolute top-1/2 left-4 text-sm font-medium text-gray-300 transition-all cursor-text;
       transform: translateY(-50%);
 
       &.active {
         @apply bg-white top-0 rounded-md text-sm text-indigo-900 p-1 z-10;
-        /* transform: translateY(-50%); */
       }
       &.isError {
         @apply text-red-500;

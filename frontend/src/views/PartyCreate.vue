@@ -13,7 +13,7 @@
         </h1>
         <button
           class="reset-service-btn"
-          @click="handleResetProvider"
+          @click="handleResetProvider()"
           v-if="provider"
         >
           다시 선택
@@ -62,32 +62,45 @@
       <template v-if="provider">
         <form class="grid gap-4">
           <TextInput
-            v-for="(field, key) in formData"
-            v-model="field.value"
+            v-for="(field, key) in inputForm"
             :key="key"
+            v-model="field.value"
             :name="key"
             :field="field"
-            :formData="formData"
+            :formData="inputForm"
             @update:validate="handleUpdateValidate($event)"
           />
+          <textarea placeholder="상세 정보"></textarea>
         </form>
       </template>
     </section>
+    <div class="button-wrapper">
+      <button
+        class="create-party-button"
+        :class="{ disabled: !formIsValid }"
+        :disabled="!formIsValid"
+        @click="handleSubmit"
+      >
+        파티 등록하기
+      </button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import TextInput from '@/components/Common/TextInput.vue'
 import { requiredValidator } from '@/libs/validator'
 import { PartyForm, Provider, ValidateData } from '@/libs/interface'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'PartyCreate',
   components: { TextInput },
   setup() {
+    const router = useRouter()
     const provider = ref<Provider>('')
-    const formData = ref<PartyForm>({
+    const inputForm = ref<PartyForm>({
       title: {
         label: '파티 이름',
         type: 'text',
@@ -115,24 +128,32 @@ export default defineComponent({
       memberCount: {
         label: '모집인원',
         type: 'number',
-        value: '',
+        value: 0,
         placeholder: '모집인원',
         errors: {},
       },
       endDate: {
         label: '파티 종료일',
         type: 'date',
-        value: Date(),
-        placeholder: '파티 종료일',
+        value: new Date().toISOString().slice(0, 10),
+        placeholder: '',
         errors: {},
       },
       pricePerDay: {
         label: '하루 이용료',
-        type: 'text',
-        value: '',
-        placeholder: '하루 이용료',
+        type: 'number',
+        value: 0,
+        placeholder: '하루 이용료를 입력하세요.',
         errors: {},
       },
+    })
+    const formIsValid = computed(() => {
+      return Object.keys(inputForm.value).every((fieldKey) => {
+        return (
+          inputForm.value[fieldKey].value &&
+          Object.keys(inputForm.value[fieldKey].errors).length === 0
+        )
+      })
     })
 
     const handleUpdateValidate = (data: ValidateData) => {
@@ -141,9 +162,9 @@ export default defineComponent({
       console.groupEnd()
       const { key, type, status, message } = data
       if (!status && message) {
-        formData.value[key].errors[type] = message
+        inputForm.value[key].errors[type] = message
       } else {
-        delete formData.value[key].errors[type]
+        delete inputForm.value[key].errors[type]
       }
     }
 
@@ -155,18 +176,38 @@ export default defineComponent({
       provider.value = ''
     }
 
+    const handleSubmit = () => {
+      const data: { [key: string]: Provider | string | number } = {
+        provider: provider.value,
+      }
+      Object.keys(inputForm.value).forEach((fieldKey) => {
+        data[fieldKey] = inputForm.value[fieldKey].value
+      })
+      const ok = confirm('생성하시겠습니까?')
+      if (ok) {
+        console.log(data)
+        router.push({ name: 'PartyList' })
+      }
+    }
+
     return {
       provider,
-      formData,
+      inputForm,
+      formIsValid,
       handleSelectProvider,
       handleResetProvider,
       handleUpdateValidate,
+      handleSubmit,
     }
   },
 })
 </script>
 
 <style lang="scss" scoped>
+.container {
+  @apply grid max-w-lg;
+}
+
 .noti-section {
   @apply py-6 px-4;
 
@@ -196,7 +237,7 @@ export default defineComponent({
   }
 
   .service-list {
-    @apply grid;
+    @apply grid gap-2;
 
     .service {
       @apply py-2 flex gap-4 items-center;
@@ -220,13 +261,30 @@ export default defineComponent({
 }
 
 .party-section {
-  @apply p-4;
+  @apply p-4 mb-6;
 
   .section-header {
     @apply mb-4;
 
     .section-title {
       @apply text-2xl font-bold;
+    }
+  }
+
+  textarea {
+    resize: none;
+    @apply p-4 border border-gray-300 placeholder-gray-300 rounded-md;
+  }
+}
+
+.button-wrapper {
+  @apply flex items-center justify-center px-4;
+
+  .create-party-button {
+    @apply place-self-center w-full py-4 text-center rounded-xl font-bold bg-indigo-900 text-white;
+
+    &.disabled {
+      @apply bg-gray-200 text-gray-400;
     }
   }
 }
