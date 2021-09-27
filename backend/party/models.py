@@ -9,7 +9,7 @@ class Party(models.Model):
     ('Watcha', 'Watcha'),
   )
   party_idx = models.AutoField(primary_key=True)
-  # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   service = models.CharField(max_length=30, choices=SERVICE_CHOICES) # 서비스 선택
   title = models.CharField(max_length=100) # 제목
   personnel = models.IntegerField() # 모집 인원
