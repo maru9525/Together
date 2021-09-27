@@ -93,13 +93,13 @@ def recommend(program_name):
 
     # Prediction
     recommend_result = recommend_program(program_name, matrix, 10, similar_genre=True)
-    result = pd.DataFrame(recommend_result, columns = ['Title', 'Correlation', 'Genre'])
+    result = pd.DataFrame(recommend_result, columns=['Title', 'Correlation', 'Genre'])
 
     print(result)
 
 
 if __name__ == '__main__':
-    program_name = "Iron Man"     # 영화 이름 지정
+    program_name = "The Walking Dead"     # 영화 이름 지정
     start = time.time()  # 시작 시간 저장
     recommend(program_name)
     print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
