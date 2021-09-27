@@ -27,7 +27,7 @@
           @click="handleSelectProvider('넷플릭스')"
         >
           <div class="logo-wrapper">
-            <img src="@/assets/images/Netflix.png" alt="넷플릭스" />
+            <img src="@/assets/images/netflix.png" alt="넷플릭스" />
           </div>
           <p class="service-name">넷플릭스</p>
         </button>
@@ -38,7 +38,7 @@
           @click="handleSelectProvider('왓챠')"
         >
           <div class="logo-wrapper">
-            <img src="@/assets/images/Watcha.png" alt="왓챠" />
+            <img src="@/assets/images/watcha.png" alt="왓챠" />
           </div>
           <p class="service-name">왓챠</p>
         </button>
@@ -49,7 +49,7 @@
           @click="handleSelectProvider('웨이브')"
         >
           <div class="logo-wrapper">
-            <img src="@/assets/images/Wavve.jpg" alt="웨이브" />
+            <img src="@/assets/images/wavve.png" alt="웨이브" />
           </div>
           <p class="service-name">웨이브</p>
         </button>
@@ -62,11 +62,13 @@
       <template v-if="provider">
         <form class="grid gap-4">
           <TextInput
-            v-for="(field, key) in partyForm"
+            v-for="(field, key) in formData"
             v-model="field.value"
             :key="key"
             :name="key"
             :field="field"
+            :formData="formData"
+            @update:validate="handleUpdateValidate($event)"
           />
         </form>
       </template>
@@ -76,35 +78,39 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import TextInput from '@/components/TextInput.vue'
-import { FormDataList, Provider, ValidateData } from '@/libs/interface'
+import TextInput from '@/components/Common/TextInput.vue'
+import { requiredValidator } from '@/libs/validator'
+import { PartyForm, Provider, ValidateData } from '@/libs/interface'
 
 export default defineComponent({
   name: 'PartyCreate',
   components: { TextInput },
   setup() {
     const provider = ref<Provider>('')
-    const partyForm = ref<FormDataList>({
+    const formData = ref<PartyForm>({
       title: {
-        label: '제목',
+        label: '파티 이름',
         type: 'text',
         value: '',
-        placeholder: '제목을 입력하세요',
+        placeholder: '파티 이름을 입력하세요',
         errors: {},
+        validators: [requiredValidator],
       },
       serviceId: {
         label: '계정',
         type: 'text',
         value: '',
-        placeholder: '넷플릭스 계정',
+        placeholder: '공유할 서비스 계정을 입력하세요',
         errors: {},
+        validators: [requiredValidator],
       },
       servicePassword: {
         label: '비밀번호',
         type: 'text',
         value: '',
-        placeholder: '넷플릭스 비밀번호',
+        placeholder: '공유할 서비스 비밀번호를 입력하세요',
         errors: {},
+        validators: [],
       },
       memberCount: {
         label: '모집인원',
@@ -115,8 +121,8 @@ export default defineComponent({
       },
       endDate: {
         label: '파티 종료일',
-        type: 'text',
-        value: '',
+        type: 'date',
+        value: Date(),
         placeholder: '파티 종료일',
         errors: {},
       },
@@ -130,11 +136,14 @@ export default defineComponent({
     })
 
     const handleUpdateValidate = (data: ValidateData) => {
+      console.group(`handleUpdateValidate`)
+      console.log(data)
+      console.groupEnd()
       const { key, type, status, message } = data
       if (!status && message) {
-        partyForm.value[key].errors[type] = message
+        formData.value[key].errors[type] = message
       } else {
-        delete partyForm.value[key].errors[type]
+        delete formData.value[key].errors[type]
       }
     }
 
@@ -148,7 +157,7 @@ export default defineComponent({
 
     return {
       provider,
-      partyForm,
+      formData,
       handleSelectProvider,
       handleResetProvider,
       handleUpdateValidate,

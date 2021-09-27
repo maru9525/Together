@@ -3,7 +3,7 @@
     <div class="profile-party__box__text--array">
       <p class="font-semibold">넷플릭스 프리미엄</p>
       <img
-        src="@/assets/images/Netflix.png"
+        src="@/assets/images/netflix.png"
         class="profile-party__box__image--size"
         alt="넷플릭스"
       />

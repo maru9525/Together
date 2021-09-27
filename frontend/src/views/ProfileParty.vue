@@ -7,7 +7,7 @@
         <div class="profile-party__box__text--array">
           <p class="font-semibold">넷플릭스 프리미엄</p>
           <img
-            src="@/assets/images/Netflix.png"
+            src="@/assets/images/netflix.png"
             class="profile-party__box__image--size"
             alt="넷플릭스"
           />
@@ -46,7 +46,7 @@
         <div class="profile-party__box__text--array">
           <p class="font-semibold">웨이브 프리미엄</p>
           <img
-            src="@/assets/images/Wavve.jpg"
+            src="@/assets/images/wavve.png"
             class="profile-party__box__image--size"
             alt="넷플릭스"
           />
@@ -83,7 +83,7 @@
         <div class="profile-party__box__text--array">
           <p class="font-semibold">왓챠 프리미엄</p>
           <img
-            src="@/assets/images/Watcha.png"
+            src="@/assets/images/watcha.png"
             class="profile-party__box__image--size"
             alt="넷플릭스"
           />
