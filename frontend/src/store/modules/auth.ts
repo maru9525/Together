@@ -31,15 +31,19 @@ export const auth: Module<authModule, RootState> = {
     setLoginData(state: authModule, loginData: loginResponseData): void {
       state.accessToken = loginData.access_token
       state.refreshToken = loginData.refresh_token
-      console.log('login mutation success')
+      console.log('auth modules: login mutation success')
     },
-    setResetPassword(state: authModule, resetEmail: string): void {
+    setResetPassword(state: authModule): void {
       state.resetPassword = true
-      console.log('resetPassword state becomes true: 임시 비밀번호 발급 완료')
+      console.log(
+        'auth modules: resetPassword state becomes true: 임시 비밀번호 발급 완료'
+      )
     },
     setChangePassword(state: authModule): void {
       state.resetPassword = false
-      console.log('resetPassword state becomes false: 비밀번호 변경 완료')
+      console.log(
+        'auth modules: resetPassword state becomes false: 비밀번호 변경 완료'
+      )
     },
   },
   actions: {
@@ -48,8 +52,9 @@ export const auth: Module<authModule, RootState> = {
         const response = await authApi.login(params.email, params.password)
         if (response.status === 200) {
           commit('setLoginData', response.data)
-          return response
+          alert('auth modules: login success')
         }
+        return response
       } catch (err: any) {
         const errorKeys = Object.keys(err.response.data)
         // 에러가 여러 개일 경우, 맨 앞의 에러 하나만 띄우도록 한다.
@@ -66,6 +71,7 @@ export const auth: Module<authModule, RootState> = {
           params.phoneNumber,
           params.nickName
         )
+        alert('auth modules: register success')
         return response
       } catch (error: any) {
         const errorKeys = Object.keys(error.response.data)
@@ -76,8 +82,9 @@ export const auth: Module<authModule, RootState> = {
     async resetPassword({ commit }, params) {
       try {
         const response = await authApi.resetPassword(params.email)
-        commit('setResetPassword', params.email)
-        return response
+        if (response.status === 200) {
+          commit('setResetPassword')
+        }
       } catch (error: any) {
         alert(error.response.data)
       }
@@ -88,7 +95,9 @@ export const auth: Module<authModule, RootState> = {
           params.password,
           params.passwordConfirm
         )
-        commit('setChangePassword')
+        if (response.status === 200) {
+          commit('setChangePassword')
+        }
       } catch (error: any) {
         alert(error.response.data)
       }

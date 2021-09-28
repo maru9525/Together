@@ -56,12 +56,14 @@ import {
 } from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Register',
   components: { TextInput },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const formData = ref<FormDataList>({
       email: {
         label: '이메일',
@@ -155,10 +157,14 @@ export default defineComponent({
           phoneNumber,
           nickName,
         })
+        if (response && response.status === 201) {
+          router.push({ name: 'Login' })
+        }
       }
     }
     return {
       store,
+      router,
       isValidFormData,
       formData,
       isValidInfoData,

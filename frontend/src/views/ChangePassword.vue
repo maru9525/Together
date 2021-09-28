@@ -91,7 +91,7 @@ export default defineComponent({
       if (isValidFormData.value) {
         const password = formData.value['password'].value
         const passwordConfirm = formData.value['passwordConfirm'].value
-        const response = await store.dispatch('auth/changePassword', {
+        await store.dispatch('auth/changePassword', {
           password,
           passwordConfirm,
         })
