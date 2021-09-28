@@ -26,7 +26,7 @@
             v-for="content in displayedContentList"
             :key="content.id"
           >
-            <router-link
+            <!-- <router-link
               :to="{ name: 'ContentDetail', params: { contentId: content.id } }"
             >
               <div class="poster-wrapper">
@@ -35,7 +35,8 @@
                   :alt="`${content.title}의 포스터`"
                 />
               </div>
-            </router-link>
+            </router-link> -->
+            <ContentPosterLink :content="content" />
           </li>
         </transition-group>
       </ul>
@@ -46,6 +47,7 @@
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { Content } from '@/libs/interface'
+import ContentPosterLink from '@/components/ContentPosterLink.vue'
 
 type Provider = 'netflix' | 'wavve' | 'watcha'
 
@@ -58,6 +60,7 @@ interface Providers {
 
 export default defineComponent({
   name: 'ContentList',
+  components: { ContentPosterLink },
   setup() {
     const store = useStore()
     const contents = ref<Content[]>([])
