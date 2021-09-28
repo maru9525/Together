@@ -17,7 +17,7 @@ class Party(models.Model):
   password = models.CharField(max_length=100) # 비밀번호
   party_start_date = models.DateTimeField(auto_now_add=True) # 시작일
   party_end_date = models.DateTimeField() # 종료일
-  price = models.IntegerField() # 하루 당 이용 요금
+  price = models.PositiveIntegerField() # 하루 당 이용 요금
   rule_age = models.BooleanField(default=False) # 19세 이상
   rule_assign = models.BooleanField(default=False) # 계정 양도
   rule_share = models.BooleanField(default=False) # 계정 공유

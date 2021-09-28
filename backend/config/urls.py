@@ -27,6 +27,7 @@ schema_url_patterns = [
     path('account/', include('sign.urls')),
     path('party/', include('party.urls')),
     # path('accounts/', include('allauth.urls')),
+    path('billing/', include('billing.urls')),
 ]
 
 schema_view_v1 = get_schema_view(
@@ -46,6 +47,7 @@ urlpatterns = [
     path('party/', include('party.urls')), # Party
     path('accounts/', include('allauth.urls')), # SNS 
     path('account/', include('sign.urls')), # User
+    path('billing/', include('billing.urls')),
     path('', sign.views.login),
     
 
