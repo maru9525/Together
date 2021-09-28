@@ -1,4 +1,4 @@
-import { ValidateParam, ValidateData } from '@/libs/interface'
+import { ValidateParam, ValidateData, Validator } from '@/libs/interface'
 
 export const emailValidator = (param: ValidateParam): ValidateData => {
   const key = param.key
@@ -68,3 +68,38 @@ export const phoneNumberValidator = (param: ValidateParam): ValidateData => {
     status: true,
   }
 }
+
+// 1. 필수 입력
+export const requiredValidator: Validator = (key, value) => {
+  if (!value) {
+    return {
+      key,
+      type: 'required',
+      status: false,
+      message: '필수 입력입니다',
+    }
+  }
+  return {
+    key,
+    type: 'required',
+    status: true,
+  }
+}
+
+// export const requiredValidator = (param: ValidateParam): ValidateData => {
+//   const key = param.key
+//   console.log(param)
+//   if (!param.value) {
+//     return {
+//       key,
+//       type: 'required',
+//       status: false,
+//       message: '필수 입력입니다',
+//     }
+//   }
+//   return {
+//     key,
+//     type: 'invalidEmail',
+//     status: true,
+//   }
+// }
