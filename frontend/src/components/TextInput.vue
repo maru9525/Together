@@ -75,11 +75,16 @@ export default defineComponent({
           value: text,
           form: props.field,
         }
-        const res: ValidateData = validator(
-          validateParam,
-          formData['password'].value
-        )
-        emit('update:validate', res)
+        if (formData['password']) {
+          const res: ValidateData = validator(
+            validateParam,
+            formData['password'].value
+          )
+          emit('update:validate', res)
+        } else {
+          const res: ValidateData = validator(validateParam)
+          emit('update:validate', res)
+        }
       }
     }
 
