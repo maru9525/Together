@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # app
     'sign.apps.SignConfig',
+    'rec_movie.apps.RecConfig',
     
     # DRF
     'rest_framework',   
