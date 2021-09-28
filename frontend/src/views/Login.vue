@@ -7,7 +7,7 @@
       </div>
       <div class="input-container">
         <div class="input-container__input-list">
-          <Textinput
+          <TextInput
             v-for="(field, key) in formData"
             v-model="field.value"
             :key="key"
@@ -34,7 +34,7 @@
           </div>
           <router-link
             class="relative top-1 text-xs text-gray-600 float-right"
-            :to="{ name: 'ResetPassword' }"
+            :to="{ name: 'PasswordReset' }"
             >비밀번호 찾기
           </router-link>
         </div>
@@ -49,7 +49,7 @@
         </button>
         <router-link
           class="text-sm text-center text-gray-600 font-medium"
-          :to="{ name: 'Login' }"
+          :to="{ name: 'Register' }"
           >이메일로 회원가입하기
         </router-link>
         <!-- Social Login area -->
@@ -70,7 +70,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import Textinput from '@/components/TextInput.vue'
+import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
 import { FormDataList, ValidateData } from '@/libs/interface'
@@ -78,7 +78,7 @@ import { FormDataList, ValidateData } from '@/libs/interface'
 export default defineComponent({
   name: 'Login',
   components: {
-    Textinput,
+    TextInput,
   },
   setup() {
     const store = useStore()

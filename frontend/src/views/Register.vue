@@ -6,7 +6,7 @@
           이메일 / 비밀번호
         </div>
         <div class="input-container__input-list">
-          <Textinput
+          <TextInput
             v-for="(field, key) in formData"
             v-model="field.value"
             :key="key"
@@ -19,7 +19,7 @@
         </div>
         <div class="input-container__input-label default">내 정보</div>
         <div class="input-container__input-list">
-          <Textinput
+          <TextInput
             v-for="(field, key) in infoData"
             v-model="field.value"
             :key="key"
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import Textinput from '@/components/TextInput.vue'
+import TextInput from '@/components/TextInput.vue'
 import {
   emailValidator,
   passwordSecurityValidator,
@@ -59,7 +59,7 @@ import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Register',
-  components: { Textinput },
+  components: { TextInput },
   setup() {
     const store = useStore()
     const formData = ref<FormDataList>({
