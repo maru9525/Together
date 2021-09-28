@@ -5,7 +5,7 @@ from rest_framework import routers  # router import
 app_name = 'movieApp'    # URL 네임스페이스
 
 urlpatterns = [
-    path('get-json/', views.getMovieData),
-    path('get-review/', views.getReviewData),
-
+    path('get-json/', views.get_movie_data),
+    path('get-review/', views.get_review_data),
+    path('get-genre/', views.get_genre_data),
 ]
