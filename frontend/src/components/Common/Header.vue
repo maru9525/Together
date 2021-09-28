@@ -6,7 +6,9 @@
       <router-link to="/party">OTT 파티</router-link>
     </nav>
     <div>
-      <div class="btn login" v-if="true">로그인</div>
+      <router-link :to="{ name: 'Login' }" class="btn login" v-if="true"
+        >로그인</router-link
+      >
       <div class="btn user" v-else>User NickName</div>
     </div>
   </header>
