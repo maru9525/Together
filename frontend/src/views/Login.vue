@@ -54,13 +54,22 @@
         </router-link>
         <!-- Social Login area -->
         <hr class="my-4" />
-        <button class="input-container__social-btn kakao">
+        <button
+          class="input-container__social-btn kakao"
+          @click="openSocialLogin('kakao')"
+        >
           카카오로 시작하기
         </button>
-        <button class="input-container__social-btn google">
+        <button
+          class="input-container__social-btn google"
+          @click="openSocialLogin('kakao')"
+        >
           구글로 시작하기
         </button>
-        <button class="input-container__social-btn naver">
+        <button
+          class="input-container__social-btn naver"
+          @click="openSocialLogin('naver')"
+        >
           네이버로 시작하기
         </button>
       </div>
@@ -148,6 +157,14 @@ export default defineComponent({
       }
     }
 
+    const openSocialLogin = async (platform: string) => {
+      window.open(
+        `http:localhost:8000/accounts/${platform}/login/callback/`,
+        '_blank',
+        'location=yes, width=520, height=570, scrollbars=yes,'
+      )
+    }
+
     return {
       store,
       router,
@@ -156,6 +173,7 @@ export default defineComponent({
       formData,
       handleUpdateValidate,
       submit,
+      openSocialLogin,
     }
   },
 })
