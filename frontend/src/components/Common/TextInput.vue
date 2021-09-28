@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue'
+import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
 import { PartyForm, PartyFormField, InputEvent } from '@/libs/interface'
 
 export default defineComponent({
@@ -64,7 +64,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'update:validate'],
   setup(props, { emit }) {
-    const labelActive = ref<boolean>(Boolean(props.modelValue !== ''))
+    const labelActive = ref<boolean>(props.modelValue !== '')
     const isError = computed(() =>
       Object.keys(props.field.errors).length === 0 ? false : true
     )
@@ -101,6 +101,10 @@ export default defineComponent({
         validate(event.target.value)
       }
     }
+
+    watchEffect(() => {
+      labelActive.value = props.modelValue !== ''
+    })
 
     return {
       labelActive,

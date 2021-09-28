@@ -5,7 +5,9 @@
       "title": "DP",
       "posterPath": "https://images.justwatch.com/poster/249686340/s332/d-p.webp",
       "simRate": 98,
-      "providers": ["netflix"],
+      "providers": [
+        "netflix"
+      ],
       "firstAirYear": 2017,
       "rated": "청불",
       "seasons": 5,
@@ -16,7 +18,9 @@
       "title": "종이의 집",
       "posterPath": "https://images.justwatch.com/poster/235094884/s276/la-casa-de-papel-el-fenomeno.webp",
       "simRate": 98,
-      "providers": ["netflix"],
+      "providers": [
+        "netflix"
+      ],
       "firstAirYear": 2017,
       "rated": "청불",
       "seasons": 5,
@@ -27,7 +31,9 @@
       "title": "하트시그널",
       "posterPath": "https://images.justwatch.com/poster/192234916/s276/hateusigeuneol.webp",
       "simRate": 98,
-      "providers": ["netflix"],
+      "providers": [
+        "netflix"
+      ],
       "firstAirYear": 2017,
       "rated": "청불",
       "seasons": 5,
@@ -38,7 +44,11 @@
       "title": "킹덤",
       "posterPath": "https://images.justwatch.com/poster/247794970/s276/kingdom-ashin-of-the-north.webp",
       "simRate": 98,
-      "providers": ["netflix", "watcha", "wavve"],
+      "providers": [
+        "netflix",
+        "watcha",
+        "wavve"
+      ],
       "firstAirYear": 2017,
       "rated": "청불",
       "seasons": 5,
@@ -49,7 +59,11 @@
       "title": "설국열차",
       "posterPath": "https://images.justwatch.com/poster/176335430/s276/snowpiercer.webp",
       "simRate": 98,
-      "providers": ["netflix", "watcha", "wavve"],
+      "providers": [
+        "netflix",
+        "watcha",
+        "wavve"
+      ],
       "firstAirYear": 2017,
       "rated": "청불",
       "seasons": 5,
@@ -60,7 +74,11 @@
       "title": "부산행",
       "posterPath": "https://images.justwatch.com/poster/187605738/s592/busanhaeng.webp",
       "simRate": 98,
-      "providers": ["netflix", "watcha", "wavve"],
+      "providers": [
+        "netflix",
+        "watcha",
+        "wavve"
+      ],
       "firstAirYear": 2017,
       "rated": "청불",
       "seasons": 5,
@@ -84,7 +102,12 @@
       "originalPricePerDay": 300,
       "pricePerDay": 85,
       "totalCount": 5,
-      "rules": ["19세 이상", "계정양도 불가", "공유 금지", "환불 불가"]
+      "rules": [
+        "19세 이상",
+        "계정양도 불가",
+        "공유 금지",
+        "환불 불가"
+      ]
     },
     {
       "id": 2,
@@ -102,7 +125,12 @@
       "originalPricePerDay": 300,
       "pricePerDay": 85,
       "totalCount": 5,
-      "rules": ["19세 이상", "계정양도 불가", "공유 금지", "환불 불가"]
+      "rules": [
+        "19세 이상",
+        "계정양도 불가",
+        "공유 금지",
+        "환불 불가"
+      ]
     },
     {
       "id": 3,
@@ -120,7 +148,12 @@
       "originalPricePerDay": 300,
       "pricePerDay": 85,
       "totalCount": 5,
-      "rules": ["19세 이상", "계정양도 불가", "공유 금지", "환불 불가"]
+      "rules": [
+        "19세 이상",
+        "계정양도 불가",
+        "공유 금지",
+        "환불 불가"
+      ]
     },
     {
       "id": 4,
@@ -138,7 +171,12 @@
       "originalPricePerDay": 300,
       "pricePerDay": 85,
       "totalCount": 5,
-      "rules": ["19세 이상", "계정양도 불가", "공유 금지", "환불 불가"]
+      "rules": [
+        "19세 이상",
+        "계정양도 불가",
+        "공유 금지",
+        "환불 불가"
+      ]
     }
   ],
   "comments": [
@@ -199,10 +237,16 @@
   ],
   "account": [
     {
-      "id": 1,
       "name": "김정일",
-      "nickName": "괴뢰군대장",
-      "phoneNumber": "010-1803-1806" 
+      "nickName": "닉네임 바뀜222",
+      "phoneNumber": "010-1803-1806",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "김정은",
+      "nickName": "괴뢰군두목",
+      "phoneNumber": "010-1803-1806"
     }
   ]
 }

@@ -11,15 +11,15 @@
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">닉네임</p>
-          <p>{{ accounts[0].nickName }}</p>
+          <p>{{ account.nickName }}</p>
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">이름</p>
-          <p>{{ accounts[0].name }}</p>
+          <p>{{ account.name }}</p>
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">휴대폰 번호</p>
-          <p>{{ accounts[0].phoneNumber }}</p>
+          <p>{{ account.phoneNumber }}</p>
         </div>
       </section>
       <section class="profile-main__seen__section">
@@ -65,6 +65,7 @@ import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
 import { Content } from '@/libs/interface'
 import ContentPosterLink from '@/components/ContentPosterLink.vue'
+import { useRouter } from 'vue-router'
 
 interface Account {
   id: number
@@ -78,19 +79,30 @@ export default defineComponent({
   components: {
     ContentPosterLink,
   },
-  setup() {
+  props: {
+    userId: {
+      type: [String, Number],
+    },
+  },
+  setup(props) {
+    const router = useRouter()
     const loading = ref<boolean>(true)
-    const accounts = ref<Account[]>()
+    const account = ref<Account>()
     const contents = ref<Content[]>([])
 
     onMounted(async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/account`)
+        const res = await axios.get(
+          `http://localhost:3000/account/${props.userId}`
+        )
         console.log(res.data)
-        accounts.value = res.data
-        console.log(accounts.value)
+        account.value = res.data
+        console.log(account.value)
       } catch (error) {
-        console.log(error)
+        console.log(error.response)
+        if (error.response.status === 404) {
+          router.push({ name: 'ContentList' })
+        }
       }
       try {
         const res = await axios.get('http://localhost:3000/contents')
@@ -102,7 +114,7 @@ export default defineComponent({
     })
     return {
       loading,
-      accounts,
+      account,
       contents,
     }
   },

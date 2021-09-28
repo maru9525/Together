@@ -100,14 +100,16 @@ const routes: Array<RouteRecordRaw> = [
     component: ProfileLayout,
     children: [
       {
-        path: '',
+        path: ':userId',
         name: 'ProfileMain',
         component: ProfileMain,
+        props: true,
       },
       {
-        path: 'edit',
+        path: ':userId/edit',
         name: 'ProfileEdit',
         component: ProfileEdit,
+        props: true,
       },
       {
         path: 'changepassword',

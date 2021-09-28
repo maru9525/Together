@@ -157,9 +157,6 @@ export default defineComponent({
     })
 
     const handleUpdateValidate = (data: ValidateData) => {
-      console.group(`handleUpdateValidate`)
-      console.log(data)
-      console.groupEnd()
       const { key, type, status, message } = data
       if (!status && message) {
         inputForm.value[key].errors[type] = message
