@@ -20,7 +20,9 @@
           <button :class="{ valid: formIsValid }" :disabled="!formIsValid">
             확인
           </button>
-          <router-link to="/">비밀번호 변경</router-link>
+          <router-link :to="{ name: 'ProfileChangePassword' }">
+            비밀번호 변경
+          </router-link>
         </div>
       </form>
     </section>

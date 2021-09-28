@@ -1,7 +1,7 @@
 <template>
   <nav class="profile-main__navbar__button">
     <router-link
-      :to="{ name: 'ProfileMain' }"
+      :to="{ name: 'ProfileMain', params: { userId: 1 } }"
       :class="{ active: !partyactive }"
     >
       <span>프로필</span>
