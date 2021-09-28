@@ -17,7 +17,7 @@ import PartyJoin from '@/views/PartyJoin.vue'
 
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
-import ResetPassword from '@/views/ResetPassword.vue'
+import PasswordReset from '@/views/PasswordReset.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -73,9 +73,9 @@ const routes: Array<RouteRecordRaw> = [
         component: Login,
       },
       {
-        path: 'reset-password',
-        name: 'ResetPassword',
-        component: ResetPassword,
+        path: 'password-reset',
+        name: 'PasswordReset',
+        component: PasswordReset,
       },
       {
         path: 'register',
