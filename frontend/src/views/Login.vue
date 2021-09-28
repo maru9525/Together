@@ -34,7 +34,7 @@
           </div>
           <router-link
             class="relative top-1 text-xs text-gray-600 float-right"
-            :to="{ name: 'PasswordReset' }"
+            :to="{ name: 'ResetPassword' }"
             >비밀번호 찾기
           </router-link>
         </div>
@@ -74,6 +74,7 @@ import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
 import { FormDataList, ValidateData } from '@/libs/interface'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Login',
@@ -82,6 +83,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
 
     const isSaveEmail = ref<boolean>(
       localStorage.getItem('email') ? true : false
@@ -128,13 +130,19 @@ export default defineComponent({
         localStorage.setItem('email', formData.value['email'].value)
       }
       if (isValidFormData.value) {
-        const userEmail = formData.value['email'].value
+        const email = formData.value['email'].value
         const password = formData.value['password'].value
         // TODO: Add loading spinner
         const response = await store.dispatch('auth/login', {
-          userEmail,
+          email,
           password,
         })
+        // 로그인 성공 시, 비밀번호를 바꿔야 한다면 비밀번호 변경 컴포넌트로 이동
+        if (store.state.auth.resetPassword) {
+          router.push({ name: 'ChangePassword' })
+        } else {
+          router.push({ name: 'ContentList' })
+        }
       }
     }
 

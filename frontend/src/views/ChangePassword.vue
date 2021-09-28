@@ -3,9 +3,9 @@
     <div class="body">
       <div class="input-container">
         <div class="input-container__info">
-          비밀번호를 찾기 위해
+          기존 비밀번호가 초기화 되었습니다.
           <br />
-          본인인증이 필요합니다
+          로그인 할 새 비밀번호를 입력하세요.
         </div>
         <div class="input-container__input-list">
           <TextInput
@@ -25,7 +25,7 @@
           :disabled="!isValidFormData"
           @click="submit"
         >
-          이메일 본인인증
+          임시 비밀번호 발급
         </button>
       </div>
     </div>
@@ -35,15 +35,22 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import TextInput from '@/components/TextInput.vue'
-import { emailValidator } from '@/libs/validator'
+import {
+  passwordSecurityValidator,
+  passwordConfirmValidator,
+} from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-  name: 'PasswordReset',
+  name: 'ChangePassword',
   components: {
     TextInput,
   },
   setup() {
+    const store = useStore()
+    const resetPassword = computed(() => store.state.auth.resetPassword)
+    const resetEmail = computed(() => store.state.auth.resetEmail)
     const isValidFormData = computed(() => {
       const keys = Object.keys(formData.value)
       return keys.every((key) => {
@@ -51,14 +58,21 @@ export default defineComponent({
         return formData.value[key].value !== '' && !errors.length
       })
     })
-
     const formData = ref<FormDataList>({
-      email: {
-        label: '이메일',
-        type: 'email',
+      password: {
+        label: '새 비밀번호',
+        type: 'password',
         value: '',
-        placeholder: '복구할 이메일을 입력하세요.',
-        validator: emailValidator,
+        placeholder: '새 비밀번호',
+        validator: passwordSecurityValidator,
+        errors: {},
+      },
+      passwordConfirm: {
+        label: '새 비밀번호 확인',
+        type: 'password',
+        value: '',
+        placeholder: '새 비밀번호 확인',
+        validator: passwordConfirmValidator,
         errors: {},
       },
     })
@@ -75,11 +89,19 @@ export default defineComponent({
 
     const submit = async () => {
       if (isValidFormData.value) {
-        console.log('true')
+        const password = formData.value['password'].value
+        const passwordConfirm = formData.value['passwordConfirm'].value
+        const response = await store.dispatch('auth/changePassword', {
+          password,
+          passwordConfirm,
+        })
       }
     }
 
     return {
+      store,
+      resetEmail,
+      resetPassword,
       formData,
       isValidFormData,
       handleUpdateValidate,
@@ -97,10 +119,10 @@ export default defineComponent({
     @apply grid gap-2 px-8 w-full sm:w-96;
 
     &__input-list {
-      @apply w-full;
+      @apply grid gap-2 w-full;
     }
     &__info {
-      @apply w-full text-indigo-900 bg-indigo-50 px-4 py-4 mb-8 font-bold text-base text-center;
+      @apply w-full rounded-md text-indigo-900 bg-indigo-50 px-4 py-4 mb-8 font-bold text-base text-center;
     }
     &__submit-btn {
       @apply w-full rounded-lg py-3 text-xs text-white font-bold bg-indigo-900 text-center;

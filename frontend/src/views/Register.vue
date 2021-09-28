@@ -140,7 +140,7 @@ export default defineComponent({
 
     const submit = async () => {
       if (isValidFormData.value && isValidInfoData.value) {
-        const userEmail = formData.value['email'].value
+        const email = formData.value['email'].value
         const password = formData.value['password'].value
         const passwordConfirm = formData.value['passwordConfirm'].value
         const nickName = infoData.value['nickName'].value
@@ -150,7 +150,7 @@ export default defineComponent({
         const response = await store.dispatch('auth/register', {
           name,
           password,
-          userEmail,
+          email,
           passwordConfirm,
           phoneNumber,
           nickName,
