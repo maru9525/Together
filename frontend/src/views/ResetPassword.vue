@@ -82,7 +82,7 @@ export default defineComponent({
     const submit = async () => {
       if (isValidFormData.value) {
         // 비밀번호 임시발급
-        const email = formData.value['email']
+        const email = formData.value['email'].value
         const response = await store.dispatch('auth/resetPassword', { email })
       }
     }
