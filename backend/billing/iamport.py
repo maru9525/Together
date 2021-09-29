@@ -20,6 +20,7 @@ def get_access_token():
 
 # 결제를 검증하는 단계 (유저가 요청한 금액과 아임포트에 있는 결제 금액이 일치하는지 검증)
 def validation_prepare(merchant_id, amount, *args, **kwargs):
+  print(get_access_token())
   access_token = get_access_token()
   print(access_token)
   if access_token:
@@ -31,7 +32,7 @@ def validation_prepare(merchant_id, amount, *args, **kwargs):
     url = 'https://api.iamport.kr/payments/prepare'
 
     headers = {
-      'Authorizetion': access_token
+      'Authorizetion': 'Baerer' + access_token
     }
 
     req = requests.post(url, data=access_data, headers=headers)

@@ -1,10 +1,11 @@
 from django.conf.urls import url
 from django.contrib import admin
-from billing.views import (
+from .views import (
     charge_point,
     PointCheckoutAjaxView,
     PointImpAjaxView,
 )
+app_name= 'billing'
 
 urlpatterns = [
     url('charge/', charge_point),

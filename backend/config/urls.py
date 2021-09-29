@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import (include, path)
 import sign.views
 
+# from allauth.views import ConfirmEmailView
+
 # Swagger
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -45,7 +47,8 @@ schema_view_v1 = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('party/', include('party.urls')), # Party
-    path('accounts/', include('allauth.urls')), # SNS 
+    path('accounts/', include('allauth.urls')), # SNS
+    path('accounts/allauth/', include('allauth.urls')),
     path('account/', include('sign.urls')), # User
     path('billing/', include('billing.urls')),
     path('', sign.views.login),

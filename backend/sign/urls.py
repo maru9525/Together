@@ -2,7 +2,9 @@ import sign.views
 from django.urls import (include, path)
 from dj_rest_auth.views import (
     LoginView, LogoutView, PasswordChangeView,
-    UserDetailsView,
+    UserDetailsView, PasswordResetConfirmView,
+    PasswordResetView, 
+   
 )
 from dj_rest_auth.registration.views import RegisterView
 
@@ -13,6 +15,8 @@ urlpatterns = [
   path('profile/', UserDetailsView.as_view(), name='detail'),
 
   # 회원가입, 비밀번호 변경
+  path('password/reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+  path('password/reset/', PasswordResetView.as_view(), name='password_reset'),
   path('password/change/', PasswordChangeView.as_view(), name='rest_password_change'),
   path('register/', RegisterView.as_view(), name='rest_register'),
   

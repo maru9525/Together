@@ -5,7 +5,7 @@ import hashlib
 from django.db import models
 from django.db.models.signals import post_save
 from django.conf import settings
-from billing.iamport import validation_prepare, get_transaction
+from billing.iamport import validation_prepare, get_transaction, get_access_token
 from party.models import Party
 
 # 유저가 결제를 시도한 정보
@@ -33,12 +33,13 @@ class PointTransactionManager(models.Manager):
   def create_new(self, user, amount, type, success=None, transaction_status=None):
     if not user:
       raise ValueError('유저가 확인되지 않습니다.')
-    
+    if user:
+      raise ValueError('test')
     short_hash = hashlib.sha1(str(random.random())).hexdigest()[:2]
     time_hash = hashlib.sha1(str(int(time.time()))).hexdigest()[-3:]
     base = str(user.email).split('@')[0]
     key = hashlib.sha1(short_hash + time_hash + base).hexdigest()[:10]
-    new_order_id = '%s'%(key)
+    new_order_id = "%s" % (key)
 
     # 아임포트 결제 사전 검증 단계
     validation_prepare(new_order_id, amount)
@@ -49,7 +50,7 @@ class PointTransactionManager(models.Manager):
       amount=amount,
       type=type,
     )
-
+    print(success + 'success')
     if success is not None:
       new_trans.sucess = success
       new_trans.transaction_status = transaction_status

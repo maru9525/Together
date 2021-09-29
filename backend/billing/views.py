@@ -15,25 +15,23 @@ class PointCheckoutAjaxView(APIView):
 
   def post(self, request, *args, **kwargs):
     if not request.user.is_authenticated:
-      return JsonResponse({}, status=403)
+      return JsonResponse({}, status=401)
 
     user = request.user
-    print(user.is_authenticated)
+    print(user)
     amount = request.POST.get('amount')
     print(amount)
     type = request.POST.get('type')
     print(type)
-
     try:
       trans = PointTransaction.objects.create_new(
         user=user,
         amount=amount,
         type=type
       )
-      
     except:
       trans = None
-    
+    print(trans)
     if trans is not None:
       data = {
         "works": True,
@@ -47,7 +45,7 @@ class PointCheckoutAjaxView(APIView):
 class PointImpAjaxView(APIView):
   def post(self, request, *args, **kwargs):
     if not request.user.is_authenticated:
-      return JsonResponse({"authenticated": False}, status=403)
+      return JsonResponse({}, status=401)
 
     user = request.user
     merchant_id = request.POST.get('merchant_id')
