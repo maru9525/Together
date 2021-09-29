@@ -25,7 +25,7 @@
           :disabled="!isValidFormData"
           @click="submit"
         >
-          임시 비밀번호 발급
+          비밀번호 변경
         </button>
       </div>
     </div>

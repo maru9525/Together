@@ -43,6 +43,7 @@ import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'ResetPassword',
@@ -51,6 +52,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const isValidFormData = computed(() => {
       const keys = Object.keys(formData.value)
       return keys.every((key) => {
@@ -84,6 +86,9 @@ export default defineComponent({
         // 비밀번호 임시발급
         const email = formData.value['email'].value
         const response = await store.dispatch('auth/resetPassword', { email })
+        if (response && response.status === 201) {
+          router.push({ name: 'ContentList' })
+        }
       }
     }
     return {
