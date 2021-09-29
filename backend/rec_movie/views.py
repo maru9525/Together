@@ -59,17 +59,26 @@ def get_provider_data(self):
     df = df.fillna(0)
 
     for idx, row in df.iterrows():
+        try:
+            movie = Movie.objects.get(movie_id=row['pk'])
+        except Movie.DoesNotExist:
+            print(f"{row['pk']}는 존재하지 않습니다.")
 
+        provider_set = set()
         if row['fields.provider.buy'] != 0:
-            Provider.objects.create(movie_id=row['pk'], provider_name=row['fields.provider.buy'][0]['provider_name'])
-            # provider_set.add(row['fields.provider.buy'][0]['provider_name'])
+            provider_list_to_set(provider_set, row['fields.provider.buy'])
         if row['fields.provider.rent'] != 0:
-            pass
-            Provider.objects.create(movie_id=row['pk'], provider_name=row['fields.provider.rent'][0]['provider_name'])
-            # provider_set.add(row['fields.provider.rent'][0]['provider_name'])
+            provider_list_to_set(provider_set, row['fields.provider.rent'])
         if row['fields.provider.flatrate'] != 0:
-            pass
-            Provider.objects.create(movie_id=row['pk'], provider_name=row['fields.provider.flatrate'][0]['provider_name'])
-            # provider_set.add(row['fields.provider.flatrate'][0]['provider_name'])
+            provider_list_to_set(provider_set, row['fields.provider.flatrate'])
+
+        for provider in provider_set:
+            Provider.objects.create(movie_id=movie, provider_name=provider)
 
     return HttpResponse('Success convert json to database')
+
+
+def provider_list_to_set(p_set, p_list):
+    size = len(p_list)
+    for idx in range(0, size):
+        p_set.add(p_list[idx]['provider_name'])
