@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    # CORS
+    'corsheaders',
+
     'drf_yasg',  # drf_yasg(swagger)
     # user authentioation basic module
     'django.contrib.sites',
@@ -54,9 +56,9 @@ INSTALLED_APPS = [
     # app
     'sign.apps.SignConfig',
     'rec_movie.apps.RecConfig',
-    
+
     # DRF
-    'rest_framework',   
+    'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'dj_rest_auth.registration',
@@ -117,19 +119,28 @@ REST_FRAMEWORK = {
 # SNS 로그인
 SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm',
-    
 }
 
 
 MIDDLEWARE = [
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+]
+
 
 ROOT_URLCONF = 'config.urls'
 
