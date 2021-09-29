@@ -53,9 +53,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
 
-
     # app
     'sign.apps.SignConfig',
+    'rec_movie.apps.RecConfig',
 
     # DRF
     'rest_framework',
