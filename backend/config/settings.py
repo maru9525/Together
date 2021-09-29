@@ -126,7 +126,7 @@ SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm', 
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'joenjoy202@gmail.com'
 EMAIL_HOST_PASSWORD ='test1234!'
