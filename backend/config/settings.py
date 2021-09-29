@@ -54,12 +54,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
 
-
     # app
     'sign.apps.SignConfig',
     'party.apps.PartyConfig',
     'billing',
-    
+    'rec_movie.apps.RecConfig',
+
     # DRF
     'rest_framework',
     'rest_framework.authtoken',
