@@ -8,16 +8,17 @@ import ProfileMain from '@/views/ProfileMain.vue'
 import ProfileEdit from '@/views/ProfileEdit.vue'
 import ProfileChangePassword from '@/views/ProfileChangePassword.vue'
 import ProfileParty from '@/views/ProfileParty.vue'
-import ProfilePartyMine from '@/views/ProfilePartyMine.vue'
 import ContentList from '@/views/ContentList.vue'
 import ContentDetail from '@/views/ContentDetail.vue'
 import PartyList from '@/views/PartyList.vue'
 import PartyDetail from '@/views/PartyDetail.vue'
 import PartyJoin from '@/views/PartyJoin.vue'
+import PartyCreate from '@/views/PartyCreate.vue'
 
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
+import ChangePassword from '@/views/ChangePassword.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -55,6 +56,11 @@ const routes: Array<RouteRecordRaw> = [
         props: true,
       },
       {
+        path: 'create',
+        name: 'PartyCreate',
+        component: PartyCreate,
+      },
+      {
         path: ':partyId/join',
         name: 'PartyJoin',
         component: PartyJoin,
@@ -78,6 +84,11 @@ const routes: Array<RouteRecordRaw> = [
         component: ResetPassword,
       },
       {
+        path: 'change-password/:uid/token/:token/',
+        name: 'ChangePassword',
+        component: ChangePassword,
+      },
+      {
         path: 'register',
         name: 'Register',
         component: Register,
@@ -95,14 +106,16 @@ const routes: Array<RouteRecordRaw> = [
     component: ProfileLayout,
     children: [
       {
-        path: '',
+        path: ':userId',
         name: 'ProfileMain',
         component: ProfileMain,
+        props: true,
       },
       {
-        path: 'edit',
+        path: ':userId/edit',
         name: 'ProfileEdit',
         component: ProfileEdit,
+        props: true,
       },
       {
         path: 'changepassword',
@@ -113,13 +126,6 @@ const routes: Array<RouteRecordRaw> = [
         path: 'myparty',
         name: 'ProfileParty',
         component: ProfileParty,
-        children: [
-          {
-            path: '',
-            name: 'ProfilePartyMine',
-            component: ProfilePartyMine,
-          },
-        ],
       },
     ],
   },

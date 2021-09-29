@@ -7,7 +7,7 @@
       </div>
       <div class="input-container">
         <div class="input-container__input-list">
-          <Textinput
+          <TextInput
             v-for="(field, key) in formData"
             v-model="field.value"
             :key="key"
@@ -49,7 +49,7 @@
         </button>
         <router-link
           class="text-sm text-center text-gray-600 font-medium"
-          :to="{ name: 'Login' }"
+          :to="{ name: 'Register' }"
           >이메일로 회원가입하기
         </router-link>
         <!-- Social Login area -->
@@ -70,19 +70,20 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import Textinput from '@/components/TextInput.vue'
+import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
 import { FormDataList, ValidateData } from '@/libs/interface'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Login',
   components: {
-    Textinput,
+    TextInput,
   },
   setup() {
     const store = useStore()
-    const innerWidth = ref<number>(window.innerWidth)
+    const router = useRouter()
 
     const isSaveEmail = ref<boolean>(
       localStorage.getItem('email') ? true : false
@@ -125,15 +126,31 @@ export default defineComponent({
     }
 
     const submit = async () => {
-      // validate check
-      // if isSaveEmail, save to localStorage
-      const keys = Object.keys(formData.value)
-      return
+      if (isSaveEmail.value) {
+        localStorage.setItem('email', formData.value['email'].value)
+      }
+      if (isValidFormData.value) {
+        const email = formData.value['email'].value
+        const password = formData.value['password'].value
+        // TODO: Add loading spinner
+        const response = await store.dispatch('auth/login', {
+          email,
+          password,
+        })
+        if (response && response.status === 200) {
+          // 로그인 성공 시, 비밀번호를 바꿔야 한다면 비밀번호 변경 컴포넌트로 이동
+          if (store.state.auth.resetPassword) {
+            router.push({ name: 'ChangePassword' })
+          } else {
+            router.push({ name: 'ContentList' })
+          }
+        }
+      }
     }
 
     return {
       store,
-      innerWidth,
+      router,
       isSaveEmail,
       isValidFormData,
       formData,
@@ -146,7 +163,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .body {
-  @apply flex flex-col justify-center items-center w-full h-screen -mt-4 mb-4;
+  @apply flex flex-col justify-center items-center w-full h-screen sm:-mt-16 sm:-mb-20 -mt-6 -mb-12;
 
   .logo {
     @apply mb-4;

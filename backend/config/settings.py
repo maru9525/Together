@@ -50,7 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    # CORS
+    'corsheaders',
+
     'drf_yasg',  # drf_yasg(swagger)
     # user authentioation basic module
     'django.contrib.sites',
@@ -65,9 +67,10 @@ INSTALLED_APPS = [
 
     # app
     'sign.apps.SignConfig',
-    
+    'rec_movie.apps.RecConfig',
+
     # DRF
-    'rest_framework',   
+    'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'dj_rest_auth.registration',
@@ -148,8 +151,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
 
+]
 
 CORS_ALLOWED_ORIGINS  = [
     'http://localhost:8080',
