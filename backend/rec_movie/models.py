@@ -28,9 +28,5 @@ class Review(models.Model):
 
 
 class Provider(models.Model):
+    movie_id = models.ForeignKey("Movie", related_name="provider", on_delete=models.CASCADE, db_column="movie_id", default='')
     provider_name = models.CharField(max_length=20)
-
-
-class MovieProvider(models.Model):
-    movie_idx = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    provider_idx = models.ForeignKey(Provider, on_delete=models.CASCADE)
