@@ -79,7 +79,7 @@ const routes: Array<RouteRecordRaw> = [
         component: ResetPassword,
       },
       {
-        path: 'change-password',
+        path: 'change-password/:uid/token/:token/',
         name: 'ChangePassword',
         component: ChangePassword,
       },

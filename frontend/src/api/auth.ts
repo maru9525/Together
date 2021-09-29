@@ -27,7 +27,7 @@ export function register(
 }
 
 export function resetPassword(email: string): Promise<AxiosResponse> {
-  return http.post('', {
+  return http.post('account/password/reset/', {
     email: email,
   })
 }
