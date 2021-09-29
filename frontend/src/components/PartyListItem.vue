@@ -4,13 +4,13 @@
       <div class="party">
         <div class="infos">
           <div class="text">
-            <h3>{{ party.provider }} 프리미엄</h3>
+            <h3>{{ party.providerName }} 프리미엄</h3>
             <p>{{ party.title }}</p>
           </div>
           <div class="logo-wrapper">
             <img
               :src="require(`@/assets/images/${provider}.png`)"
-              :alt="`${party.provider} 로고`"
+              :alt="`${party.providerName} 로고`"
             />
           </div>
         </div>
@@ -23,7 +23,7 @@
           </div>
           <div class="price-wrapper">
             <p class="original-price">
-              {{ toCurrency(party.originalPricePerDay * restDays) }}
+              {{ toCurrency(party.providerPricePerDay * restDays) }}
             </p>
             <p class="price">
               {{ toCurrency(party.pricePerDay * restDays) }}
@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { Party } from '@/libs/interface'
+import { getRestDays, toCurrency } from '@/libs/func'
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
@@ -49,7 +50,7 @@ export default defineComponent({
   },
   setup(props) {
     let provider = ''
-    switch (props.party.provider) {
+    switch (props.party.providerName) {
       case '넷플릭스': {
         provider = 'netflix'
         break
@@ -63,13 +64,8 @@ export default defineComponent({
         break
       }
     }
-    const restDays: number = Math.floor(
-      (new Date(props.party.endDate).getTime() - new Date().getTime()) /
-        (1000 * 60 * 60 * 24)
-    )
-    const toCurrency = (price: number): string => {
-      return `${String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`
-    }
+
+    const restDays: number = getRestDays(props.party.endDate)
     return { toCurrency, provider, restDays }
   },
 })

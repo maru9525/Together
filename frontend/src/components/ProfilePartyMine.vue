@@ -2,7 +2,7 @@
   <div class="profile-party__box" :class="provider">
     <header>
       <div class="profile-party__box__text--array">
-        <p class="font-semibold">{{ party.provider }}</p>
+        <p class="font-semibold">{{ party.providerName }}</p>
         <img
           :src="require(`@/assets/images/${provider}.png`)"
           class="profile-party__box__image--size"
@@ -62,7 +62,7 @@ export default defineComponent({
     const provider = ref<string>('netflix')
     const isExpanded = ref<boolean>(false)
 
-    switch (prop.party.provider) {
+    switch (prop.party.providerName) {
       case '넷플릭스': {
         provider.value = 'netflix'
         break

@@ -93,12 +93,14 @@ import TextInput from '@/components/Common/TextInput.vue'
 import { requiredValidator } from '@/libs/validator'
 import { PartyForm, Provider, ValidateData } from '@/libs/interface'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'PartyCreate',
   components: { TextInput },
   setup() {
     const router = useRouter()
+    const store = useStore()
     const provider = ref<Provider>('')
     const inputForm = ref<PartyForm>({
       title: {
@@ -125,7 +127,7 @@ export default defineComponent({
         errors: {},
         validators: [],
       },
-      totalMemberCount: {
+      memberLimit: {
         label: '모집인원',
         type: 'number',
         value: 0,
@@ -183,23 +185,24 @@ export default defineComponent({
       provider.value = ''
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       const data: { [key: string]: Provider | string | number } = {
-        provider: provider.value,
         desc: desc.value,
         // 하드코딩
-        host: '김병훈',
-        logoUrl: '@/assets/images/netflix.png',
-        joinMemberCount: 0,
-        originalPricePerDay: 300,
+        providerName: provider.value,
+        providerLogoUrl: '@/assets/images/netflix.png',
+        providerPricePerDay: 300,
+        hostName: '김병훈',
+        membersCount: 3,
       }
       Object.keys(inputForm.value).forEach((fieldKey) => {
+        console.log(fieldKey, typeof inputForm.value[fieldKey].value)
         data[fieldKey] = inputForm.value[fieldKey].value
       })
       const ok = confirm('생성하시겠습니까?')
       if (ok) {
         console.log(data)
-        // router.push({ name: 'PartyList' })
+        await store.dispatch('party/postParty', data)
       }
     }
 
