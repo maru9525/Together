@@ -1,8 +1,7 @@
-# from .serializers import SignupSerializer
 from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-import requests
+
 
 def login(request):
   return render(request, 'login.html')
@@ -14,3 +13,9 @@ def detail(request, pk):
     'user': user
   }
   return render(request, 'detail.html', context)
+
+def passwordReset(request):
+  return redirect(f'http://localhost:8080/auth/reset-password/')
+
+def passwordResetConfirm(request, uid, token):
+  return redirect(f'http://localhost:8080/auth/change-password/{uid}/token/{token}/')

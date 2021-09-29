@@ -80,7 +80,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False # 유저네임은 없어도 됨
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # 로그아웃 후 리디렉션 할 페이지
@@ -125,10 +125,10 @@ SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm', 
 }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cember123@gmail.com'
-EMAIL_HOST_PASSWORD ='tpaqj123!'
+EMAIL_HOST_USER = 'joenjoy202@gmail.com'
+EMAIL_HOST_PASSWORD ='test1234!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
