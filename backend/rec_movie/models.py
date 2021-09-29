@@ -9,6 +9,7 @@ class Movie(models.Model):
     overview = models.TextField()
     release_date = models.DateField()
     poster_path = models.CharField(max_length=40)    # https://image.tmdb.org/t/p/original/[poster_path]
+    genres = models.ManyToManyField('Genre')
 
 
 class Genre(models.Model):
@@ -16,9 +17,9 @@ class Genre(models.Model):
     genre_name = models.CharField(max_length=20)
 
 
-class MovieGenre(models.Model):
-    movie_idx = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    genre_idx = models.ForeignKey(Genre, on_delete=models.CASCADE)
+#class MovieGenre(models.Model):
+#    movie_idx = models.ForeignKey(Movie, on_delete=models.CASCADE)
+#    genre_idx = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
 
 class Review(models.Model):
