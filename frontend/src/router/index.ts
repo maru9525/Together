@@ -18,6 +18,7 @@ import PartyCreate from '@/views/PartyCreate.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
+import ChangePassword from '@/views/ChangePassword.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -81,6 +82,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'reset-password',
         name: 'ResetPassword',
         component: ResetPassword,
+      },
+      {
+        path: 'change-password/:uid/token/:token/',
+        name: 'ChangePassword',
+        component: ChangePassword,
       },
       {
         path: 'register',

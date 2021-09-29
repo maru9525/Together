@@ -25,3 +25,19 @@ export function register(
     nickname: nickName,
   })
 }
+
+export function resetPassword(email: string): Promise<AxiosResponse> {
+  return http.post('account/password/reset/', {
+    email: email,
+  })
+}
+
+export function changePassword(
+  password1: string,
+  password2: string
+): Promise<AxiosResponse> {
+  return http.post('account/password/change/', {
+    new_password1: password1,
+    new_password2: password2,
+  })
+}
