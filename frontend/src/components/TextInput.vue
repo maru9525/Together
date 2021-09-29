@@ -75,11 +75,16 @@ export default defineComponent({
           value: text,
           form: props.field,
         }
-        const res: ValidateData = validator(
-          validateParam,
-          formData['password'].value
-        )
-        emit('update:validate', res)
+        if (formData['password']) {
+          const res: ValidateData = validator(
+            validateParam,
+            formData['password'].value
+          )
+          emit('update:validate', res)
+        } else {
+          const res: ValidateData = validator(validateParam)
+          emit('update:validate', res)
+        }
       }
     }
 
@@ -138,7 +143,7 @@ export default defineComponent({
     }
   }
   &__placeholder {
-    @apply absolute top-3 left-3 text-sm text-gray-300 transition-all;
+    @apply absolute pl-1.5 top-3 left-3 text-sm text-gray-300 transition-all;
     transform: translate(0);
 
     &.active {

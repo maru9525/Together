@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404
 
 
 def login(request):
-  return render(request, 'login.html')
+    print('여기로요청')
+    return render(request, 'login.html')
 
 def detail(request, pk):
   User = get_user_model()
