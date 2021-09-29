@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ProfileHeader from '@/views/ProfileHeader.vue'
+import ProfileHeader from '@/components/ProfileHeader.vue'
 
 export default defineComponent({
   name: 'ProfileLayout',

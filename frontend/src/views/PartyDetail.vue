@@ -98,6 +98,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.container {
+  @apply max-w-3xl;
+}
+
 .party-detail-section {
   @apply grid gap-8 py-6 px-4;
 

@@ -13,6 +13,7 @@ import ContentDetail from '@/views/ContentDetail.vue'
 import PartyList from '@/views/PartyList.vue'
 import PartyDetail from '@/views/PartyDetail.vue'
 import PartyJoin from '@/views/PartyJoin.vue'
+import PartyCreate from '@/views/PartyCreate.vue'
 
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
@@ -52,6 +53,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'PartyDetail',
         component: PartyDetail,
         props: true,
+      },
+      {
+        path: 'create',
+        name: 'PartyCreate',
+        component: PartyCreate,
       },
       {
         path: ':partyId/join',
@@ -94,14 +100,16 @@ const routes: Array<RouteRecordRaw> = [
     component: ProfileLayout,
     children: [
       {
-        path: '',
+        path: ':userId',
         name: 'ProfileMain',
         component: ProfileMain,
+        props: true,
       },
       {
-        path: 'edit',
+        path: ':userId/edit',
         name: 'ProfileEdit',
         component: ProfileEdit,
+        props: true,
       },
       {
         path: 'changepassword',
