@@ -21,7 +21,10 @@
       <div class="remain-container">
         <h3>남은 자리</h3>
         <ul class="member-list">
-          <li v-for="i in 2" :key="i">
+          <li
+            v-for="i in party.totalMemberCount - party.joinMemberCount"
+            :key="i"
+          >
             <div class="image-wrapper">
               <img
                 class="member-icon"
@@ -35,7 +38,7 @@
       <div class="members-container">
         <h3>파티원</h3>
         <ul class="member-list">
-          <li v-for="i in 3" :key="i">
+          <li v-for="i in party.joinMemberCount" :key="i">
             <div class="image-wrapper">
               <img
                 class="member-icon"

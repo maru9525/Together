@@ -70,7 +70,7 @@
             :formData="inputForm"
             @update:validate="handleUpdateValidate($event)"
           />
-          <textarea placeholder="상세 정보"></textarea>
+          <textarea v-model="desc" placeholder="상세 정보"></textarea>
         </form>
       </template>
     </section>
@@ -125,7 +125,7 @@ export default defineComponent({
         errors: {},
         validators: [],
       },
-      memberCount: {
+      totalMemberCount: {
         label: '모집인원',
         type: 'number',
         value: 0,
@@ -147,13 +147,23 @@ export default defineComponent({
         errors: {},
       },
     })
-    const formIsValid = computed(() => {
+    const desc = ref<string>('')
+
+    const checkErrorFromInputForm = computed(() => {
       return Object.keys(inputForm.value).every((fieldKey) => {
         return (
           inputForm.value[fieldKey].value &&
           Object.keys(inputForm.value[fieldKey].errors).length === 0
         )
       })
+    })
+
+    const formIsValid = computed(() => {
+      return (
+        checkErrorFromInputForm.value &&
+        provider.value.length !== 0 &&
+        desc.value.length !== 0
+      )
     })
 
     const handleUpdateValidate = (data: ValidateData) => {
@@ -176,6 +186,12 @@ export default defineComponent({
     const handleSubmit = () => {
       const data: { [key: string]: Provider | string | number } = {
         provider: provider.value,
+        desc: desc.value,
+        // 하드코딩
+        host: '김병훈',
+        logoUrl: '@/assets/images/netflix.png',
+        joinMemberCount: 0,
+        originalPricePerDay: 300,
       }
       Object.keys(inputForm.value).forEach((fieldKey) => {
         data[fieldKey] = inputForm.value[fieldKey].value
@@ -183,11 +199,12 @@ export default defineComponent({
       const ok = confirm('생성하시겠습니까?')
       if (ok) {
         console.log(data)
-        router.push({ name: 'PartyList' })
+        // router.push({ name: 'PartyList' })
       }
     }
 
     return {
+      desc,
       provider,
       inputForm,
       formIsValid,

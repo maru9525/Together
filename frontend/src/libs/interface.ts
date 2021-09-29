@@ -40,24 +40,22 @@ export interface Content {
   overview: string
 }
 
+type Rule = '19세 이상' | '계정양도 불가' | '공유 금지' | '환불 불가'
+export type Provider = '넷플릭스' | '왓챠' | '웨이브' | ''
 export interface Party {
   id: number
-  provider: string
+  provider: Provider
   title: string
   desc: string
   logoUrl: string
-  member: {
-    totalCount: number
-    joinCount: number
-  }
+  totalMemberCount: number
+  joinMemberCount: number
   endDate: string
-  restDays: number
+  originalPricePerDay: number
   pricePerDay: number
-  totalCount: number
+  rules: Rule[]
 }
 
-export type Provider = '넷플릭스' | '왓챠' | '웨이브' | ''
-type Rule = '19세 이상' | '계정양도 불가' | '공유 금지' | '환불 불가'
 export type Validator = (key: string, value: string | number) => ValidateData
 
 export interface PartyFormField {
