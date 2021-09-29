@@ -164,6 +164,7 @@ pythonenv*
 backend/venv/
 backend/.idea/
 backend/*.ipynb
+0*.py
 
 # Spyder project settings
 .spyderproject
