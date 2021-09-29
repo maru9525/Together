@@ -19,14 +19,14 @@
         </div>
         <div class="details">
           <div>
-            <p class="date">{{ party.endDate }}까지 ({{ party.restDays }}일)</p>
+            <p class="date">{{ party.endDate }}까지 ({{ restDays }}일)</p>
           </div>
           <div class="price-wrapper">
             <p class="original-price">
-              {{ toCurrency(party.originalPricePerDay * party.restDays) }}
+              {{ toCurrency(party.originalPricePerDay * restDays) }}
             </p>
             <p class="price">
-              {{ toCurrency(party.pricePerDay * party.restDays) }}
+              {{ toCurrency(party.pricePerDay * restDays) }}
             </p>
           </div>
         </div>
@@ -36,21 +36,8 @@
 </template>
 
 <script lang="ts">
+import { Party } from '@/libs/interface'
 import { defineComponent, PropType } from 'vue'
-
-interface Party {
-  id: number
-  provider: string
-  title: string
-  logoUrl: string
-  member: {
-    totalCount: number
-    joinCount: number
-  }
-  endDate: string
-  restDays: number
-  pricePerDay: number
-}
 
 export default defineComponent({
   name: 'PartyListItem',
@@ -76,10 +63,14 @@ export default defineComponent({
         break
       }
     }
+    const restDays: number = Math.floor(
+      (new Date(props.party.endDate).getTime() - new Date().getTime()) /
+        (1000 * 60 * 60 * 24)
+    )
     const toCurrency = (price: number): string => {
       return `${String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`
     }
-    return { toCurrency, provider }
+    return { toCurrency, provider, restDays }
   },
 })
 </script>

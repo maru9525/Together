@@ -47,21 +47,8 @@
 </template>
 
 <script lang="ts">
+import { Party } from '@/libs/interface'
 import { defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
-
-interface Party {
-  id: number
-  provider: string
-  title: string
-  logoUrl: string
-  member: {
-    totalCount: number
-    joinCount: number
-  }
-  endDate: string
-  restDays: number
-  pricePerDay: number
-}
 
 export default defineComponent({
   name: 'ProfilePartyMine',

@@ -19,9 +19,7 @@
           </div>
           <div class="info">
             <span class="label">파티 종료일</span>
-            <span class="value">
-              {{ party.endDate }} ({{ party.restDays }}일)
-            </span>
+            <span class="value"> {{ party.endDate }} (restDays일) </span>
           </div>
           <div class="info">
             <span class="label">참가비</span>
