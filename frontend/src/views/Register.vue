@@ -6,7 +6,7 @@
           이메일 / 비밀번호
         </div>
         <div class="input-container__input-list">
-          <Textinput
+          <TextInput
             v-for="(field, key) in formData"
             v-model="field.value"
             :key="key"
@@ -19,7 +19,7 @@
         </div>
         <div class="input-container__input-label default">내 정보</div>
         <div class="input-container__input-list">
-          <Textinput
+          <TextInput
             v-for="(field, key) in infoData"
             v-model="field.value"
             :key="key"
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import Textinput from '@/components/TextInput.vue'
+import TextInput from '@/components/TextInput.vue'
 import {
   emailValidator,
   passwordSecurityValidator,
@@ -56,12 +56,14 @@ import {
 } from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Register',
-  components: { Textinput },
+  components: { TextInput },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const formData = ref<FormDataList>({
       email: {
         label: '이메일',
@@ -140,7 +142,7 @@ export default defineComponent({
 
     const submit = async () => {
       if (isValidFormData.value && isValidInfoData.value) {
-        const userEmail = formData.value['email'].value
+        const email = formData.value['email'].value
         const password = formData.value['password'].value
         const passwordConfirm = formData.value['passwordConfirm'].value
         const nickName = infoData.value['nickName'].value
@@ -150,15 +152,19 @@ export default defineComponent({
         const response = await store.dispatch('auth/register', {
           name,
           password,
-          userEmail,
+          email,
           passwordConfirm,
           phoneNumber,
           nickName,
         })
+        if (response && response.status === 201) {
+          router.push({ name: 'Login' })
+        }
       }
     }
     return {
       store,
+      router,
       isValidFormData,
       formData,
       isValidInfoData,

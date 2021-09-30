@@ -13,11 +13,13 @@ import ContentDetail from '@/views/ContentDetail.vue'
 import PartyList from '@/views/PartyList.vue'
 import PartyDetail from '@/views/PartyDetail.vue'
 import PartyJoin from '@/views/PartyJoin.vue'
+import PartyJoinConfirm from '@/views/PartyJoinConfirm.vue'
 import PartyCreate from '@/views/PartyCreate.vue'
 
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
+import ChangePassword from '@/views/ChangePassword.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -65,6 +67,12 @@ const routes: Array<RouteRecordRaw> = [
         component: PartyJoin,
         props: true,
       },
+      {
+        path: ':partyId/join/confirm',
+        name: 'PartyJoinConfirm',
+        component: PartyJoinConfirm,
+        props: true,
+      },
     ],
   },
   {
@@ -81,6 +89,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'reset-password',
         name: 'ResetPassword',
         component: ResetPassword,
+      },
+      {
+        path: 'change-password/:uid/token/:token/',
+        name: 'ChangePassword',
+        component: ChangePassword,
       },
       {
         path: 'register',

@@ -2,12 +2,7 @@
   <div class="container">
     <div class="body">
       <div class="input-container">
-        <div class="input-container__info" v-if="!resetPassword">
-          비밀번호를 찾기 위해
-          <br />
-          이메일이 필요합니다
-        </div>
-        <div class="input-container__info" v-else>
+        <div class="input-container__info">
           기존 비밀번호가 초기화 되었습니다.
           <br />
           로그인 할 새 비밀번호를 입력하세요.
@@ -30,7 +25,7 @@
           :disabled="!isValidFormData"
           @click="submit"
         >
-          임시 비밀번호 발급
+          비밀번호 변경
         </button>
       </div>
     </div>
@@ -40,19 +35,22 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import TextInput from '@/components/TextInput.vue'
-import { emailValidator } from '@/libs/validator'
+import {
+  passwordSecurityValidator,
+  passwordConfirmValidator,
+} from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
 
 export default defineComponent({
-  name: 'ResetPassword',
+  name: 'ChangePassword',
   components: {
     TextInput,
   },
   setup() {
     const store = useStore()
-    const router = useRouter()
+    const resetPassword = computed(() => store.state.auth.resetPassword)
+    const resetEmail = computed(() => store.state.auth.resetEmail)
     const isValidFormData = computed(() => {
       const keys = Object.keys(formData.value)
       return keys.every((key) => {
@@ -60,20 +58,28 @@ export default defineComponent({
         return formData.value[key].value !== '' && !errors.length
       })
     })
-
     const formData = ref<FormDataList>({
-      email: {
-        label: '이메일',
-        type: 'email',
+      password: {
+        label: '새 비밀번호',
+        type: 'password',
         value: '',
-        placeholder: '복구할 이메일을 입력하세요.',
-        validator: emailValidator,
+        placeholder: '새 비밀번호',
+        validator: passwordSecurityValidator,
+        errors: {},
+      },
+      passwordConfirm: {
+        label: '새 비밀번호 확인',
+        type: 'password',
+        value: '',
+        placeholder: '새 비밀번호 확인',
+        validator: passwordConfirmValidator,
         errors: {},
       },
     })
 
     const handleUpdateValidate = (data: ValidateData) => {
       const { key, type, status, message } = data
+      // message와 같이 undefined로 올 수도 있는 경우, 체크를 잘 해주어야 함
       if (!status && message) {
         formData.value[key].errors[type] = message
       } else {
@@ -83,16 +89,19 @@ export default defineComponent({
 
     const submit = async () => {
       if (isValidFormData.value) {
-        // 비밀번호 임시발급
-        const email = formData.value['email'].value
-        const response = await store.dispatch('auth/resetPassword', { email })
-        if (response && response.status === 201) {
-          router.push({ name: 'ContentList' })
-        }
+        const password = formData.value['password'].value
+        const passwordConfirm = formData.value['passwordConfirm'].value
+        await store.dispatch('auth/changePassword', {
+          password,
+          passwordConfirm,
+        })
       }
     }
+
     return {
       store,
+      resetEmail,
+      resetPassword,
       formData,
       isValidFormData,
       handleUpdateValidate,
