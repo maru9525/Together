@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-# from django.contrib import admin
+from django.contrib import admin
 from django.urls import (include, path)
 import sign.views
 
@@ -41,7 +41,7 @@ schema_view_v1 = get_schema_view(
 )
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')), # SNS 
     path('account/', include('sign.urls')), # User
     path('', sign.views.login),

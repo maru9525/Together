@@ -87,7 +87,7 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = 'sign.User'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_USERNAME_REQUIRED = False # 유저네임은 없어도 됨
+ACCOUNT_USERNAME_REQUIRED = False # 유저네임은 없어도 됨
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
@@ -97,7 +97,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # 로그아웃 후 리디렉션 할 페이지
 ACCOUNT_LOGOUT_ON_GET = True # 로그아웃 버튼 클릭 시 자동 로그아웃
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'sign.serializers.CustomUserDetailSerializer',
+    'LOGIN_SERIALIZER': 'sign.serializers.UserLoginSerializer',
+    'USER_DETAILS_SERIALIZER': 'sign.serializers.UserDetailSerializer',
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {

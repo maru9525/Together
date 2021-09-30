@@ -3,8 +3,16 @@ from django.db.models import fields
 from .models import User
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
-# from dj_rest_auth.serializers import UserDetailsSerializer
-# from dj_rest_auth.serializers import LoginSerializer
+from dj_rest_auth.serializers import (
+  UserDetailsSerializer, LoginSerializer
+)
+
+class UserLoginSerializer(LoginSerializer):
+
+  class Meta:
+    model = User
+    fields = ['email', 'password',]
+
 
 class UserRegisterSerializer(RegisterSerializer):
   phone_number = serializers.CharField(max_length=20)
@@ -13,52 +21,38 @@ class UserRegisterSerializer(RegisterSerializer):
 
   class Meta:
     model = User
-    fields = ['name', 'email', 'password', 'password2', 'phone_number', 'nick_name',]
+    fields = ['username', 'email', 'password', 'password2', 'phone_number', 'nick_name',]
     extra_kwarge= {
       'password': {
         'write_only': True
       }
     }
-  def save(self):
+  def save(self, request):
     user = User(
-      name = self.validated_data['name'],
+      username = self.validated_data['username'],
       email = self.validated_data['email'],
       nick_name = self.validated_data['nick_name'],
       phone_number = self.validated_data['phone_number'],
-      is_active = self.validated_data['is_active'],
-      is_admin = self.validated_data['is_admin'],
     )
-    password = self.validated_data['password']
+    password1 = self.validated_data['password1']
     password2 = self.validated_data['password2']
 
-    if password != password2:
+    if password1 != password2:
       raise serializers.ValidationError({'password': 'Passwords must match.'})
-    user.set_password(password)
+    user.set_password(password1)
     user.save()
     return user
 
 
-# class CustomRegisterSerializer(RegisterSerializer):
-#   phone_number = serializers.CharField(max_length=30)
-#   nickname = serializers.CharField(max_length=100)
-
-#   @transaction.atomic
-#   def save(self, request):
-#     user = super().save(request)
-#     user.phone_number = self.data.get('phone_number')
-#     user.nickname = self.data.get('nickname')
-#     user.save()
-#     return user
-
-# class CustomUserDetailSerializer(UserDetailsSerializer):
+class UserDetailSerializer(UserDetailsSerializer):
   
-#   class Meta:
-#     model = User
-#     fields = (
-#       'pk',
-#       'email',
-#       'nickname',
-#       'username',
-#       'phone_number',
-#     )
-#     read_only_fields = ('pk', 'email','username',)
+  class Meta:
+    model = User
+    fields = (
+      'id',
+      'email',
+      'nick_name',
+      'username',
+      'phone_number',
+    )
+    read_only_fields = ('id', 'email','username',)

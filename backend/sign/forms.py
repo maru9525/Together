@@ -12,7 +12,7 @@ class UserCreationForm(forms.ModelForm):
   class Meta:
     model = User
     fields = (
-      'name',
+      'username',
       'email',
       'nick_name',
       'phone_number'
@@ -36,7 +36,7 @@ class UserChangeForm(forms.ModelForm):
   class Meta:
     model = User
     fields = (
-      'name',
+      'username',
       'email',
       'nick_name',
       'phone_number'
