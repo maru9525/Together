@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 from django.http import (HttpResponse, Http404)
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from rest_framework import status
 from rest_framework.decorators import renderer_classes, api_view
@@ -11,6 +11,7 @@ from rest_framework.response import Response
 
 from .models import (Movie, Review, Genre, Provider)
 from .serializers import (MovieSerializer, ReviewSerializer, GenreSerializer, ProviderSerializer)
+
 
 # @api_view(['GET'])
 # @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
@@ -105,7 +106,7 @@ def post(self, request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# Review CRUD
+# Review APIs
 class ReviewView(GenericAPIView):
     queryset = Review.objects.all()  # Generic Api View는 반드시 포함 해야함
     serializer_class = ReviewSerializer
@@ -144,17 +145,25 @@ class ReviewDetailView(GenericAPIView):
             raise Http404
 
     def get(self, request, pk):
-        review = self.get_object_review(pk)
-        serializer = ReviewSerializer(review)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            review = self.get_object_review(pk)
+            serializer = ReviewSerializer(review)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Review.DoesNotExist:
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk, format=None):
-        review = self.get_object_review(pk)
-        serializer = ReviewSerializer(review, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            review = self.get_object_review(pk)
+            serializer = ReviewSerializer(review, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        except Review.DoesNotExist:
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request, pk, format=None):
         review = self.get_object_review(pk)
@@ -163,3 +172,10 @@ class ReviewDetailView(GenericAPIView):
             return Response(status=status.HTTP_200_OK)
         except Review.DoesNotExist:
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def get_movie(request, pk):
+    movie = get_object_or_404(Movie, id=pk)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)

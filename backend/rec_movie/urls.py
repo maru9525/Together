@@ -10,6 +10,9 @@ urlpatterns = [
     path('convert-genre/', views.convert_genre_data),
     path('convert-provider/', views.convert_provider_data),
 
+    # movie
+    path('movie/<int:pk>/', views.get_movie),
+
     # review
     path('review/', views.ReviewView.as_view()),
     path('review/<int:pk>/', views.ReviewDetailView.as_view()),

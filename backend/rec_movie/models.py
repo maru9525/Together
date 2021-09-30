@@ -9,7 +9,7 @@ class Movie(models.Model):
     overview = models.TextField()
     release_date = models.DateField()
     poster_path = models.CharField(max_length=40)    # https://image.tmdb.org/t/p/original/[poster_path]
-    genres = models.ManyToManyField('Genre')
+    genres = models.ManyToManyField('Genre')    # many to many로 genre와 연결하였다. related_name은 자동으로 'genres'
 
 
 class Genre(models.Model):

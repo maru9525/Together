@@ -26,7 +26,7 @@ from rest_framework.permissions import AllowAny
 schema_url_patterns = [
     path('account/', include('sign.urls')),
     path('accounts/', include('allauth.urls')),
-    path('movie/', include('rec_movie.urls')),
+    path('movies/', include('rec_movie.urls')),
     ]
 
 schema_view_v1 = get_schema_view(
@@ -46,7 +46,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')), # SNS 
     path('account/', include('sign.urls')), # User
-    path('movie/', include('rec_movie.urls')),  # Movie contents
+    path('movies/', include('rec_movie.urls')),  # Movie contents
 
     # Swagger 연동
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
