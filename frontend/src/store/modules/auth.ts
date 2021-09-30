@@ -45,8 +45,15 @@ export const auth: Module<authModule, RootState> = {
       state.accessToken = accessToken
       state.refreshToken = refreshToken
     },
+    REMOVE_TOKEN(state) {
+      state.accessToken = ''
+      state.refreshToken = ''
+    },
     SET_USER(state: authModule, user: User) {
       state.user = user
+    },
+    REMOVE_USER(state) {
+      delete state.user
     },
     setResetPassword(state: authModule): void {
       state.resetPassword = true
@@ -88,6 +95,13 @@ export const auth: Module<authModule, RootState> = {
         // 에러가 여러 개일 경우, 맨 앞의 에러 하나만 띄우도록 한다.
         alert(err.response.data[errorKeys[0]])
       }
+    },
+    logout({ commit }) {
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
+      localStorage.removeItem('user')
+      commit('REMOVE_TOKEN')
+      commit('REMOVE_USER')
     },
     async register(context, params) {
       try {
@@ -131,5 +145,9 @@ export const auth: Module<authModule, RootState> = {
       }
     },
   },
-  getters: {},
+  getters: {
+    isLogin(state) {
+      return state.accessToken !== ''
+    },
+  },
 }
