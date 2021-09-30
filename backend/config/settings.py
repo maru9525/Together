@@ -84,10 +84,10 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-AUTH_USER_MODEL = 'sign.CustomUser'
+AUTH_USER_MODEL = 'sign.User'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False # 유저네임은 없어도 됨
+# ACCOUNT_USERNAME_REQUIRED = False # 유저네임은 없어도 됨
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
@@ -101,7 +101,7 @@ REST_AUTH_SERIALIZERS = {
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'sign.serializers.CustomRegisterSerializer',
+    'REGISTER_SERIALIZER': 'sign.serializers.UserRegisterSerializer',
 }
 
 REST_USE_JWT = True
