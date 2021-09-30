@@ -149,5 +149,8 @@ export const auth: Module<authModule, RootState> = {
     isLogin(state) {
       return state.accessToken !== ''
     },
+    getUserPK(state) {
+      return state.user?.pk
+    },
   },
 }
