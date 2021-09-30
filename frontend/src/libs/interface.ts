@@ -1,7 +1,3 @@
-export interface FormDataList {
-  [key: string]: FormDataListItem
-}
-
 export interface FormDataListItem {
   label: string
   type: string
@@ -12,6 +8,10 @@ export interface FormDataListItem {
   }
   validator?: (param: ValidateParam, password?: string) => ValidateData
   message?: string
+}
+
+export interface FormDataList {
+  [key: string]: FormDataListItem
 }
 
 export interface ValidateParam {
@@ -28,18 +28,64 @@ export interface ValidateData {
   message?: string
 }
 
+export interface Content {
+  id: number
+  title: string
+  posterPath: string
+  simRate: number
+  providers: string[]
+  firstAirYear: number
+  rated: string
+  seasons: number
+  overview: string
+}
+
+export type Provider = '넷플릭스' | '왓챠' | '웨이브' | ''
 export interface Party {
   id: number
-  provider: string
   title: string
   desc: string
-  logoUrl: string
-  member: {
-    totalCount: number
-    joinCount: number
-  }
+  memberLimit: number
   endDate: string
-  restDays: number
   pricePerDay: number
-  totalCount: number
+  providerName: Provider
+  providerLogoUrl: string
+  providerPricePerDay: number
+  hostName: string
+  membersCount: number
+}
+
+export type Validator = (key: string, value: string | number) => ValidateData
+
+export interface PartyFormField {
+  label: string
+  type: 'text' | 'number' | 'date'
+  value: string | number
+  placeholder?: string
+  errors: {
+    [key: string]: string
+  }
+  validators?: Validator[]
+  message?: string
+}
+export interface PartyForm {
+  [key: string]: PartyFormField
+}
+
+export interface InputEvent<T = Element> {
+  relatedTarget: EventTarget | null
+  target: EventTarget & T
+}
+
+// User
+type SNSProvider = 'Google' | 'Naver' | null
+export interface User {
+  id: number
+  name: string
+  nickName: string
+  phoneNumber: string
+  email: string
+  password: string
+  snsProvider: SNSProvider
+  snsId: string | null
 }

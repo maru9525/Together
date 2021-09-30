@@ -52,5 +52,5 @@ urlpatterns = [
     url(r'^swagger/$', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-
+    path('movie/', include('rec_movie.urls')),  # Movie contents
 ]
