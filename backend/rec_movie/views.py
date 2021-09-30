@@ -1,12 +1,20 @@
 import json
 import pandas as pd
-from django.http import HttpResponse
+from django.http import (HttpResponse, Http404)
 from django.shortcuts import render
+
+from rest_framework import status
+from rest_framework.decorators import renderer_classes, api_view
+from rest_framework.generics import GenericAPIView
+from rest_framework_swagger import renderers
+from rest_framework.response import Response
+
 from .models import (Movie, Review, Genre, Provider)
+from .serializers import (MovieSerializer, ReviewSerializer, GenreSerializer, ProviderSerializer)
 
-
-# Create your views here.
-def get_movie_data(self):
+# @api_view(['GET'])
+# @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def convert_movie_data(self):
     movie_id_set = set()    # 영화 데이터 중 movie_id를 저장할 set
     with open('./rec_movie/data/movies_kr.json', 'r') as f:
         data = json.loads(f.read())
@@ -30,7 +38,7 @@ def get_movie_data(self):
     return HttpResponse('Success convert json to database')
 
 
-def get_review_data(request):
+def convert_review_data(request):
     with open('./rec_movie/data/movie_reviews.json', 'r') as f:
         data = json.loads(f.read())
     df = pd.json_normalize(data)
@@ -44,7 +52,7 @@ def get_review_data(request):
     return HttpResponse('Success convert json to database')
 
 
-def get_genre_data(self):
+def convert_genre_data(self):
     with open('./rec_movie/data/movies_genre.json', 'r') as f:
         data = json.loads(f.read())
     df = pd.json_normalize(data)
@@ -55,7 +63,7 @@ def get_genre_data(self):
     return HttpResponse('Success convert json to database')
 
 
-def get_provider_data(self):
+def convert_provider_data(self):
     with open('./rec_movie/data/movies_kr.json', 'r') as f:
         data = json.loads(f.read())
 
@@ -87,3 +95,71 @@ def provider_list_to_set(p_set, p_list):
     size = len(p_list)
     for idx in range(0, size):
         p_set.add(p_list[idx]['provider_name'])
+
+
+def post(self, request):
+    serializer = ReviewSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Review CRUD
+class ReviewView(GenericAPIView):
+    queryset = Review.objects.all()  # Generic Api View는 반드시 포함 해야함
+    serializer_class = ReviewSerializer
+
+    def post(self, request, format=None):
+        """
+        리뷰를 등록하기 위한 API입니다.
+
+        ---
+        # Parameters
+            - user_id : 유지 id(닉네임)
+            - rating : 평가 점수 (0 ~ 10)
+            - movie_id : 연계된 movie. movie의 primary key와 연결해야한다.
+
+        responseMessages:
+            - code: 201
+              message: Success Create Album
+
+        """
+
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ReviewDetailView(GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get_object_review(self, pk):
+        try:
+            return Review.objects.get(id=pk)
+        except Review.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        review = self.get_object_review(pk)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk, format=None):
+        review = self.get_object_review(pk)
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        review = self.get_object_review(pk)
+        review.delete()
+        try:
+            return Response(status=status.HTTP_200_OK)
+        except Review.DoesNotExist:
+            return Response(status=status.HTTP_204_NO_CONTENT)
