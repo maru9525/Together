@@ -19,6 +19,7 @@ export default defineComponent({
         ? route.matched[0].name !== 'AuthLayout'
         : true
     })
+
     return { route, showBottomNav }
   },
 })

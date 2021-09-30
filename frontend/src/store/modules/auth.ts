@@ -1,23 +1,31 @@
+import { AxiosResponse } from 'axios'
 import * as authApi from '@/api/auth'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
 
+interface User {
+  pk: number
+  email: string
+  nickname: string
+  username: string
+  phone_number: string
+}
+
+interface Token {
+  accessToken: string
+  refreshToken: string
+}
 interface authModule {
   accessToken: string
   refreshToken: string
   resetPassword: boolean
+  user?: User
 }
 
 interface loginResponseData {
   access_token: string
   refresh_token: string
-  user: {
-    pk: number
-    email: string
-    nickname: string
-    username: string
-    phone_number: string
-  }
+  user: User
 }
 
 export const auth: Module<authModule, RootState> = {
@@ -28,10 +36,17 @@ export const auth: Module<authModule, RootState> = {
     resetPassword: false,
   },
   mutations: {
-    setLoginData(state: authModule, loginData: loginResponseData): void {
-      state.accessToken = loginData.access_token
-      state.refreshToken = loginData.refresh_token
-      console.log('auth modules: login mutation success')
+    // setLoginData(state: authModule, loginData: loginResponseData): void {
+    //   state.accessToken = loginData.access_token
+    //   state.refreshToken = loginData.refresh_token
+    //   console.log('auth modules: login mutation success')
+    // },
+    SET_TOKEN(state: authModule, { accessToken, refreshToken }: Token) {
+      state.accessToken = accessToken
+      state.refreshToken = refreshToken
+    },
+    SET_USER(state: authModule, user: User) {
+      state.user = user
     },
     setResetPassword(state: authModule): void {
       state.resetPassword = true
@@ -49,10 +64,23 @@ export const auth: Module<authModule, RootState> = {
   actions: {
     async login({ commit }, params) {
       try {
-        const response = await authApi.login(params.email, params.password)
+        const response: AxiosResponse<loginResponseData> = await authApi.login(
+          params.email,
+          params.password
+        )
         if (response.status === 200) {
-          commit('setLoginData', response.data)
+          // commit('setLoginData', response.data)
           alert('auth modules: login success')
+          commit('SET_TOKEN', {
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+          })
+          commit('SET_USER', response.data.user)
+          localStorage.setItem('accessToken', response.data.access_token)
+          localStorage.setItem('refreshToken', response.data.refresh_token)
+          // 임시
+          localStorage.setItem('user', JSON.stringify(response.data.user))
+          // 임시
         }
         return response
       } catch (err: any) {
