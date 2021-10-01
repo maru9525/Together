@@ -6,6 +6,13 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import (
   UserDetailsSerializer, LoginSerializer
 )
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class UserSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = User
+    fields = '__all__'
 
 class UserLoginSerializer(LoginSerializer):
 
@@ -56,3 +63,15 @@ class UserDetailSerializer(UserDetailsSerializer):
       'phone_number',
     )
     read_only_fields = ('id', 'email','username',)
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+  @classmethod
+  def get_token(cls, user):
+    token = super().get_token(user)
+
+    token['id']= user.id
+    token['email'] = user.email
+    token['username'] = user.username
+
+    return token

@@ -36,7 +36,7 @@ class User(AbstractBaseUser):
   phone_number = models.CharField(max_length=20)
   is_active = models.BooleanField(default=True)
   is_admin = models.BooleanField(default=False)
-
+  
   objects = UserManager()
 
   USERNAME_FIELD  = 'email'
