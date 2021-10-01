@@ -34,23 +34,18 @@ export const auth: Module<authModule, RootState> = {
     refreshToken: '',
   },
   mutations: {
-    // setLoginData(state: authModule, loginData: loginResponseData): void {
-    //   state.accessToken = loginData.access_token
-    //   state.refreshToken = loginData.refresh_token
-    //   console.log('auth modules: login mutation success')
-    // },
     SET_TOKEN(state: authModule, { accessToken, refreshToken }: Token) {
       state.accessToken = accessToken
       state.refreshToken = refreshToken
     },
-    REMOVE_TOKEN(state) {
+    REMOVE_TOKEN(state: authModule) {
       state.accessToken = ''
       state.refreshToken = ''
     },
     SET_USER(state: authModule, user: User) {
       state.user = user
     },
-    REMOVE_USER(state) {
+    REMOVE_USER(state: authModule) {
       delete state.user
     },
   },
@@ -62,7 +57,6 @@ export const auth: Module<authModule, RootState> = {
           params.password
         )
         if (response.status === 200) {
-          // commit('setLoginData', response.data)
           alert('auth modules: login success')
           commit('SET_TOKEN', {
             accessToken: response.data.access_token,
@@ -107,7 +101,7 @@ export const auth: Module<authModule, RootState> = {
         alert(error.response.data[errorKeys[0]])
       }
     },
-    async resetPassword({ commit }, params) {
+    async resetPassword(context, params) {
       try {
         const response = await authApi.resetPassword(params.email)
         if (response.status === 200) {
@@ -118,7 +112,7 @@ export const auth: Module<authModule, RootState> = {
         alert(error.response.data)
       }
     },
-    async resetPasswordConfirm({ commit }, params) {
+    async resetPasswordConfirm(context, params) {
       try {
         const response = await authApi.resetPasswordConfirm(
           params.uid,
