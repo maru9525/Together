@@ -114,8 +114,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -133,6 +131,7 @@ SIMPLE_JWT = {
 SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm', 
 }
+
 # Password Reset Email Host
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
@@ -155,7 +154,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
