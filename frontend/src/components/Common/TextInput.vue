@@ -96,9 +96,11 @@ export default defineComponent({
 
     const handleInput = (event: InputEvent<HTMLInputElement>) => {
       // modelValue를 먼저 업데이트 해 줘야 validate가 정상적인 로직으로 진행된다.
-      emit('update:modelValue', event.target.value)
+      const value =
+        props.field.type === 'number' ? +event.target.value : event.target.value
+      emit('update:modelValue', value)
       if (props.field?.errors) {
-        validate(event.target.value)
+        validate(value)
       }
     }
 
@@ -131,20 +133,18 @@ export default defineComponent({
         @apply border-indigo-900;
       }
 
-      /* &.active {
-        @apply border-indigo-900;
-      } */
       &.isError {
         @apply border-red-500;
       }
     }
 
     .placeholder {
-      @apply absolute top-1/2 left-4 text-sm font-medium text-gray-300 transition-all cursor-text;
-      transform: translateY(-50%);
+      @apply absolute top-3 left-4 p-1 text-sm font-medium text-gray-300 transition-all cursor-text bg-white rounded-md;
+      transform: translateY(0);
 
       &.active {
-        @apply bg-white top-0 rounded-md text-sm text-indigo-900 p-1 z-10;
+        @apply text-sm text-indigo-900;
+        transform: translateY(-100%);
       }
       &.isError {
         @apply text-red-500;

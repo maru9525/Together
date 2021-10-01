@@ -8,7 +8,6 @@ urlpatterns = [
     path('convert-movie/', views.convert_movie_data),
     path('convert-review/', views.convert_review_data),
     path('convert-genre/', views.convert_genre_data),
-    path('convert-provider/', views.convert_provider_data),
 
     # movie
     path('movie/<int:pk>/', views.get_movie),
