@@ -7,7 +7,7 @@
       <span>프로필</span>
     </router-link>
     <router-link
-      :to="{ name: 'ProfileParty' }"
+      :to="{ name: 'ProfileParty', params: { userId: 1 } }"
       :class="{ active: partyactive }"
       class="profile-main__navbar__button--space"
     >
@@ -25,13 +25,13 @@ export default defineComponent({
     const route = useRoute()
     // console.log(route.path)
 
-    const partyactive = ref<boolean>(route.path.includes('myparty'))
+    const partyactive = ref<boolean>(route.path.includes('party'))
 
     watch(
       () => route.path,
       (newroute) => {
         // console.log(newroute)
-        partyactive.value = newroute.includes('myparty')
+        partyactive.value = newroute.includes('party')
       }
     )
     return { partyactive }
