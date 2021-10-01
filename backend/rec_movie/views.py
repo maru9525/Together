@@ -87,12 +87,12 @@ def convert_review_data(request):
 def convert_genre_data(self):
     Genre.objects.all().delete()
 
-    with open('./rec_movie/data/movies_genre.json', 'r') as f:
+    with open('./rec_movie/data/movies_genre.json', 'r', encoding='UTF-8') as f:
         data = json.loads(f.read())
     df = pd.json_normalize(data)
 
     for idx, row in df.iterrows():
-        Genre.objects.create(genre_id=row['pk'], name=row['fields.name'])
+        Genre.objects.create(genre_id=row['pk'], name=row['fields.name'], k_name=row['fields.k-name'])
 
     return HttpResponse('Success convert json to database')
 
@@ -169,4 +169,11 @@ class ReviewDetailView(GenericAPIView):
 def get_movie(request, pk):
     movie = get_object_or_404(Movie, id=pk)
     serializer = MovieSerializer(movie)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_genre(self):
+    genre = Genre.objects.all()
+    serializer = GenreSerializer(genre, many=True)
     return Response(serializer.data)

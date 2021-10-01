@@ -15,4 +15,7 @@ urlpatterns = [
     # review
     path('review/', views.ReviewView.as_view()),
     path('review/<int:pk>/', views.ReviewDetailView.as_view()),
+
+    # genre
+    path('genre/', views.get_genre),
 ]
