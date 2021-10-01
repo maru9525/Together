@@ -29,6 +29,7 @@ class Migration(migrations.Migration):
                 ('overview', models.TextField()),
                 ('release_date', models.DateField()),
                 ('poster_path', models.CharField(max_length=40)),
+                ('genres', models.ManyToManyField(to='rec_movie.Genre')),
             ],
         ),
         migrations.CreateModel(
@@ -46,14 +47,6 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('provider_name', models.CharField(max_length=20)),
                 ('movie_id', models.ForeignKey(db_column='movie_id', default='', on_delete=django.db.models.deletion.CASCADE, related_name='provider', to='rec_movie.movie')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='MovieGenre',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('genre_idx', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='rec_movie.genre')),
-                ('movie_idx', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='rec_movie.movie')),
             ],
         ),
     ]

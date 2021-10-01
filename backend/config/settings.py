@@ -130,7 +130,7 @@ SIMPLE_JWT = {
 SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm',
 }
-# Password Reset Email Host 
+# Password Reset Email Host
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")

@@ -2,7 +2,7 @@ import json
 import pandas as pd
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import (Movie, Review, Genre, MovieGenre, Provider)
+from .models import (Movie, Review, Genre, Provider)
 
 
 # Create your views here.
@@ -20,9 +20,13 @@ def get_movie_data(self):
         # release_date가 없는 영화가 1개 있다.
         if row['fields.release_date'] == '' or row['fields.release_date'] is None or row['fields.poster_path'] is None:
             continue
-        Movie.objects.create(movie_id=row['pk'], original_title=row['fields.original_title'],
-                             overview=row['fields.overview'], release_date=row['fields.release_date'],
-                             poster_path=row['fields.poster_path'])
+        movie = Movie.objects.create(movie_id=row['pk'], original_title=row['fields.original_title'],
+                                     overview=row['fields.overview'], release_date=row['fields.release_date'],
+                                     poster_path=row['fields.poster_path'])
+        for genre_id in row['fields.genre_ids']:
+            genre = Genre.objects.get(genre_id=genre_id)
+            movie.genres.add(genre)
+
     return HttpResponse('Success convert json to database')
 
 
@@ -78,6 +82,7 @@ def get_provider_data(self):
     return HttpResponse('Success convert json to database')
 
 
+# row['fields.provider']에는 중복되는 provider가 있으므로, set을 통해 중복을 제거해준다.
 def provider_list_to_set(p_set, p_list):
     size = len(p_list)
     for idx in range(0, size):
