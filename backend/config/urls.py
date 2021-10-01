@@ -48,10 +48,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('party/', include('party.urls')), # Party
     path('accounts/', include('allauth.urls')), # SNS
-    path('accounts/allauth/', include('allauth.urls')),
     path('account/', include('sign.urls')), # User
     path('billing/', include('billing.urls')),
-    path('', sign.views.login),
+   
     
 
     # Swagger 연동

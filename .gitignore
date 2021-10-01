@@ -164,8 +164,8 @@ pythonenv*
 backend/venv/
 backend/.idea/
 backend/*.ipynb
-# migrations
 0*.py
+backend/secrets.json
 
 # Spyder project settings
 .spyderproject

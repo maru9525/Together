@@ -2,15 +2,10 @@
   <div class="container">
     <div class="body">
       <div class="input-container">
-        <div class="input-container__info" v-if="!resetPassword">
+        <div class="input-container__info">
           비밀번호를 찾기 위해
           <br />
           이메일이 필요합니다
-        </div>
-        <div class="input-container__info" v-else>
-          기존 비밀번호가 초기화 되었습니다.
-          <br />
-          로그인 할 새 비밀번호를 입력하세요.
         </div>
         <div class="input-container__input-list">
           <TextInput
@@ -30,7 +25,7 @@
           :disabled="!isValidFormData"
           @click="submit"
         >
-          임시 비밀번호 발급
+          비밀번호 초기화 메일 발송
         </button>
       </div>
     </div>
@@ -43,6 +38,7 @@ import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { FormDataList, ValidateData } from '@/libs/interface'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'ResetPassword',
@@ -51,6 +47,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const isValidFormData = computed(() => {
       const keys = Object.keys(formData.value)
       return keys.every((key) => {
@@ -83,7 +80,7 @@ export default defineComponent({
       if (isValidFormData.value) {
         // 비밀번호 임시발급
         const email = formData.value['email'].value
-        const response = await store.dispatch('auth/resetPassword', { email })
+        await store.dispatch('auth/resetPassword', { email })
       }
     }
     return {
