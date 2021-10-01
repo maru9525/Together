@@ -53,25 +53,23 @@
           >이메일로 회원가입하기
         </router-link>
         <!-- Social Login area -->
-        <hr class="my-4" />
-        <button
-          class="input-container__social-btn kakao"
-          @click="openSocialLogin('kakao')"
-        >
-          카카오로 시작하기
-        </button>
-        <button
-          class="input-container__social-btn google"
-          @click="openSocialLogin('kakao')"
-        >
-          구글로 시작하기
-        </button>
-        <button
-          class="input-container__social-btn naver"
-          @click="openSocialLogin('naver')"
-        >
-          네이버로 시작하기
-        </button>
+        <hr class="my-1" />
+        <p class="text-center text-gray-600 text-xs font-medium">
+          SNS 계정으로 로그인
+        </p>
+        <div class="input-container__social-btn-group">
+          <button
+            v-for="(provider, key) in snsProviders"
+            :class="provider.name"
+            :key="key"
+            @click="handleSocialLoginClick(provider.name)"
+          >
+            <img
+              :src="require(`@/assets/images/${provider.name}_login.png`)"
+              :alt="provider.name"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -82,7 +80,7 @@ import { computed, defineComponent, ref } from 'vue'
 import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
-import { FormDataList, ValidateData } from '@/libs/interface'
+import { FormDataList, ValidateData, SNSProviders } from '@/libs/interface'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -93,6 +91,18 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const router = useRouter()
+
+    const snsProviders = ref<SNSProviders>({
+      google: {
+        name: 'google',
+      },
+      naver: {
+        name: 'naver',
+      },
+      kakao: {
+        name: 'kakao',
+      },
+    })
 
     const isSaveEmail = ref<boolean>(
       localStorage.getItem('email') ? true : false
@@ -157,23 +167,24 @@ export default defineComponent({
       }
     }
 
-    const openSocialLogin = async (platform: string) => {
-      window.open(
-        `http:localhost:8000/accounts/${platform}/login/callback/`,
-        '_blank',
-        'location=yes, width=520, height=570, scrollbars=yes,'
-      )
+    const handleSocialLoginClick = async (platform: string) => {
+      // Google Oauth
+      if (platform === 'google') {
+        //
+        console.log('google')
+      }
     }
 
     return {
       store,
       router,
+      snsProviders,
       isSaveEmail,
       isValidFormData,
       formData,
       handleUpdateValidate,
       submit,
-      openSocialLogin,
+      handleSocialLoginClick,
     }
   },
 })
@@ -202,17 +213,20 @@ export default defineComponent({
     &__sub-option {
       @apply flex flex-row justify-between;
     }
-    &__social-btn {
-      @apply w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
+    &__social-btn-group {
+      @apply flex justify-around w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
+      button {
+        @apply rounded-md w-14 h-14;
 
-      &.kakao {
-        @apply bg-yellow-400;
-      }
-      &.google {
-        @apply bg-gray-100;
-      }
-      &.naver {
-        @apply bg-green-500;
+        &.kakao {
+          @apply bg-yellow-400;
+        }
+        &.google {
+          @apply bg-gray-100;
+        }
+        &.naver {
+          @apply bg-green-500;
+        }
       }
     }
   }
