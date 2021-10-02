@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os, json
+import sys
 from pathlib import Path
 import datetime
 from django.core.exceptions import ImproperlyConfigured
@@ -26,6 +27,9 @@ secret_file = os.path.join(BASE_DIR, 'secrets.json')
 with open(secret_file) as f:
     secrets = json.loads(f.read())
 
+for key, value in secrets.items():
+    setattr(sys.modules[__name__], key, value)
+
 def get_secret(setting, secrets=secrets):
     try:
         return secrets[setting]
@@ -35,14 +39,12 @@ def get_secret(setting, secrets=secrets):
 
 SECRET_KEY = get_secret("SECRET_KEY")
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,23 +54,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # CORS
     'corsheaders',
-
-    'drf_yasg',  # drf_yasg(swagger)
+    # drf_yasg(swagger)
+    'drf_yasg',
     # user authentioation basic module
     'django.contrib.sites',
+    # django-allauth, social OAuth
     'allauth',
-    'allauth.socialaccount', # 소셜 가입계정 관리
     'allauth.account',
-
-    # provider
+    'allauth.socialaccount', # 소셜 가입계정 관리
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
-
+    'allauth.socialaccount.providers.github',
     # app
     'sign.apps.SignConfig',
     'rec_movie.apps.RecConfig',
-
     # DRF
     'rest_framework',
     'rest_framework.authtoken',

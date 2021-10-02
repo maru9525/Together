@@ -42,15 +42,15 @@ schema_view_v1 = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')), # SNS 
+    path('accounts/', include('allauth.urls')), # SNS
+    path('accounts/', include('dj_rest_auth.urls')),
     path('account/', include('sign.urls')), # User
     path('', sign.views.login),
-    
 
     # Swagger 연동
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
-    path('movie/', include('rec_movie.urls')),  # Movie contents
+    # Movie contents
+    path('movie/', include('rec_movie.urls')),
 ]
