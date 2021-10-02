@@ -28,8 +28,9 @@ from rest_framework.permissions import AllowAny
 schema_url_patterns = [
     path('account/', include('sign.urls')),
     path('party/', include('party.urls')),
-    # path('accounts/', include('allauth.urls')),
     path('billing/', include('billing.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('movies/', include('rec_movie.urls')),
 ]
 
 schema_view_v1 = get_schema_view(
@@ -50,13 +51,12 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')), # SNS
     path('account/', include('sign.urls')), # User
     path('billing/', include('billing.urls')),
-   
-    
+    path('movies/', include('rec_movie.urls')),  # Movie contents
 
     # Swagger 연동
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    path('movie/', include('rec_movie.urls')),  # Movie contents
+
 ]
