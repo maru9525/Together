@@ -10,5 +10,5 @@ class PartySerializer(serializers.ModelSerializer):
   class Meta:
     model = Party
     fields = '__all__'
-    read_only_field = ('host',)
+    read_only_field = ('host', 'payments')
    

@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from .serializers import PartySerializer
 from .models import Party
+from sign.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.http import Http404, response
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
-
+import json
+from django.http import JsonResponse
 
 class PartyView(generics.GenericAPIView):
   queryset = Party.objects.all()
@@ -23,16 +25,31 @@ class PartyView(generics.GenericAPIView):
           - title : 제목
           - personnel : 모집 인원
           - email : 이메일
-          - password : 비밀번호
+          - password : 비밀번호 
           - party_start_date : 시작일
           - party_end_date : 종료일
           - price_per_day : 이용 요금
           - detail_content : 상세 내용
     """
+   
     partys = Party.objects.all()
     serializer = PartySerializer(partys, many=True)
-    return Response(serializer.data) 
+    return Response(serializer.data)
+  
+
   def post(self, request):
+    # try:
+    #   data = json.loads(request.body)
+    #   party_id = data['id']
+    #   nick_name = data['nick_name']
+    #   user = request.user
+    #   nick_name = User.objects.get(nick_name=nick_name)
+
+    #   party = Party.objects.get(id=)
+    #   Party.objects.create(id=user.id, nick_name=nick_name)
+    #   return JsonResponse({'result': 'SUCESS'}, status=200)
+    # except KeyError:
+    #   return JsonResponse({'message': 'KEY_ERROR'}, status=400)
     """
        Party Create API
 
@@ -48,6 +65,7 @@ class PartyView(generics.GenericAPIView):
           - price : 이용 요금
           - detail_content : 상세 내용
     """
+    
     serializer = PartySerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
