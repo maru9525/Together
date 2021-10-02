@@ -22,7 +22,7 @@ export function register(
     password1: password1,
     password2: password2,
     phone_number: phoneNumber,
-    nickname: nickName,
+    nick_name: nickName,
   })
 }
 
