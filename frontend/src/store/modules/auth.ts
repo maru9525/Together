@@ -70,22 +70,25 @@ export const auth: Module<authModule, RootState> = {
       commit('REMOVE_TOKEN')
       commit('REMOVE_USER')
     },
-    async register(context, params) {
+    async register({ commit }, submitData) {
       try {
-        const response = await authApi.register(
-          params.name,
-          params.email,
-          params.password,
-          params.passwordConfirm,
-          params.phoneNumber,
-          params.nickname
-        )
+        const data = await authApi.register(submitData)
         alert('auth modules: register success')
-        return response
+        // 바로 로그인
+        commit('SET_TOKEN', {
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+        })
+        commit('SET_USER', data.user)
+        localStorage.setItem('accessToken', data.accessToken)
+        localStorage.setItem('refreshToken', data.refreshToken)
+        // 임시
+        localStorage.setItem('user', JSON.stringify(data.user))
+        // 임시
       } catch (error: any) {
         const errorKeys = Object.keys(error.response.data)
         // 에러가 여러 개일 경우, 맨 앞의 에러 하나만 띄우도록 한다.
-        alert(error.response.data[errorKeys[0]])
+        throw new Error(error.response.data[errorKeys[0]])
       }
     },
     async resetPassword(context, params) {
@@ -99,14 +102,9 @@ export const auth: Module<authModule, RootState> = {
         alert(error.response.data)
       }
     },
-    async resetPasswordConfirm(context, params) {
+    async resetPasswordConfirm(context, submitData) {
       try {
-        const response = await authApi.resetPasswordConfirm(
-          params.uid,
-          params.token,
-          params.password,
-          params.passwordConfirm
-        )
+        const response = await authApi.resetPasswordConfirm(submitData)
         if (response.status === 200) {
           alert(response.data.detail)
         }

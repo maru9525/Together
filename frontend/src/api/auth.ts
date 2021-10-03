@@ -24,40 +24,29 @@ export const login = async (
   }
 }
 
-export const register = async (
-  name: string,
-  email: string,
-  password1: string,
-  password2: string,
-  phoneNumber: string,
+export const register = async (submitData: {
+  username: string
+  email: string
+  password1: string
+  password2: string
+  phone_number: string
   nickname: string
-): Promise<AuthResponseData> => {
-  return http.post('account/register/', {
-    username: name,
-    email: email,
-    password1: password1,
-    password2: password2,
-    phone_number: phoneNumber,
-    nickname: nickname,
-  })
+}): Promise<AuthResponseData> => {
+  const res = await http.post('account/register/', submitData)
+  return keysToCamel(res.data)
 }
 
 export function resetPassword(email: string): Promise<AxiosResponse> {
   return http.post('account/password/reset/', { email: email })
 }
 
-export function resetPasswordConfirm(
-  uid: string,
-  token: string,
-  password1: string,
+export function resetPasswordConfirm(submitData: {
+  uid: string
+  token: string
+  password1: string
   password2: string
-): Promise<AxiosResponse> {
-  return http.post('account/password/reset/confirm/', {
-    uid: uid,
-    token: token,
-    new_password1: password1,
-    new_password2: password2,
-  })
+}): Promise<AxiosResponse> {
+  return http.post('account/password/reset/confirm/', submitData)
 }
 
 export const getUserData = async (userId: number): Promise<OutputUser> => {
