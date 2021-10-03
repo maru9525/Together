@@ -226,5 +226,52 @@
     "password": "q1w2e3r4!@",
     "snsProvider": null,
     "snsId": null
-  }
+  },
+  "genres": [
+    {
+      "id": 1,
+      "name": "Action",
+      "k_name": "액션"
+    },
+    {
+      "id": 2,
+      "name": "Adventure",
+      "k_name": "어드벤쳐"
+    },
+    {
+      "id": 3,
+      "name": "Animation",
+      "k_name": "애니메이션"
+    },
+    {
+      "id": 4,
+      "name": "Crime",
+      "k_name": "범죄"
+    },
+    {
+      "id": 5,
+      "name": "Documentary",
+      "k_name": "다큐멘터리"
+    },
+    {
+      "id": 6,
+      "name": "Drama",
+      "k_name": "드라마"
+    },
+    {
+      "id": 7,
+      "name": "Family",
+      "k_name": "가족"
+    },
+    {
+      "id": 8,
+      "name": "Fantasy",
+      "k_name": "판타지"
+    },
+    {
+      "id": 9,
+      "name": "History",
+      "k_name": "역사"
+    }
+  ]
 }

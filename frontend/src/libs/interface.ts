@@ -28,6 +28,12 @@ export interface ValidateData {
   message?: string
 }
 
+// Content
+export interface Genre {
+  id: number
+  name: string
+  k_name: string
+}
 export interface Content {
   id: number
   title: string

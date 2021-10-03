@@ -136,5 +136,8 @@ export const auth: Module<authModule, RootState> = {
     getUserPK(state) {
       return state.user?.pk
     },
+    getToken(state) {
+      return state.accessToken
+    },
   },
 }

@@ -1,21 +1,10 @@
-import axios from 'axios'
+import { Content, Genre } from '@/libs/interface'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
 
 interface ProfileState {
   data: string
-}
-
-interface Content {
-  id: number
-  title: string
-  posterPath: string
-  simRate: number
-  providers: string[]
-  firstAirYear: number
-  rated: string
-  seasons: number
-  overview: string
 }
 
 const apiAxios = axios.create({
@@ -58,6 +47,14 @@ export const content: Module<ProfileState, RootState> = {
           // Just a stock error
           throw new Error('알 수 없는 에러 발생')
         }
+      }
+    },
+    getGenreList: async (): Promise<Genre[]> => {
+      try {
+        const res: AxiosResponse<Genre[]> = await apiAxios.get('/genres')
+        return res.data
+      } catch (error: any) {
+        throw new Error(error.response)
       }
     },
   },
