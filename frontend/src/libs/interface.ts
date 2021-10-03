@@ -85,13 +85,29 @@ export interface InputEvent<T = Element> {
 
 // User
 type SNSProvider = 'Google' | 'Naver' | null
-export interface User {
-  id: number
-  name: string
-  nickName: string
-  phoneNumber: string
-  email: string
-  password: string
-  snsProvider: SNSProvider
-  snsId: string | null
+
+export type InputUser = {
+  pk: number
+  username?: string
+  nickname?: string
+  phone_number?: string
+  email?: string
+  favorite_genres?: {
+    id: number
+    name: string
+    k_name: string
+  }[]
+}
+
+export type OutputUser = {
+  pk: number
+  username?: string
+  nickname?: string
+  phoneNumber?: string
+  email?: string
+  favoriteGenres?: {
+    id: number
+    name: string
+    kName: string
+  }[]
 }

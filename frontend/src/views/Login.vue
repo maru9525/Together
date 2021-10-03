@@ -133,17 +133,14 @@ export default defineComponent({
         const email = formData.value['email'].value
         const password = formData.value['password'].value
         // TODO: Add loading spinner
-        const response = await store.dispatch('auth/login', {
-          email,
-          password,
-        })
-        if (response && response.status === 200) {
-          // 로그인 성공 시, 비밀번호를 바꿔야 한다면 비밀번호 변경 컴포넌트로 이동
-          if (store.state.auth.resetPassword) {
-            router.push({ name: 'ChangePassword' })
-          } else {
-            router.push({ name: 'ContentList' })
-          }
+        try {
+          await store.dispatch('auth/login', {
+            email,
+            password,
+          })
+          router.push({ name: 'ContentList' })
+        } catch (error) {
+          alert(error)
         }
       }
     }

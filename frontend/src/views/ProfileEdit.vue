@@ -67,7 +67,7 @@ export default defineComponent({
     const router = useRouter()
     const loading = ref<boolean>(true)
     const formData = ref<FormData>({
-      nickName: {
+      nickname: {
         label: '닉네임',
         value: '',
         type: 'text',
@@ -104,14 +104,14 @@ export default defineComponent({
       console.log('submit')
       try {
         const name = formData.value.name.value
-        const nickName = formData.value.nickName.value
+        const nickname = formData.value.nickname.value
         const phoneNumber = formData.value.phoneNumber.value
 
         const res = await axios.put(
           `http://localhost:3000/account/${props.userId}`,
           {
             name,
-            nickName,
+            nickname,
             phoneNumber,
           }
         )
@@ -139,10 +139,10 @@ export default defineComponent({
         const res = await axios.get(
           `http://localhost:3000/account/${props.userId}`
         )
-        const { nickName, name, phoneNumber } = res.data
-        formData.value.nickName.value = nickName
+        const { nickname, name, phone_number } = res.data
+        formData.value.nickname.value = nickname
         formData.value.name.value = name
-        formData.value.phoneNumber.value = phoneNumber
+        formData.value.phoneNumber.value = phone_number
       } catch (error) {
         console.log(error)
       }

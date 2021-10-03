@@ -1,28 +1,44 @@
 import http from '@/api/http'
-import { AxiosResponse } from 'axios'
+import { keysToCamel } from '@/libs/func'
+import { OutputUser, InputUser } from '@/libs/interface'
+import axios, { AxiosResponse } from 'axios'
 
-export function login(email: string, password: string): Promise<AxiosResponse> {
-  return http.post('account/login/', {
-    email: email,
-    password: password,
-  })
+interface AuthResponseData {
+  accessToken: string
+  refreshToken: string
+  user: OutputUser
 }
 
-export function register(
+export const login = async (
+  email: string,
+  password: string
+): Promise<AuthResponseData> => {
+  try {
+    const res = await http.post('account/login/', {
+      email,
+      password,
+    })
+    return keysToCamel(res.data)
+  } catch (error) {
+    throw new Error('로그인 실패')
+  }
+}
+
+export const register = async (
   name: string,
   email: string,
   password1: string,
   password2: string,
   phoneNumber: string,
-  nickName: string
-): Promise<AxiosResponse> {
+  nickname: string
+): Promise<AuthResponseData> => {
   return http.post('account/register/', {
     username: name,
     email: email,
     password1: password1,
     password2: password2,
     phone_number: phoneNumber,
-    nickname: nickName,
+    nickname: nickname,
   })
 }
 
@@ -42,4 +58,18 @@ export function resetPasswordConfirm(
     new_password1: password1,
     new_password2: password2,
   })
+}
+
+export const getUserData = async (userId: number): Promise<OutputUser> => {
+  try {
+    // const res: AxiosResponse<InputUser> = await http.get(`account/${userId}/`)
+    const res: AxiosResponse<InputUser> = await axios.get(
+      `http://localhost:3000/account/${userId}/`
+    )
+    const user: OutputUser = keysToCamel(res.data)
+    console.log(user)
+    return user
+  } catch (error) {
+    throw new Error('에러 발생')
+  }
 }

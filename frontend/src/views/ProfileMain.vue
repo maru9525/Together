@@ -11,7 +11,7 @@
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">닉네임</p>
-          <p>{{ account.nickName }}</p>
+          <p>{{ account.nickname }}</p>
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">이름</p>
@@ -20,6 +20,12 @@
         <div class="profile-main__info--array">
           <p class="text-gray-500">휴대폰 번호</p>
           <p>{{ account.phoneNumber }}</p>
+        </div>
+        <div class="profile-main__info--array">
+          <p class="text-gray-500">선호 장르</p>
+          <router-link :to="{ name: 'ProfileGenre', params: { userId } }">
+            장르 선택
+          </router-link>
         </div>
       </section>
       <section class="profile-main__seen__section">
@@ -63,14 +69,15 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
-import { Content } from '@/libs/interface'
+import { Content, OutputUser } from '@/libs/interface'
 import ContentPosterLink from '@/components/ContentPosterLink.vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 interface Account {
   id: number
   name: string
-  nickName: string
+  nickname: string
   phoneNumber: string
 }
 
@@ -86,18 +93,20 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter()
+    const store = useStore()
     const loading = ref<boolean>(true)
-    const account = ref<Account>()
+    const account = ref<OutputUser>()
     const contents = ref<Content[]>([])
 
     onMounted(async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:3000/account/${props.userId}`
+        // TODO: 장고 백엔드 서버에 API를 요청하는 것으로 변경
+        // vuex actions: auth/getUserData
+        const user: OutputUser = await store.dispatch(
+          'auth/getUserData',
+          props.userId
         )
-        console.log(res.data)
-        account.value = res.data
-        console.log(account.value)
+        account.value = user
       } catch (error) {
         console.log(error.response)
         if (error.response.status === 404) {
@@ -105,6 +114,8 @@ export default defineComponent({
         }
       }
       try {
+        // TODO: OutputUser 테이블에 내가 본 영화를 저장하는 필드가 필요함
+        // 우선순위 낮음
         const res = await axios.get('http://localhost:3000/contents')
         contents.value = res.data
       } catch (error) {

@@ -92,7 +92,7 @@ export default defineComponent({
     })
 
     const infoData = ref<FormDataList>({
-      nickName: {
+      nickname: {
         label: '닉네임',
         type: 'text',
         value: '',
@@ -145,7 +145,7 @@ export default defineComponent({
         const email = formData.value['email'].value
         const password = formData.value['password'].value
         const passwordConfirm = formData.value['passwordConfirm'].value
-        const nickName = infoData.value['nickName'].value
+        const nickname = infoData.value['nickname'].value
         const name = infoData.value['name'].value
         const phoneNumber = infoData.value['phoneNumber'].value
         // TODO: Add loading spinner
@@ -155,7 +155,7 @@ export default defineComponent({
           email,
           passwordConfirm,
           phoneNumber,
-          nickName,
+          nickname,
         })
         if (response && response.status === 201) {
           router.push({ name: 'Login' })

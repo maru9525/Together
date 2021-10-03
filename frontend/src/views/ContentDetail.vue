@@ -65,7 +65,7 @@
             </div>
             <div class="right">
               <div class="upper">
-                <span>{{ comment.user.nickName }}</span>
+                <span>{{ comment.user.nickname }}</span>
                 <span>2시간 전</span>
               </div>
               <div class="comment">종이로 집을 지으면 전부 타버릴거야!</div>
@@ -123,7 +123,7 @@ interface Youtube {
 interface Comment {
   id: number
   user: {
-    nickName: string
+    nickname: string
     profileImg: string
   }
   comment: string
