@@ -69,17 +69,11 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
-import { Content, OutputUser } from '@/libs/interface'
+import { Content } from '@/libs/interface'
+import { OutputUser } from '@/libs/interfaces/auth'
 import ContentPosterLink from '@/components/ContentPosterLink.vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-
-interface Account {
-  id: number
-  name: string
-  nickname: string
-  phoneNumber: string
-}
 
 export default defineComponent({
   name: 'ProfileMain',

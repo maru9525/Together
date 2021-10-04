@@ -63,9 +63,9 @@ export interface Party {
 
 export type Validator = (key: string, value: string | number) => ValidateData
 
-export interface PartyFormField {
+export interface FormField {
   label: string
-  type: 'text' | 'number' | 'date'
+  type: 'text' | 'number' | 'date' | 'password'
   value: string | number
   placeholder?: string
   errors: {
@@ -74,8 +74,13 @@ export interface PartyFormField {
   validators?: Validator[]
   message?: string
 }
-export interface PartyForm {
-  [key: string]: PartyFormField
+
+export interface FormData {
+  [key: string]: FormField
+}
+
+export interface SubmitFormData {
+  [key: string]: string | number
 }
 
 export interface InputEvent<T = Element> {
@@ -85,29 +90,3 @@ export interface InputEvent<T = Element> {
 
 // User
 type SNSProvider = 'Google' | 'Naver' | null
-
-export type InputUser = {
-  pk: number
-  username?: string
-  nickname?: string
-  phone_number?: string
-  email?: string
-  favorite_genres?: {
-    id: number
-    name: string
-    k_name: string
-  }[]
-}
-
-export type OutputUser = {
-  pk: number
-  username?: string
-  nickname?: string
-  phoneNumber?: string
-  email?: string
-  favoriteGenres?: {
-    id: number
-    name: string
-    kName: string
-  }[]
-}

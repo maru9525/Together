@@ -37,16 +37,8 @@
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { Content } from '@/libs/interface'
+import { ProviderNameEn, ProviderFilter } from '@/libs/interfaces/party'
 import ContentPosterLink from '@/components/ContentPosterLink.vue'
-
-type Provider = 'netflix' | 'wavve' | 'watcha'
-
-interface Providers {
-  [key: string]: {
-    name: Provider
-    active: boolean
-  }
-}
 
 export default defineComponent({
   name: 'ContentList',
@@ -55,7 +47,7 @@ export default defineComponent({
     const store = useStore()
     const contents = ref<Content[]>([])
 
-    const providers = ref<Providers>({
+    const providers = ref<ProviderFilter>({
       netflix: {
         name: 'netflix',
         active: true,
@@ -78,7 +70,7 @@ export default defineComponent({
       })
     })
 
-    const handleFilterClick = (providerName: Provider) => {
+    const handleFilterClick = (providerName: ProviderNameEn) => {
       providers.value[providerName].active =
         !providers.value[providerName].active
     }

@@ -89,47 +89,7 @@ import ContentDetailInfoSection from '@/components/ContentDetailInfoSection.vue'
 import PartyListItem from '@/components/PartyListItem.vue'
 import { useStore } from 'vuex'
 import { Party } from '@/libs/interface'
-
-interface Content {
-  id: number
-  title: string
-  posterPath: string
-  simRate: number
-  providers: string[]
-  firstAirYear: number
-  rated: string
-  seasons: number
-  overview: string
-}
-
-interface Youtube {
-  id: {
-    kind: string
-    videoId: string
-  }
-  snippet: {
-    title: string
-    thumbnails: {
-      medium?: {
-        url: string
-      }
-      high?: {
-        url: string
-      }
-    }
-  }
-}
-
-interface Comment {
-  id: number
-  user: {
-    nickname: string
-    profileImg: string
-  }
-  comment: string
-  like: number
-  rating: number
-}
+import { Content, Youtube, Comment } from '@/libs/interfaces/content'
 
 const YOUTUBE_BASEURL = 'https://www.googleapis.com/youtube/v3/search'
 const YOUTUBE_KEY = 'AIzaSyA3BjU4BpGVhBFlvHsJHsTNRuLePCbaU1Q'

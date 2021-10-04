@@ -33,25 +33,9 @@
 import axios from 'axios'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import Textinput from '@/components/Common/TextInput.vue'
-import { ValidateData, Validator } from '@/libs/interface'
+import { ValidateData, FormData } from '@/libs/interface'
 import { requiredValidator } from '@/libs/validator'
 import { useRouter } from 'vue-router'
-
-interface FormField {
-  label: string
-  type: 'text' | 'number' | 'date'
-  value: string | number
-  placeholder?: string
-  errors: {
-    [key: string]: string
-  }
-  validators?: Validator[]
-  message?: string
-}
-
-interface FormData {
-  [key: string]: FormField
-}
 
 export default defineComponent({
   name: 'ProfileEdit',

@@ -1,6 +1,6 @@
 import http from '@/api/http'
 import { keysToCamel } from '@/libs/func'
-import { OutputUser, InputUser } from '@/libs/interface'
+import { OutputUser, InputUser } from '@/libs/interfaces/auth'
 import axios, { AxiosResponse } from 'axios'
 
 interface AuthResponseData {
@@ -55,9 +55,7 @@ export const getUserData = async (userId: number): Promise<OutputUser> => {
     const res: AxiosResponse<InputUser> = await axios.get(
       `http://localhost:3000/account/${userId}/`
     )
-    const user: OutputUser = keysToCamel(res.data)
-    console.log(user)
-    return user
+    return keysToCamel(res.data)
   } catch (error) {
     throw new Error('에러 발생')
   }

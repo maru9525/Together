@@ -1,23 +1,13 @@
-import { AxiosResponse } from 'axios'
 import * as authApi from '@/api/auth'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
-import { InputUser, OutputUser } from '@/libs/interface'
+import { InputUser } from '@/libs/interfaces/auth'
+import { Token } from '@/libs/interfaces/auth'
 
-interface Token {
-  accessToken: string
-  refreshToken: string
-}
 interface authModule {
   accessToken: string
   refreshToken: string
   user?: InputUser
-}
-
-interface loginResponseData {
-  access_token: string
-  refresh_token: string
-  user: InputUser
 }
 
 export const auth: Module<authModule, RootState> = {
