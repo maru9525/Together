@@ -24,6 +24,16 @@ export const login = async (
   }
 }
 
+export const oauthLogin = async (
+  platform: string,
+  code: string
+): Promise<AuthResponseData> => {
+  const params = new URLSearchParams()
+  params.append('code', code)
+  const res = await http.post(`account/${platform}/callback/`, params)
+  return keysToCamel(res.data)
+}
+
 export const register = async (submitData: {
   username: string
   email: string
@@ -59,13 +69,4 @@ export const getUserData = async (userId: number): Promise<OutputUser> => {
   } catch (error) {
     throw new Error('에러 발생')
   }
-}
-
-export function oauthLogin(
-  platform: string,
-  code: string
-): Promise<AxiosResponse> {
-  const params = new URLSearchParams()
-  params.append('code', code)
-  return http.post(`account/${platform}/callback/`, params)
 }
