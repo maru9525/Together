@@ -6,7 +6,7 @@
       <section class="filter-section">
         <div class="filter-list">
           <button
-            class="filter-button img-wrapper"
+            class="filter-button"
             :class="{ active: provider.active }"
             v-for="(provider, index) in providers"
             :key="provider.name"
@@ -130,14 +130,23 @@ export default defineComponent({
   @apply py-6 px-4;
 
   .filter-list {
-    @apply flex flex-wrap gap-6;
+    @apply flex flex-wrap gap-2;
 
     .filter-button {
+      @apply py-2 px-4 rounded transition-colors;
       /* @apply w-8 h-8 md:w-10 md:h-10 opacity-30; */
+
+      &:hover {
+        @apply bg-indigo-200;
+      }
 
       &.active {
         @apply bg-indigo-100;
         /* @apply opacity-100; */
+
+        &:hover {
+          @apply bg-indigo-300;
+        }
       }
 
       img {

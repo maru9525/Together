@@ -17,9 +17,9 @@ const getContentList = async (): Promise<Movie[]> => {
   }
 }
 
-const getContent = async (contentId: number): Promise<Content> => {
+const getContent = async (contentId: number): Promise<Movie> => {
   try {
-    const res = await http2.get(`/contents/${contentId}`)
+    const res = await http.get(`/movies/${contentId}`)
     return keysToCamel(res.data)
   } catch (error: any) {
     throw new Error(error)

@@ -33,7 +33,7 @@ export const content: Module<ProfileState, RootState> = {
         }
       }
     },
-    getContent: async (_, contentId: number | string): Promise<Content> => {
+    getContent: async (_, contentId: number | string): Promise<Movie> => {
       try {
         return await contentAxios.getContent(+contentId)
       } catch (error) {

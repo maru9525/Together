@@ -71,6 +71,7 @@ export interface Movie {
   id: number
   movieId: number
   originalTitle: string
+  title: string
   overview: string
   posterPath: string
   releaseDate: string
