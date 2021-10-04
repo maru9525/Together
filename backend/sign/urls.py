@@ -25,7 +25,6 @@ urlpatterns = [
   path('password/reset/confirm/', PasswordResetConfirmView.as_view(), name='rest_password_reset_confirm'),
   path('password/change/', PasswordChangeView.as_view(), name='rest_password_change'),
   # google oauth
-  path('google/login/', views.google_login, name='google_login'),
   path('google/callback/', views.google_callback, name='google_callback'),
-  path('google/login/finish/', views.GoogleLogin.as_view(), name='google_login_todjango'),
+  path('google/login/finish/', views.GoogleLogin.as_view(), name='google_login_to_django'),
 ]

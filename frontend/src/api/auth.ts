@@ -43,3 +43,12 @@ export function resetPasswordConfirm(
     new_password2: password2,
   })
 }
+
+export function oauthLogin(
+  platform: string,
+  code: string
+): Promise<AxiosResponse> {
+  const params = new URLSearchParams()
+  params.append('code', code)
+  return http.post(`account/${platform}/callback/`, params)
+}

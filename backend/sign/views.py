@@ -17,13 +17,16 @@ from allauth.socialaccount.models import SocialAccount
 from .serializers import UserSerializer
 from .models import User
 import json
+from django.views.decorators.csrf import csrf_exempt
 
+FRONT_BASE_URL = "http://localhost:8080"
 BASE_URL = "http://localhost:8000"
-GOOGLE_CALLBACK_URI = f"{BASE_URL}/account/google/callback/"
-KAKAO_CALLBACK_URI = f"{BASE_URL}/account/kakao/callback/"
-GITHUB_CALLBACK_URI = f"{BASE_URL}/account/github/callback/"
+GOOGLE_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/google/callback"
+KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/account/kakao/callback/"
+GITHUB_CALLBACK_URI = f"{FRONT_BASE_URL}/account/github/callback/"
 
 # Hash value for protect from xsrf attack
+# Temporary, not in use while refactoring
 state = hashlib.sha256(os.urandom(1024)).hexdigest()
 
 class UserMe(viewsets.ModelViewSet):
@@ -35,27 +38,19 @@ class UserMe(viewsets.ModelViewSet):
 
 
 def passwordResetRedirect(request, uid, token):
-    return redirect(f"{BASE_URL}/auth/reset-password-confirm/{uid}/token/{token}/")
+    return redirect(f"{FRONT_BASE_URL}/auth/reset-password-confirm/{uid}/token/{token}")
 
 
-def google_login(request):
-    """
-    Code Request
-    """
-    scope = "https://www.googleapis.com/auth/userinfo.email"
-    client_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_CLIENT_ID')
-    return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?scope={scope}&client_id={client_id}&response_type=code&redirect_uri={GOOGLE_CALLBACK_URI}&state={state}")
-
-
+@csrf_exempt
 def google_callback(request):
     client_id = getattr(settings, "SOCIAL_AUTH_GOOGLE_CLIENT_ID")
     client_secret = getattr(settings, "SOCIAL_AUTH_GOOGLE_SECRET")
-    code = request.GET.get('code')
+    code = request.POST.get('code')
     """
     Request Access Token
     """
     token_res = requests.post(
-        f"https://oauth2.googleapis.com/token?client_id={client_id}&client_secret={client_secret}&code={code}&grant_type=authorization_code&redirect_uri={GOOGLE_CALLBACK_URI}&state={state}"
+        f"https://oauth2.googleapis.com/token?client_id={client_id}&client_secret={client_secret}&code={code}&grant_type=authorization_code&redirect_uri={GOOGLE_CALLBACK_URI}"
     )
     token_json = token_res.json()
     error = token_json.get('error')
@@ -93,7 +88,6 @@ def google_callback(request):
         if accept_status != 200:
             return JsonResponse({'Google_Callback_Error': 'failed to signin'}, status=accept_status)
         accept_json = accept.json()
-        accept_json.pop('user', None)
         return JsonResponse(accept_json)
     except User.DoesNotExist:
         # 기존에 가입되지 않았던 유저라면 새로 가입
@@ -103,7 +97,6 @@ def google_callback(request):
         if accept_status != 200:
             return JsonResponse({'Google_Callback_Error': 'failed to signup'}, status=accept_status)
         accept_json = accept.json()
-        accept_json.pop('user', None)
         return JsonResponse(accept_json)
 
 

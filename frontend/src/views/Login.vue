@@ -163,8 +163,15 @@ export default defineComponent({
     }
 
     const handleSocialLoginClick = async (platform: string) => {
-      const link = `http://localhost:8000/account/${platform}/login`
-      location.href = link
+      if (platform === 'google') {
+        const callback_uri = `http://localhost:8080/auth/${platform}/callback`
+        const client_id =
+          '819701037998-q2ascolrbjsmiqnq5tj3q7ifmk0sv5oh.apps.googleusercontent.com'
+        const scope = 'https://www.googleapis.com/auth/userinfo.email'
+
+        const link = `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${client_id}&response_type=code&redirect_uri=${callback_uri}`
+        location.href = link
+      }
     }
 
     return {
