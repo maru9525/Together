@@ -1,5 +1,5 @@
 import { Content, Genre } from '@/libs/interface'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
 import contentAxios from '@/api/content'
@@ -7,10 +7,6 @@ import contentAxios from '@/api/content'
 interface ProfileState {
   data: string
 }
-
-const apiAxios = axios.create({
-  baseURL: 'http://localhost:3000',
-})
 
 export const content: Module<ProfileState, RootState> = {
   namespaced: true,

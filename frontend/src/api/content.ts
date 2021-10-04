@@ -1,7 +1,7 @@
 // import http from '@/api/http'
 import { keysToCamel } from '@/libs/func'
 import { Content, Genre } from '@/libs/interface'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 const http = axios.create({
   baseURL: 'http://localhost:3000',
