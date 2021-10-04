@@ -30,7 +30,7 @@ export const register = async (submitData: {
   password1: string
   password2: string
   phone_number: string
-  nickname: string
+  nick_name: string
 }): Promise<AuthResponseData> => {
   const res = await http.post('account/register/', submitData)
   return keysToCamel(res.data)

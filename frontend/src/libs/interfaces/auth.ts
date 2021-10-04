@@ -4,9 +4,9 @@ export interface Token {
 }
 
 export type InputUser = {
-  pk: number
+  id: number
   username?: string
-  nickname?: string
+  nick_name?: string
   phone_number?: string
   email?: string
   favorite_genres?: {
@@ -17,9 +17,9 @@ export type InputUser = {
 }
 
 export type OutputUser = {
-  pk: number
+  id: number
   username?: string
-  nickname?: string
+  nickName?: string
   phoneNumber?: string
   email?: string
   favoriteGenres?: {

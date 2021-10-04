@@ -31,7 +31,7 @@ export interface Youtube {
 export interface Comment {
   id: number
   user: {
-    nickname: string
+    nickName: string
     profileImg: string
   }
   comment: string

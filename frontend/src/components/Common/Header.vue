@@ -16,9 +16,9 @@
       <div class="flex gap-2" v-else>
         <router-link
           class="btn"
-          :to="{ name: 'ProfileMain', params: { userId: user.pk } }"
+          :to="{ name: 'ProfileMain', params: { userId: user.id } }"
         >
-          {{ user.nickname }}
+          {{ user.nickName }}
         </router-link>
         <button class="btn logout" @click="handleClickLogoutBtn">
           로그아웃

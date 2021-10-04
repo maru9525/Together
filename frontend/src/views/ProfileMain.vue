@@ -11,7 +11,7 @@
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">닉네임</p>
-          <p>{{ account.nickname }}</p>
+          <p>{{ account.nickName }}</p>
         </div>
         <div class="profile-main__info--array">
           <p class="text-gray-500">이름</p>
@@ -68,7 +68,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
-import axios from 'axios'
 import { Content } from '@/libs/interface'
 import { OutputUser } from '@/libs/interfaces/auth'
 import ContentPosterLink from '@/components/ContentPosterLink.vue'
@@ -110,8 +109,7 @@ export default defineComponent({
       try {
         // TODO: OutputUser 테이블에 내가 본 영화를 저장하는 필드가 필요함
         // 우선순위 낮음
-        const res = await axios.get('http://localhost:3000/contents')
-        contents.value = res.data
+        contents.value = await store.dispatch('content/getRecommendContent')
       } catch (error) {
         console.log(error)
       }

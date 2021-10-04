@@ -63,6 +63,7 @@ export const auth: Module<authModule, RootState> = {
     async register({ commit }, submitData) {
       try {
         const data = await authApi.register(submitData)
+        console.log(data)
         alert('auth modules: register success')
         // 바로 로그인
         commit('SET_TOKEN', {
@@ -139,7 +140,7 @@ export const auth: Module<authModule, RootState> = {
       return state.accessToken !== ''
     },
     getUserPK(state) {
-      return state.user?.pk
+      return state.user?.id
     },
     getToken(state) {
       return state.accessToken

@@ -92,7 +92,7 @@ export default defineComponent({
     })
 
     const infoData = ref<FormDataList>({
-      nickname: {
+      nickName: {
         label: '닉네임',
         type: 'text',
         value: '',
@@ -145,7 +145,7 @@ export default defineComponent({
         const email = formData.value['email'].value
         const password1 = formData.value['password'].value
         const password2 = formData.value['passwordConfirm'].value
-        const nickname = infoData.value['nickname'].value
+        const nick_name = infoData.value['nickName'].value
         const username = infoData.value['name'].value
         const phone_number = infoData.value['phoneNumber'].value
         // TODO: Add loading spinner
@@ -154,7 +154,7 @@ export default defineComponent({
             email,
             password1,
             password2,
-            nickname,
+            nick_name,
             username,
             phone_number,
           })

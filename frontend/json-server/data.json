@@ -181,7 +181,7 @@
     {
       "id": 1,
       "user": {
-        "nickname": "넷플조아",
+        "nickName": "넷플조아",
         "profileImg": "https://cdn-icons-png.flaticon.com/512/1864/1864513.png"
       },
       "comment": "종이로 집을 지으면 전부 타버릴거야!",
@@ -191,7 +191,7 @@
     {
       "id": 2,
       "user": {
-        "nickname": "넷플조아",
+        "nickName": "넷플조아",
         "profileImg": "https://cdn-icons-png.flaticon.com/512/1864/1864513.png"
       },
       "comment": "종이로 집을 지으면 전부 타버릴거야!",
@@ -201,7 +201,7 @@
     {
       "id": 3,
       "user": {
-        "nickname": "넷플조아",
+        "nickName": "넷플조아",
         "profileImg": "https://cdn-icons-png.flaticon.com/512/1864/1864513.png"
       },
       "comment": "종이로 집을 지으면 전부 타버릴거야!",
@@ -211,7 +211,7 @@
     {
       "id": 4,
       "user": {
-        "nickname": "넷플조아",
+        "nickName": "넷플조아",
         "profileImg": "https://cdn-icons-png.flaticon.com/512/1864/1864513.png"
       },
       "comment": "종이로 집을 지으면 전부 타버릴거야!",
@@ -237,7 +237,7 @@
     {
       "id": 1,
       "name": "김정일",
-      "nickname": "닉네임 바뀜222",
+      "nickName": "닉네임 바뀜222",
       "phone_number": "010-1803-1806",
       "email": "email@email.com",
       "favorite_genres": [
@@ -256,7 +256,7 @@
     {
       "id": 2,
       "name": "김정은",
-      "nickname": "괴뢰군두목",
+      "nickName": "괴뢰군두목",
       "phone_number": "010-1803-1806",
       "email": "email2@email.com",
       "favorite_genres": []
@@ -265,7 +265,7 @@
   "me": {
     "id": 100,
     "name": "김병훈",
-    "nickname": "닉네임 바뀜222",
+    "nickName": "닉네임 바뀜222",
     "phone_number": "010-1803-1806",
     "email": "keyp123asdf@as.com",
     "password": "q1w2e3r4!@",
