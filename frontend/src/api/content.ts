@@ -1,15 +1,16 @@
-// import http from '@/api/http'
+import http from '@/api/http'
 import { keysToCamel } from '@/libs/func'
 import { Content, Genre } from '@/libs/interface'
-import axios, { AxiosResponse } from 'axios'
+import { Movie } from '@/libs/interfaces/content'
+import axios from 'axios'
 
-const http = axios.create({
+const http2 = axios.create({
   baseURL: 'http://localhost:3000',
 })
 
-const getContentList = async (): Promise<Content[]> => {
+const getContentList = async (): Promise<Movie[]> => {
   try {
-    const res = await http.get(`/contents`)
+    const res = await http.get(`/movies/`)
     return keysToCamel(res.data)
   } catch (error: any) {
     throw new Error(error)
@@ -18,7 +19,7 @@ const getContentList = async (): Promise<Content[]> => {
 
 const getContent = async (contentId: number): Promise<Content> => {
   try {
-    const res = await http.get(`/contents/${contentId}`)
+    const res = await http2.get(`/contents/${contentId}`)
     return keysToCamel(res.data)
   } catch (error: any) {
     throw new Error(error)
@@ -27,7 +28,7 @@ const getContent = async (contentId: number): Promise<Content> => {
 
 const getGenreList = async (): Promise<Genre[]> => {
   try {
-    const res = await http.get(`/genres`)
+    const res = await http2.get(`/genres`)
     return keysToCamel(res.data)
   } catch (error: any) {
     throw new Error(error)
