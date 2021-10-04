@@ -22,8 +22,8 @@ from django.views.decorators.csrf import csrf_exempt
 FRONT_BASE_URL = "http://localhost:8080"
 BASE_URL = "http://localhost:8000"
 GOOGLE_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/google/callback"
-KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/account/kakao/callback"
-GITHUB_CALLBACK_URI = f"{FRONT_BASE_URL}/account/github/callback"
+KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/kakao/callback"
+GITHUB_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/github/callback"
 
 # Hash value for protect from xsrf attack
 # Temporary, not in use while refactoring
