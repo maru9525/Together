@@ -1,7 +1,8 @@
 import { Content, Genre } from '@/libs/interface'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
+import contentAxios from '@/api/content'
 
 interface ProfileState {
   data: string
@@ -18,13 +19,9 @@ export const content: Module<ProfileState, RootState> = {
   },
   mutations: {},
   actions: {
-    getContent: async (
-      context,
-      contentId: number | string
-    ): Promise<Content | undefined> => {
+    getRecommendContent: async (): Promise<Content[]> => {
       try {
-        const res = await apiAxios.get(`/contents/${contentId}`)
-        return res.data
+        return await contentAxios.getContentList()
       } catch (error) {
         if (axios.isAxiosError(error)) {
           // Access to config, request, and response
@@ -35,10 +32,9 @@ export const content: Module<ProfileState, RootState> = {
         }
       }
     },
-    getRecommendContent: async (): Promise<Content[] | undefined> => {
+    getContent: async (_, contentId: number | string): Promise<Content> => {
       try {
-        const res = await apiAxios.get('/contents')
-        return res.data
+        return await contentAxios.getContent(+contentId)
       } catch (error) {
         if (axios.isAxiosError(error)) {
           // Access to config, request, and response
@@ -51,8 +47,7 @@ export const content: Module<ProfileState, RootState> = {
     },
     getGenreList: async (): Promise<Genre[]> => {
       try {
-        const res: AxiosResponse<Genre[]> = await apiAxios.get('/genres')
-        return res.data
+        return contentAxios.getGenreList()
       } catch (error: any) {
         throw new Error(error.response)
       }
