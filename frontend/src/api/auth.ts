@@ -60,3 +60,12 @@ export const getUserData = async (userId: number): Promise<OutputUser> => {
     throw new Error('에러 발생')
   }
 }
+
+export function oauthLogin(
+  platform: string,
+  code: string
+): Promise<AxiosResponse> {
+  const params = new URLSearchParams()
+  params.append('code', code)
+  return http.post(`account/${platform}/callback/`, params)
+}

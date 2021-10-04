@@ -103,6 +103,7 @@ export const auth: Module<authModule, RootState> = {
         alert(error.response.data)
       }
     },
+    // TODO: 임시
     async getUserData(context, userId: string | number) {
       try {
         console.log(userId)
@@ -110,6 +111,26 @@ export const auth: Module<authModule, RootState> = {
         return user
       } catch (error) {
         throw new Error('유저 데이터를 가져오던 중 문제가 생겼습니다')
+      }
+    },
+    async oauthLogin({ commit }, params) {
+      try {
+        const response = await authApi.oauthLogin(params.platform, params.code)
+        if (response.status === 200) {
+          alert(`auth modules: ${params.platform} login success`)
+          commit('SET_TOKEN', {
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+          })
+          commit('SET_USER', response.data.user)
+          localStorage.setItem('accessToken', response.data.access_token)
+          localStorage.setItem('refreshToken', response.data.refresh_token)
+          // 임시
+          localStorage.setItem('user', JSON.stringify(response.data.user))
+        }
+        return response
+      } catch (error: any) {
+        alert(error.response.data)
       }
     },
   },

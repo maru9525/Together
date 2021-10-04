@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os, json
+import sys
 from pathlib import Path
-import datetime
+from datetime import timedelta
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,6 +27,9 @@ secret_file = os.path.join(BASE_DIR, 'secrets.json')
 with open(secret_file) as f:
     secrets = json.loads(f.read())
 
+for key, value in secrets.items():
+    setattr(sys.modules[__name__], key, value)
+
 def get_secret(setting, secrets=secrets):
     try:
         return secrets[setting]
@@ -35,14 +39,12 @@ def get_secret(setting, secrets=secrets):
 
 SECRET_KEY = get_secret("SECRET_KEY")
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,28 +52,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # CORS
     'corsheaders',
-
-    'drf_yasg',  # drf_yasg(swagger)
-    # user authentioation basic module
-    'django.contrib.sites',
+    # drf_yasg(swagger)
+    'drf_yasg',
+    # django-allauth, social OAuth
     'allauth',
-    'allauth.socialaccount', # 소셜 가입계정 관리
     'allauth.account',
-
-    # provider
+    'allauth.socialaccount', # 소셜 가입계정 관리
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
-
+    'allauth.socialaccount.providers.github',
     # app
     'sign.apps.SignConfig',
     'rec_movie.apps.RecConfig',
-
     # DRF
+    'rest_framework_simplejwt',
     'rest_framework',
-    'rest_framework.authtoken',
     'dj_rest_auth',
     'dj_rest_auth.registration',
 ]
@@ -84,7 +83,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-AUTH_USER_MODEL = 'sign.CustomUser'
+AUTH_USER_MODEL = 'sign.User'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False # 유저네임은 없어도 됨
@@ -97,24 +96,12 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # 로그아웃 후 리디렉션 할 페이지
 ACCOUNT_LOGOUT_ON_GET = True # 로그아웃 버튼 클릭 시 자동 로그아웃
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'sign.serializers.CustomUserDetailSerializer',
+    'LOGIN_SERIALIZER': 'sign.serializers.UserLoginSerializer',
+    'USER_DETAILS_SERIALIZER': 'sign.serializers.UserDetailSerializer',
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'sign.serializers.CustomRegisterSerializer',
-}
-
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-
-
-JWT_AUTH = {
-    'JWT_SECRET_KEY': SECRET_KEY,
-    'JWT_ALGORITHM': 'HS256',
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
+    'REGISTER_SERIALIZER': 'sign.serializers.UserRegisterSerializer',
 }
 
 REST_FRAMEWORK = {
@@ -123,11 +110,21 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': False,
+}
 # SNS 로그인
 SOCIALACCOUNT_FORMS = {
     'signup': 'allauth.socialaccount.forms.SignupForm',
@@ -147,7 +144,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

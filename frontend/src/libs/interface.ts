@@ -1,3 +1,7 @@
+export interface FormDataList {
+  [key: string]: FormDataListItem
+}
+
 export interface FormDataListItem {
   label: string
   type: string
@@ -8,10 +12,6 @@ export interface FormDataListItem {
   }
   validator?: (param: ValidateParam, password?: string) => ValidateData
   message?: string
-}
-
-export interface FormDataList {
-  [key: string]: FormDataListItem
 }
 
 export interface ValidateParam {
@@ -89,4 +89,21 @@ export interface InputEvent<T = Element> {
 }
 
 // User
-type SNSProvider = 'Google' | 'Naver' | null
+export interface User {
+  id: number
+  name: string
+  nickName: string
+  phoneNumber: string
+  email: string
+  password: string
+  snsProvider: SNSProvider
+  snsId: string | null
+}
+
+type SNSProvider = 'google' | 'naver' | 'kakao' | null
+
+export interface SNSProviders {
+  [key: string]: {
+    name: SNSProvider
+  }
+}
