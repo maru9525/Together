@@ -99,7 +99,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: { requiresNoAuth: true },
       },
       {
-        path: 'reset-password-confirm/:uid/token/:token',
+        path: 'reset-password-confirm/:uid/token/:token/',
         name: 'ResetPasswordConfirm',
         component: ResetPasswordConfirm,
         meta: { requiresNoAuth: true },
