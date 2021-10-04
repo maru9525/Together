@@ -36,8 +36,8 @@ def convert_program_data(self):
         if row['fields.release_date'] == '' or row['fields.release_date'] == 0 or row['fields.poster_path'] == 0:
             continue
         program = Program.objects.create(program_id=row['pk'], original_title=row['fields.original_title'],
-                                     overview=row['fields.overview'], release_date=row['fields.release_date'],
-                                     poster_path=row['fields.poster_path'])
+                                         title=row['fields.name'], overview=row['fields.overview'], release_date=row['fields.release_date'],
+                                         poster_path=row['fields.poster_path'])
         # manyTomany로 연결 된 genre 데이터를 가져와서 연결한다.
         for genre_id in row['fields.genre_ids']:
             genre = Genre.objects.get(genre_id=genre_id)
