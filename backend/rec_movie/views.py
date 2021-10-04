@@ -200,6 +200,16 @@ def get_movie(request, pk):
 
 @api_view(['GET'])
 def get_genre(self):
+    """
+        모든 영화 장르를 가져옵니다.
+
+        ---
+
+        responseMessages:
+            - code: 201
+              message: Success Create Album
+
+        """
     genre = Genre.objects.all()
     serializer = GenreSerializer(genre, many=True)
     return Response(serializer.data)
@@ -207,6 +217,19 @@ def get_genre(self):
 
 @api_view(['GET'])
 def get_genre_rec_movies(self):
+    """
+        메인 페이지에서 장르를 기준으로 가장 인기있는 영화를 추천해 줍니다.
+        현재 임의로 3개의 장르를 설정하여 추천 알고리즘을 적용하였습니다.
+        차후 User와 연결하여, User의 선호 장르를 읽어와 제공하도록 합니다.
+
+        ---
+
+        responseMessages:
+            - code: 201
+              message: Success Get Movies
+
+        """
+
     # 이후 유저의 정보를 받으면, 그 유저의 선호 장르 3개에 대한 추천 영화를 출력한다.
     movie_ids = rec_g.recommend(16, 28, 35)
     movies = []
