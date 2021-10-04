@@ -9,10 +9,6 @@ interface ProfileState {
   data: string
 }
 
-const apiAxios = axios.create({
-  baseURL: 'http://localhost:3000',
-})
-
 export const content: Module<ProfileState, RootState> = {
   namespaced: true,
   state: {
