@@ -2,21 +2,21 @@
   <section class="info-section">
     <header class="section-header">
       <span class="title">{{ content.title }}</span>
-      <div class="sim-rate">{{ content.simRate }}%</div>
+      <div class="sim-rate" v-if="false">{{ content.simRate }}%</div>
     </header>
     <ul class="provider-list">
       <li
         class="provider-item"
         v-for="provider in content.providers"
-        :key="provider"
+        :key="provider.id"
       >
-        {{ provider }}
+        {{ provider.name }}
       </li>
     </ul>
     <div class="details">
-      <div>{{ content.firstAirYear }}</div>
-      <div>{{ content.rated }}</div>
-      <div>시즌 {{ content.seasons }}개</div>
+      <div>{{ content.releaseDate }}</div>
+      <div v-if="content.rated">{{ content.rated }}</div>
+      <div v-if="content.seasons">시즌 {{ content.seasons }}개</div>
     </div>
     <div class="overview">
       {{ content.overview }}
@@ -37,20 +37,9 @@
 </template>
 
 <script lang="ts">
+import { Content } from '@/libs/interfaces/content'
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { useStore } from 'vuex'
-
-type Content = {
-  id: number
-  title: string
-  posterPath: string
-  simRate: number
-  providers: string[]
-  firstAirYear: number
-  rated: string
-  seasons: number
-  overview: string
-}
 
 export default defineComponent({
   name: 'ContentDetailInfoSection',
@@ -84,7 +73,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .info-section {
-  @apply p-4 grid gap-4;
+  @apply relative z-10 p-4 grid gap-4 md:text-white;
 
   .section-header {
     @apply flex justify-between items-center;
@@ -99,7 +88,7 @@ export default defineComponent({
   }
 
   .provider-list {
-    @apply flex gap-2;
+    @apply flex flex-wrap gap-2;
   }
 
   .details {

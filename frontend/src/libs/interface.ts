@@ -1,3 +1,7 @@
+export interface FormDataList {
+  [key: string]: FormDataListItem
+}
+
 export interface FormDataListItem {
   label: string
   type: string
@@ -8,10 +12,6 @@ export interface FormDataListItem {
   }
   validator?: (param: ValidateParam, password?: string) => ValidateData
   message?: string
-}
-
-export interface FormDataList {
-  [key: string]: FormDataListItem
 }
 
 export interface ValidateParam {
@@ -28,6 +28,12 @@ export interface ValidateData {
   message?: string
 }
 
+// Content
+export interface Genre {
+  id: number
+  name: string
+  k_name: string
+}
 export interface Content {
   id: number
   title: string
@@ -57,9 +63,9 @@ export interface Party {
 
 export type Validator = (key: string, value: string | number) => ValidateData
 
-export interface PartyFormField {
+export interface FormField {
   label: string
-  type: 'text' | 'number' | 'date'
+  type: 'text' | 'number' | 'date' | 'password'
   value: string | number
   placeholder?: string
   errors: {
@@ -68,8 +74,13 @@ export interface PartyFormField {
   validators?: Validator[]
   message?: string
 }
-export interface PartyForm {
-  [key: string]: PartyFormField
+
+export interface FormData {
+  [key: string]: FormField
+}
+
+export interface SubmitFormData {
+  [key: string]: string | number
 }
 
 export interface InputEvent<T = Element> {
@@ -78,7 +89,6 @@ export interface InputEvent<T = Element> {
 }
 
 // User
-type SNSProvider = 'Google' | 'Naver' | null
 export interface User {
   id: number
   name: string
@@ -88,4 +98,12 @@ export interface User {
   password: string
   snsProvider: SNSProvider
   snsId: string | null
+}
+
+type SNSProvider = 'google' | 'naver' | 'kakao' | 'github' | null
+
+export interface SNSProviders {
+  [key: string]: {
+    name: SNSProvider
+  }
 }

@@ -53,16 +53,23 @@
           >이메일로 회원가입하기
         </router-link>
         <!-- Social Login area -->
-        <hr class="my-4" />
-        <button class="input-container__social-btn kakao">
-          카카오로 시작하기
-        </button>
-        <button class="input-container__social-btn google">
-          구글로 시작하기
-        </button>
-        <button class="input-container__social-btn naver">
-          네이버로 시작하기
-        </button>
+        <hr class="my-1" />
+        <p class="text-center text-gray-600 text-xs font-medium">
+          SNS 계정으로 로그인
+        </p>
+        <div class="input-container__social-btn-group">
+          <button
+            v-for="(provider, key) in snsProviders"
+            :class="provider.name"
+            :key="key"
+            @click="handleSocialLoginClick(provider.name)"
+          >
+            <img
+              :src="require(`@/assets/images/${provider.name}_login.png`)"
+              :alt="provider.name"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -73,7 +80,7 @@ import { computed, defineComponent, ref } from 'vue'
 import TextInput from '@/components/TextInput.vue'
 import { emailValidator } from '@/libs/validator'
 import { useStore } from 'vuex'
-import { FormDataList, ValidateData } from '@/libs/interface'
+import { FormDataList, ValidateData, SNSProviders } from '@/libs/interface'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -84,6 +91,18 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const router = useRouter()
+
+    const snsProviders = ref<SNSProviders>({
+      google: {
+        name: 'google',
+      },
+      naver: {
+        name: 'naver',
+      },
+      kakao: {
+        name: 'kakao',
+      },
+    })
 
     const isSaveEmail = ref<boolean>(
       localStorage.getItem('email') ? true : false
@@ -133,29 +152,61 @@ export default defineComponent({
         const email = formData.value['email'].value
         const password = formData.value['password'].value
         // TODO: Add loading spinner
-        const response = await store.dispatch('auth/login', {
-          email,
-          password,
-        })
-        if (response && response.status === 200) {
-          // 로그인 성공 시, 비밀번호를 바꿔야 한다면 비밀번호 변경 컴포넌트로 이동
-          if (store.state.auth.resetPassword) {
-            router.push({ name: 'ChangePassword' })
-          } else {
-            router.push({ name: 'ContentList' })
-          }
+        try {
+          await store.dispatch('auth/login', {
+            email,
+            password,
+          })
+          router.push({ name: 'ContentList' })
+        } catch (error) {
+          alert(error)
         }
+      }
+    }
+
+    const handleSocialLoginClick = async (platform: string) => {
+      if (platform === 'google') {
+        const REDIRECT_URI = `http://localhost:8080/auth/${platform}/callback`
+        const CLIENT_ID =
+          '819701037998-q2ascolrbjsmiqnq5tj3q7ifmk0sv5oh.apps.googleusercontent.com'
+        const SCOPE = 'https://www.googleapis.com/auth/userinfo.email'
+
+        const link = `https://accounts.google.com/o/oauth2/v2/auth?scope=${SCOPE}&client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}`
+        location.href = link
+      } else if (platform === 'kakao') {
+        const REDIRECT_URI = `http://localhost:8080/auth/${platform}/callback`
+        const REST_API_KEY = 'd7ddc4b6ec233d4fc10dd21de17d8c63'
+
+        const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+        location.href = link
+      } else if (platform === 'github') {
+        const REDIRECT_URI = `http://localhost:8080/auth/${platform}/callback`
+        const CLIENT_ID =
+          '819701037998-q2ascolrbjsmiqnq5tj3q7ifmk0sv5oh.apps.googleusercontent.com'
+
+        // const link = `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}`
+        // location.href = link
+      } else {
+        const REDIRECT_URI = `http://localhost:8080/auth/${platform}/callback`
+        const client_id =
+          '819701037998-q2ascolrbjsmiqnq5tj3q7ifmk0sv5oh.apps.googleusercontent.com'
+        const scope = 'https://www.googleapis.com/auth/userinfo.email'
+
+        // const link = `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${client_id}&response_type=code&redirect_uri=${REDIRECT_URI}`
+        // location.href = link
       }
     }
 
     return {
       store,
       router,
+      snsProviders,
       isSaveEmail,
       isValidFormData,
       formData,
       handleUpdateValidate,
       submit,
+      handleSocialLoginClick,
     }
   },
 })
@@ -184,17 +235,20 @@ export default defineComponent({
     &__sub-option {
       @apply flex flex-row justify-between;
     }
-    &__social-btn {
-      @apply w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
+    &__social-btn-group {
+      @apply flex justify-around w-full rounded-lg py-3 text-sm text-gray-600 font-bold;
+      button {
+        @apply rounded-md w-14 h-14;
 
-      &.kakao {
-        @apply bg-yellow-400;
-      }
-      &.google {
-        @apply bg-gray-100;
-      }
-      &.naver {
-        @apply bg-green-500;
+        &.kakao {
+          @apply bg-yellow-400;
+        }
+        &.google {
+          @apply bg-gray-100;
+        }
+        &.naver {
+          @apply bg-green-500;
+        }
       }
     }
   }
