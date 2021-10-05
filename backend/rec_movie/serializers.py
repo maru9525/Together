@@ -56,6 +56,5 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
     def get_reviews(self, movie):
-        reviews = movie.reviews.all().order_by('created_at')
+        reviews = movie.reviews.all().order_by('-created_at')
         return ReviewSerializer(reviews, many=True).data
-

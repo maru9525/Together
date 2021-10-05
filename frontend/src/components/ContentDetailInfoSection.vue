@@ -97,7 +97,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .info-section {
-  @apply relative z-10 p-4 grid gap-4 md:text-white;
+  @apply relative z-10 p-4 grid gap-2 select-none md:text-white;
 
   .section-header {
     @apply flex justify-between items-center;
@@ -113,6 +113,10 @@ export default defineComponent({
 
   .provider-list {
     @apply flex flex-wrap gap-2;
+
+    .provider-item {
+      @apply hover:text-red-400;
+    }
   }
 
   .details {
@@ -135,7 +139,7 @@ export default defineComponent({
       @apply hidden;
     }
     .star {
-      @apply text-gray-200;
+      @apply text-gray-200 cursor-pointer;
     }
 
     input:checked ~ label, /* show gold star when clicked */
