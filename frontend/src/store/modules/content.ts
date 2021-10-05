@@ -1,4 +1,4 @@
-import { Content } from '@/libs/interfaces/content'
+import { Content, Review } from '@/libs/interfaces/content'
 import { Genre } from '@/libs/interface'
 import axios from 'axios'
 import { Module } from 'vuex'
@@ -77,9 +77,16 @@ export const content: Module<ProfileState, RootState> = {
     },
     getProgramGenreList: async (): Promise<Genre[]> => {
       try {
-        return contentAxios.getProgramGenreList()
+        return await contentAxios.getProgramGenreList()
       } catch (error: any) {
         throw new Error(error.response)
+      }
+    },
+    postReview: async (_, { submitData, contentType }): Promise<Review> => {
+      try {
+        return await contentAxios.postReview(submitData, contentType)
+      } catch (error: any) {
+        throw new Error(error)
       }
     },
   },

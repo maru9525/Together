@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -25,9 +26,10 @@ class Genre(models.Model):
 class Review(models.Model):
     user_id = models.CharField(max_length=100)
     program_id = models.ForeignKey("Program", related_name="review", on_delete=models.CASCADE, db_column="program_id")
-    rating = models.IntegerField()
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     content = models.TextField(default='')
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Provider(models.Model):

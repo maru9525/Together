@@ -2,14 +2,22 @@
   <LoadingSection v-if="loading">로딩 중</LoadingSection>
   <template v-else>
     <section class="banner-section">
-      <ContentDetailInfoSection v-if="!isMobile" :content="content" />
+      <ContentDetailInfoSection
+        v-if="!isMobile"
+        :content="content"
+        :contentType="contentType"
+      />
       <div class="img-wrapper">
         <div class="layer"></div>
         <img :src="posterPath" alt="" />
       </div>
     </section>
     <div class="container py-4">
-      <ContentDetailInfoSection v-if="isMobile" :content="content" />
+      <ContentDetailInfoSection
+        v-if="isMobile"
+        :content="content"
+        :contentType="contentType"
+      />
       <section class="review-section">
         <header class="section-header">{{ content.title }} 리뷰</header>
         <ul class="review-list">
@@ -131,10 +139,12 @@ export default defineComponent({
       return youtubeReviews.value?.slice(0, isMobile.value ? 3 : 12)
     })
 
-    addEventListener('resize', (e) => {
+    const handleResize = (e: Event) => {
       const w = e.target as Window
       innerWidth.value = w.innerWidth
-    })
+    }
+
+    addEventListener('resize', handleResize)
 
     onMounted(async () => {
       try {
@@ -180,9 +190,7 @@ export default defineComponent({
       loading.value = false
     })
     onBeforeUnmount(() => {
-      removeEventListener('resize', () => {
-        console.log('Remove')
-      })
+      removeEventListener('resize', handleResize)
     })
     return {
       loading,

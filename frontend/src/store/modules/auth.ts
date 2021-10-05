@@ -7,7 +7,7 @@ import { Token } from '@/libs/interfaces/auth'
 interface authModule {
   accessToken: string
   refreshToken: string
-  user?: InputUser
+  user?: OutputUser
 }
 
 export const auth: Module<authModule, RootState> = {
@@ -25,7 +25,7 @@ export const auth: Module<authModule, RootState> = {
       state.accessToken = ''
       state.refreshToken = ''
     },
-    SET_USER(state: authModule, user: InputUser) {
+    SET_USER(state: authModule, user: OutputUser) {
       state.user = user
     },
     REMOVE_USER(state: authModule) {
@@ -140,6 +140,9 @@ export const auth: Module<authModule, RootState> = {
     },
     getToken(state) {
       return state.accessToken
+    },
+    getUserNickName(state) {
+      return state.user?.nickName
     },
   },
 }
