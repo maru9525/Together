@@ -31,7 +31,8 @@ schema_url_patterns = [
     path('billing/', include('billing.urls')),
     path('accounts/', include('allauth.urls')),
     path('movies/', include('rec_movie.urls')),
-]
+    path('programs/', include('rec_program.urls')),
+    ]
 
 schema_view_v1 = get_schema_view(
     openapi.Info(
@@ -49,14 +50,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('party/', include('party.urls')), # Party
     path('accounts/', include('allauth.urls')), # SNS
+    path('accounts/', include('dj_rest_auth.urls')),
     path('account/', include('sign.urls')), # User
     path('billing/', include('billing.urls')),
     path('movies/', include('rec_movie.urls')),  # Movie contents
+    path('programs/', include('rec_program.urls')),  # Program contents
 
     # Swagger 연동
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
-
 ]

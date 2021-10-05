@@ -9,6 +9,7 @@ import ProfileMain from '@/views/ProfileMain.vue'
 import ProfileEdit from '@/views/ProfileEdit.vue'
 import ProfileChangePassword from '@/views/ProfileChangePassword.vue'
 import ProfileParty from '@/views/ProfileParty.vue'
+import ProfileGenre from '@/views/ProfileGenre.vue'
 import ContentList from '@/views/ContentList.vue'
 import ContentDetail from '@/views/ContentDetail.vue'
 import PartyList from '@/views/PartyList.vue'
@@ -21,6 +22,8 @@ import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
 import ResetPasswordConfirm from '@/views/ResetPasswordConfirm.vue'
+
+import OauthCallback from '@/views/OauthCallback.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -108,6 +111,19 @@ const routes: Array<RouteRecordRaw> = [
         component: Register,
         meta: { requiresNoAuth: true },
       },
+      {
+        path: ':platform/callback',
+        name: 'OauthCallback',
+        component: OauthCallback,
+        props: true,
+        meta: { requiresNoAuth: true },
+      },
+      {
+        path: 'social-login-success',
+        name: 'SocialLoginSuccess',
+        redirect: { name: 'ContentList' },
+        meta: { requiresNoAuth: true },
+      },
     ],
   },
   {
@@ -138,6 +154,11 @@ const routes: Array<RouteRecordRaw> = [
         path: ':userId/party',
         name: 'ProfileParty',
         component: ProfileParty,
+      },
+      {
+        path: ':userId/genre',
+        name: 'ProfileGenre',
+        component: ProfileGenre,
       },
     ],
   },

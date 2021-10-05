@@ -1,6 +1,5 @@
 from django.urls import path, include
 from . import views
-from rest_framework import routers  # router import
 
 app_name = 'movieApp'    # URL 네임스페이스
 
@@ -10,7 +9,7 @@ urlpatterns = [
     path('convert-genre/', views.convert_genre_data),
 
     # movie
-    path('movie/<int:pk>/', views.get_movie),
+    path('<int:pk>/', views.get_movie),
     path('', views.get_genre_rec_movies),
 
     # review
