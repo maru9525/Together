@@ -7,10 +7,7 @@ from .models import (
 )
 from rest_framework.views import APIView
 from django.views.generic.base import View
-# from django.views.decorators.csrf import csrf_exempt
-# from django.utils.decorators import method_decorator
 
-# @method_decorator(csrf_exempt, name='dispatch')
 class PointCheckoutAjaxView(APIView):
 
   def post(self, request, *args, **kwargs):
@@ -41,7 +38,6 @@ class PointCheckoutAjaxView(APIView):
     else:
       return JsonResponse({}, status=401)
 
-# @method_decorator(csrf_exempt, name='dispatch')
 class PointImpAjaxView(APIView):
   def post(self, request, *args, **kwargs):
     if not request.user.is_authenticated:
