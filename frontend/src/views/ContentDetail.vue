@@ -136,7 +136,7 @@ export default defineComponent({
 
     const displayedReviews = computed(() => {
       // 화면 사이즈에 따라 end index가 달라진다.
-      return youtubeReviews.value?.slice(0, isMobile.value ? 3 : 12)
+      return youtubeReviews.value?.slice(0, isMobile.value ? 3 : 6)
     })
 
     const handleResize = (e: Event) => {
@@ -172,12 +172,13 @@ export default defineComponent({
         console.log(error)
       }
 
+      let youtubeQuery = props.contentType === 'movies' ? '영화' : '드라마'
       try {
         const res = await axios.get(YOUTUBE_BASEURL, {
           params: {
             key: YOUTUBE_KEY,
             part: 'snippet',
-            q: `${content.value?.title} 리뷰`,
+            q: `${youtubeQuery} ${content.value?.title} 리뷰`,
             maxResults: 20,
             type: 'video',
             regionCode: 'KR',

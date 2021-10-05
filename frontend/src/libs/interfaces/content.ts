@@ -75,6 +75,7 @@ export interface Content {
     [key: string]: string
   }[]
   genres: Genre[]
+  reviews: Review[]
 }
 
 export type ProviderFilter = {
@@ -85,7 +86,8 @@ export type ProviderFilter = {
 export interface Review {
   id: number
   userId: string
-  contentId: string
   rating: number
   content: string
+  programId?: number
+  movieId?: number
 }
