@@ -165,7 +165,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS  = [
-    'https://j5d202.p.ssafy.io',
+        'https://j5d202.p.ssafy.io',
 ]
 
 CORS_ALLOW_METHODS = [
