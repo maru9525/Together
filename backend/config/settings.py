@@ -43,7 +43,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-        'j5d202.p.ssafy.io'
+        'j5d202.p.ssafy.io', 'localhost'
         ]
 
 # Application definition
