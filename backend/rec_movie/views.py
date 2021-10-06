@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
+from silk.profiling.profiler import silk_profile
 
 from .models import (Movie, Review, Genre, Provider)
 from .serializers import (MovieSerializer, ReviewSerializer, GenreSerializer)
@@ -171,6 +172,7 @@ class ReviewDetailView(GenericAPIView):
 
 
 @api_view(['GET'])
+@silk_profile(name='Get Movie data')
 def get_movie(request, pk):
     """
     영화 정보를 가져옵니다.
@@ -218,6 +220,7 @@ def get_genre(self):
 
 
 @api_view(['GET'])
+@silk_profile(name='Get Main data')
 def get_genre_rec_movies(self):
     """
         메인 페이지에서 장르를 기준으로 가장 인기있는 영화를 추천해 줍니다.
