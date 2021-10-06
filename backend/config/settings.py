@@ -134,7 +134,7 @@ SIMPLE_JWT = {
 }
 # SNS 로그인
 SOCIALACCOUNT_FORMS = {
-    'signup': 'allauth.socialaccount.forms.SignupForm', 
+    'signup': 'allauth.socialaccount.forms.SignupForm',
 }
 
 # Password Reset Email Host
