@@ -73,7 +73,6 @@ class UserRegisterSerializer(RegisterSerializer):
 
 
 class UserDetailSerializer(UserDetailsSerializer):
-
   fav_movie_genres = serializers.SerializerMethodField('get_movie_genres')
   fav_program_genres = serializers.SerializerMethodField('get_program_genres')
   
