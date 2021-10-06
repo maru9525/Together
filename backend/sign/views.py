@@ -1,12 +1,14 @@
+from rec_movie.serializers import GenreSerializer
+from rec_movie.views import get_genre
+from rec_movie.models import Genre
 import requests
 import hashlib, os
-from django.shortcuts import redirect, render
-from django.shortcuts import render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from json.decoder import JSONDecodeError
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, generics
 from rest_framework.response import Response
 from dj_rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.google import views as google_view
@@ -15,10 +17,11 @@ from allauth.socialaccount.providers.github import views as github_view
 from allauth.socialaccount.providers.naver import views as naver_view
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.models import SocialAccount
-from .serializers import UserSerializer
+from .serializers import UserDetailSerializer, UserSerializer, UserMovieGenreSerializer
 from .models import User
 import json
 from django.views.decorators.csrf import csrf_exempt
+
 
 FRONT_BASE_URL = "http://localhost:8080"
 BASE_URL = "http://localhost:8000"
@@ -36,6 +39,32 @@ class UserMe(viewsets.ModelViewSet):
   def get_queryset(self):
     user = self.request.user
     return User.objects.get_queryset().filter(username=user)
+
+class UserProfileView(generics.GenericAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserDetailSerializer
+
+    def get_object(self, pk):
+      return get_object_or_404(User,pk=pk)
+
+    def get(self, request, pk):
+      user = self.get_object(pk)
+      serializer = UserDetailSerializer(user)
+      return Response(serializer.data)
+
+    def put(self, request, pk):
+      user = self.get_object(pk)
+      serializer = UserDetailSerializer(user, data=request.data)
+      if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class UserFavMovieGenreView(generics.GenericAPIView):
+
+
+  
+
 
 
 def passwordResetRedirect(request, uid, token):

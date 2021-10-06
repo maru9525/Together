@@ -1,5 +1,9 @@
+import re
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db.models.fields.related import ManyToManyField
+from rec_movie.models import Genre as MovieGenre
+from rec_program.models import Genre
 
 class UserManager(BaseUserManager):
   def create_user(self, username, email, nick_name, phone_number, password=None):
@@ -30,6 +34,9 @@ class UserManager(BaseUserManager):
     return user
 
 class User(AbstractBaseUser):
+  fav_movie_genres = ManyToManyField(MovieGenre, related_name='movie_genres')
+  fav_program_genres=  ManyToManyField(Genre, related_name='program_genres')
+
   username = models.CharField(max_length=100)
   email = models.EmailField(max_length=255, unique=True)
   nick_name = models.CharField(max_length=100)
@@ -38,7 +45,6 @@ class User(AbstractBaseUser):
   is_admin = models.BooleanField(default=False)
   
   objects = UserManager()
-
   USERNAME_FIELD  = 'email'
   REQUIRED_FIELDS = ['username','nick_name', 'phone_number']
 

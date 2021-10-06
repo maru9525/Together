@@ -2,10 +2,11 @@ from django.conf import settings
 from django.db import transaction
 from django.db.models import fields
 from .models import User
+from rec_movie.serializers import GenreSerializer
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import (
-  UserDetailsSerializer, LoginSerializer
+  UserDetailsSerializer, LoginSerializer,
 )
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -59,16 +60,25 @@ class UserRegisterSerializer(RegisterSerializer):
     return user
 
 
-class UserDetailSerializer(UserDetailsSerializer):
+class UserDetailSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = User
     fields = (
       'id',
+      'username',
       'email',
       'nick_name',
       'username',
       'phone_number',
     )
-    read_only_fields = ('id', 'email','username',)
+    read_only_fields = ('id',)
 
+class UserMovieGenreSerializer(serializers.ModelSerializer):
+  fav_movie_genres = GenreSerializer(required=False, many=True)
+   
+  class Meta:
+    model = User
+    fields = (
+      'id', 'fav_movie_genres'
+    )
