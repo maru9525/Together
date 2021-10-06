@@ -134,7 +134,7 @@ SIMPLE_JWT = {
 }
 # SNS 로그인
 SOCIALACCOUNT_FORMS = {
-    'signup': 'allauth.socialaccount.forms.SignupForm', 
+    'signup': 'allauth.socialaccount.forms.SignupForm',
 }
 
 # Password Reset Email Host
@@ -167,7 +167,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS  = [
-    'http://localhost:8080',
+    'https://j5d202.p.ssafy.io',
 ]
 
 CORS_ALLOW_METHODS = [
