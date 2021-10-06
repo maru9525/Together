@@ -21,7 +21,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 
 FRONT_BASE_URL = "https://j5d202.p.ssafy.io"
-BASE_URL = "https://j5d202.p.ssafy.io:8001"
+BASE_URL = "http://j5d202.p.ssafy.io:8001"
 GOOGLE_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/google/callback"
 KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/kakao/callback"
 GITHUB_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/github/callback"
