@@ -20,8 +20,8 @@ from .models import User
 import json
 from django.views.decorators.csrf import csrf_exempt
 
-FRONT_BASE_URL = "http://localhost:8080"
-BASE_URL = "http://localhost:8000"
+FRONT_BASE_URL = "https://j5d202.p.ssafy.io"
+BASE_URL = "http://j5d202.p.ssafy.io:8000"
 GOOGLE_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/google/callback"
 KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/kakao/callback"
 GITHUB_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/github/callback"
