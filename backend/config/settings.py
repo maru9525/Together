@@ -167,7 +167,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS  = [
-    'http://localhost:8080',
+        'https://j5d202.p.ssafy.io',
 ]
 
 CORS_ALLOW_METHODS = [
