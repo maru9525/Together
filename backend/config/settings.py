@@ -79,8 +79,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'dj_rest_auth',
     'dj_rest_auth.registration',
-    # SSL
-    'sslserver',
 ]
 
 # 디폴트 SITE의 id / 등록을 하지 않으면, 각 요청 시에 host명의 Site 인스턴스를 찾는다 .
