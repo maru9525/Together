@@ -1,14 +1,14 @@
-export interface Content {
-  id: number
-  title: string
-  posterPath: string
-  simRate: number
-  providers: string[]
-  firstAirYear: number
-  rated: string
-  seasons: number
-  overview: string
-}
+// export interface Content {
+//   id: number
+//   title: string
+//   posterPath: string
+//   simRate: number
+//   providers: string[]
+//   firstAirYear: number
+//   rated: string
+//   seasons: number
+//   overview: string
+// }
 
 export interface Youtube {
   id: {
@@ -51,14 +51,9 @@ export type ProviderNameEn =
   | 'Watcha'
   | 'Naver Store'
   | 'wavve'
-  | 'Crunchyroll'
-  | 'Curiosity Stream'
-  | 'Hoichoi'
-  | 'Classix'
-  | 'BroadwayHD'
-  | 'Magellan TV'
-  | 'WOW Presents Plus'
   | 'Amazon Prime Video'
+  | 'Disney Plus'
+  | 'Google Play Movies'
 
 interface Provider {
   id: number
@@ -67,7 +62,7 @@ interface Provider {
   pricePerDay: number
 }
 
-export interface Movie {
+export interface Content {
   id: number
   movieId: number
   originalTitle: string
@@ -80,9 +75,19 @@ export interface Movie {
     [key: string]: string
   }[]
   genres: Genre[]
+  reviews: Review[]
 }
 
 export type ProviderFilter = {
   name: ProviderNameEn
   active: boolean
 }[]
+
+export interface Review {
+  id: number
+  userId: string
+  rating: number
+  content: string
+  programId?: number
+  movieId?: number
+}
