@@ -16,7 +16,7 @@ services:
       container_name: django_service
       working_dir: /home/ubuntu/Together/backend
       command: "python manage.py runserver"
-      build: ./backend
+      build: /home/ubuntu/Together/backend
       volumes:
         - .:/home/ubuntu/Together/backend
       depends_on:
