@@ -2,7 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'http://j5d202.p.ssafy.io',
+  baseURL: 'https://j5d202.p.ssafy.io',
 })
 
 http.interceptors.request.use(function (config) {
