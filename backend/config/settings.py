@@ -47,7 +47,9 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        'j5d202.p.ssafy.io', 'localhost'
+        ]
 
 # Application definition
 INSTALLED_APPS = [
@@ -139,7 +141,7 @@ SIMPLE_JWT = {
 }
 # SNS 로그인
 SOCIALACCOUNT_FORMS = {
-    'signup': 'allauth.socialaccount.forms.SignupForm', 
+    'signup': 'allauth.socialaccount.forms.SignupForm',
 }
 
 # Password Reset Email Host
@@ -174,7 +176,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS  = [
-    'http://localhost:8080',
+        'https://j5d202.p.ssafy.io',
 ]
 
 CORS_ALLOW_METHODS = [
@@ -215,10 +217,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'OTT_DB',
+        'NAME': 'ott_db',
         'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
