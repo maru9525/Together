@@ -1,39 +1,49 @@
 from django.conf import settings
 from django.db import transaction
 from django.db.models import fields
+from party.models import Party, Provider
 
 from rec_movie.serializers import GenreSerializer as MovieGenreSerializer
 from rec_program.serializers import GenreSerializerP as ProgramGenreSerializer
 from .models import User
+from rec_movie.serializers import GenreSerializer
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import (
-  UserDetailsSerializer, LoginSerializer
+  UserDetailsSerializer, LoginSerializer,
 )
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-class UserSerializer(serializers.ModelSerializer):
-
-  fav_movie_genres = serializers.SerializerMethodField('get_movie_genres')
-  fav_program_genres = serializers.SerializerMethodField('get_program_genres')
-  class Meta:
-    model = User
-    exclude = ('password', 'last_login', 'is_active', 'is_admin')
-
-  def get_movie_genres(self, user):
-    genres = user.fav_movie_genres.all()
-    return MovieGenreSerializer(genres, many=True).data
-
-  def get_program_genres(self, user):
-    genres = user.fav_program_genres.all()
-    return ProgramGenreSerializer(genres, many=True).data
 
 class UserSmallSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = User
-    fields = ('id', 'nick_name')
+    fields = ('id', 'nick_name', 'username', 'email', 'phone_number')
 
+class ProviderSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = Provider
+    fields = '__all__'
+
+
+class PartySmallSerializer(serializers.ModelSerializer):
+  host = UserSmallSerializer()
+  provider = ProviderSerializer()
+  
+  class Meta:
+    model = Party
+    exclude = ('payments',)
+
+class UserSerializer(serializers.ModelSerializer):
+  payments = PartySmallSerializer(required=False, many=True)
+  fav_movie_genres = MovieGenreSerializer(required=False, many=True)
+  fav_program_genres = ProgramGenreSerializer(required=False, many=True)
+
+  class Meta:
+    model = User
+    exclude = ('password', 'last_login', 'is_active', 'is_admin')
 
 class UserLoginSerializer(LoginSerializer):
 
@@ -73,43 +83,28 @@ class UserRegisterSerializer(RegisterSerializer):
 
 
 class UserDetailSerializer(UserDetailsSerializer):
-  fav_movie_genres = serializers.SerializerMethodField('get_movie_genres')
-  fav_program_genres = serializers.SerializerMethodField('get_program_genres')
-  
+  payments = PartySmallSerializer(required=False, many=True)
+  fav_movie_genres = MovieGenreSerializer(required=False, many=True)
+  fav_program_genres = ProgramGenreSerializer(required=False, many=True)
   class Meta:
     model = User
     fields = (
       'id',
+      'username',
       'email',
       'nick_name',
       'username',
       'phone_number',
       'fav_movie_genres',
       'fav_program_genres',
+      'payments',
     )
-    read_only_fields = ('id', 'email','username',)
-
-  def get_movie_genres(self, user):
-    genres = user.fav_movie_genres.all()
-    return MovieGenreSerializer(genres, many=True).data
-
-  def get_program_genres(self, user):
-    genres = user.fav_program_genres.all()
-    return ProgramGenreSerializer(genres, many=True).data
-
+    read_only_fields = ('id', 'email')
 
 class UserGenreSerializer(serializers.ModelSerializer):
-  fav_movie_genres = serializers.SerializerMethodField('get_movie_genres')
-  fav_program_genres = serializers.SerializerMethodField('get_program_genres')
+  fav_movie_genres = MovieGenreSerializer(required=False, many=True)
+  fav_program_genres = ProgramGenreSerializer(required=False, many=True)
 
   class Meta:
     model = User
     fields = ( 'fav_movie_genres', 'fav_program_genres' )
-
-  def get_movie_genres(self, user):
-    genres = user.fav_movie_genres.all()
-    return MovieGenreSerializer(genres, many=True).data
-
-  def get_program_genres(self, user):
-    genres = user.fav_program_genres.all()
-    return ProgramGenreSerializer(genres, many=True).data
