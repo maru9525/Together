@@ -1,5 +1,5 @@
 <template>
-  <LoadingSection v-if="loading">로딩 중</LoadingSection>
+  <LoadingSection v-if="loading" />
   <template v-else>
     <section class="banner-section">
       <ContentDetailInfoSection
