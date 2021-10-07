@@ -220,7 +220,8 @@ DATABASES = {
         'NAME': 'ott_db',
         'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': 'db',
+        # 'HOST': 'db', 수동배포
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
