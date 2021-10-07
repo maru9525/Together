@@ -1,27 +1,33 @@
 version: "3"
 services:
-    web:
-      build: ./backend
-      command: python manage.py runserver 0.0.0.0:8000
-      ports:
-        - "8000:8000"
-      volumes:
-        - .:/code
-      depends_on:
-        - db
-    
-    db:
+    postgres:
+      container_name: postgres_service
       image: postgres:12
       volumes:
-        - ./data/db:/var/lib/postgresql/data
+        - ./backend/data/db:/var/lib/postgresql/data
       environment:
         - POSTGRES_DB=ott_db
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=root
+        - POSTGRES_HOST=postgres
+        - POSTGRES_PORT=5432
 
-    web_front:
+    django:
+      container_name: django_service
       build:
-        context: ./frontend
-        dockerfile: Dockerfile
+        context: ./backend
+        dockerfile: ./backend/Dockerfile
+      working_dir: /home/
+      command: >
+        bash -c "
+        chmod +x /wait-for-it.sh
+        && /wait-for-it.sh postgres:5432 -t 10 # 5432 포트 사용 가능 시까지 대기
+        && python manage.py makemigrations
+        && python manage.py migrate
+        && python manage.py runserver"
       volumes:
-        - ./
+        - ./:/home/
+      depends_on:
+        - postgres
+      ports:
+        - "8000:8000"
