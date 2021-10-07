@@ -220,8 +220,8 @@ DATABASES = {
         'NAME': 'ott_db',
         'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': 'db', 
-        'PORT': '5432',
+        'HOST': 'postgres',
+        'PORT': '5433',
     }
 }
 
