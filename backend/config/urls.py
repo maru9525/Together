@@ -25,10 +25,9 @@ from drf_yasg import openapi
 from rest_framework.permissions import AllowAny
 
 schema_url_patterns = [
-    # path('account/', include('sign.urls')),
+    path('account/', include('sign.urls')),
     path('party/', include('party.urls')),
     path('billing/', include('billing.urls')),
-    # path('accounts/', include('allauth.urls')),
     path('movies/', include('rec_movie.urls')),
     path('programs/', include('rec_program.urls')),
     ]
@@ -46,10 +45,11 @@ schema_view_v1 = get_schema_view(
 )
 
 urlpatterns = [
+    # silk 적용
+    path('silk/', include('silk.urls')),
+
     path('admin/', admin.site.urls),
     path('party/', include('party.urls')), # Party
-    # path('accounts/', include('allauth.urls')), # SNS
-    # path('accounts/', include('dj_rest_auth.urls')),
     path('account/', include('sign.urls')), # User
     path('billing/', include('billing.urls')),
     path('movies/', include('rec_movie.urls')),  # Movie contents
