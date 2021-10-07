@@ -24,14 +24,14 @@ from .serializers import UserDetailSerializer, UserGenreSerializer, UserSerializ
 from .models import User
 import json
 from django.views.decorators.csrf import csrf_exempt
-# 
+#
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 
 FRONT_BASE_URL = "https://j5d202.p.ssafy.io"
-BASE_URL = "https://j5d202.p.ssafy.io"
+BASE_URL = "http://localhost:8001"
 GOOGLE_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/google/callback"
 KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/kakao/callback"
 GITHUB_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/github/callback"
