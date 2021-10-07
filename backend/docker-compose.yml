@@ -4,7 +4,7 @@ services:
       container_name: postgres_service
       image: postgres:12
       volumes:
-        - ./backend/data/postgres:/var/lib/postgresql/data
+        - ./data/postgres:/var/lib/postgresql/data
       environment:
         - POSTGRES_DB=ott_db
         - POSTGRES_USER=postgres
@@ -14,7 +14,6 @@ services:
 
     django:
       container_name: django_service
-      working_dir: /home/ubuntu/Together/backend
       command: "python manage.py runserver"
       build: .
       volumes:
