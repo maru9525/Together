@@ -1,7 +1,9 @@
 FROM python:3.6.8
 ENV PYTHONUNBUFFERED=1
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install --upgrade pip
+WORKDIR /home/ubuntu/Together/
+COPY requirements.txt ./
+RUN python3 -m pip install --upgrade pip
 RUN pip install -r requirements.txt
-COPY . ./code/
+COPY . .
+CMD ["python", "manage.py", "runserver", "8000:8000"]
+EXPOSE 8000

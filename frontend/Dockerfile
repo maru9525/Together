@@ -1,6 +1,6 @@
 # build stage
 FROM node:lts-alpine as build-stage
-WORKDIR /home/ubuntu/auto_Together/frontend
+WORKDIR /home/ubuntu/Together/frontend
 COPY package*.json ./
 RUN npm install
 COPY . .
