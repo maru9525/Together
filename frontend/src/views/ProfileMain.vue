@@ -22,6 +22,10 @@
             <p class="label">휴대폰 번호</p>
             <p class="value">{{ user.phoneNumber }}</p>
           </div>
+          <div class="profile-main__info--array">
+            <p class="label">이메일</p>
+            <p class="value">{{ user.email }}</p>
+          </div>
         </div>
       </div>
       <div class="grid gap-4">
