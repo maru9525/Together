@@ -65,6 +65,7 @@ const postReview = async (
 ): Promise<Review> => {
   try {
     const res = await http.post(`/${contentType}/review/`, submitData)
+    console.log(res)
     return keysToCamel(res.data)
   } catch (error: any) {
     throw new Error(error)
