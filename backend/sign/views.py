@@ -30,7 +30,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 
-FRONT_BASE_URL = "https://j5d202.p.ssafy.io/api/v1"
+FRONT_BASE_URL = "https://j5d202.p.ssafy.io"
 BASE_URL = "https://j5d202.p.ssafy.io/api/v1"
 GOOGLE_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/google/callback"
 KAKAO_CALLBACK_URI = f"{FRONT_BASE_URL}/auth/kakao/callback"
