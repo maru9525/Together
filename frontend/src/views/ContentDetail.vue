@@ -107,7 +107,7 @@ import { Youtube, Content } from '@/libs/interfaces/content'
 import { Party } from '@/libs/interfaces/party'
 
 const YOUTUBE_BASEURL = 'https://www.googleapis.com/youtube/v3/search'
-const YOUTUBE_KEY = 'AIzaSyAR4pZBzjvyJWXr7H8JlCsFdDoDu2SRzTE'
+const YOUTUBE_KEY = ''
 
 export default defineComponent({
   name: 'ContentDetail',
